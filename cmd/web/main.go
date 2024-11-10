@@ -12,7 +12,7 @@ type Application struct {
 }
 
 func main() {
-	addr := flag.String("addr", "localhost:4000", "HTTP Network Address")
+	addr := flag.String("addr", "localhost:3000", "HTTP Network Address")
 	flag.Parse()
 
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
