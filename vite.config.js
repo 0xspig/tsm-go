@@ -4,10 +4,14 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   root: 'ui/vite',
   build: {
+    manifest: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'ui/vite/index.html'),
+        main: 'ui/vite/main.js',
       },
     },
+  },
+  server: {
+    origin: 'http://localhost:3000',
   },
 })

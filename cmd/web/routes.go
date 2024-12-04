@@ -4,6 +4,12 @@ import (
 	"net/http"
 )
 
+func checkError(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func (app *Application) routes() *http.ServeMux {
 
 	app.logger.Debug("running routes")
