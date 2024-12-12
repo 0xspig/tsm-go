@@ -1,5 +1,10 @@
 package models
 
+import (
+	"fmt"
+	"os"
+)
+
 // Struct containing a hash table of all nodes in graph
 type Garden struct {
 	masterlist map[string]*Node
@@ -21,7 +26,7 @@ const (
 // Essential node element
 type Node struct {
 	id            string
-	adjacentNodes NodeList
+	incomingNodes NodeList
 	outgoingNodes NodeList
 
 	data_type   int
@@ -48,9 +53,9 @@ func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 	return newNode
 }
 
-func (garden *Garden) ConnectNodes(n1ID string, n2ID string) {
-	garden.masterlist[n1ID].adjacentNodes.AddNodeToList(garden.masterlist[n2ID])
-	garden.masterlist[n2ID].adjacentNodes.AddNodeToList(garden.masterlist[n1ID])
+func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
+	garden.masterlist[mainID].outgoingNodes.AddNodeToList(garden.masterlist[outgoingID])
+	garden.masterlist[outgoingID].incomingNodes.AddNodeToList(garden.masterlist[mainID])
 }
 
 func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
@@ -76,9 +81,19 @@ func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
 	current.next = &NodeList{node: nodeToAdd, next: nil, prev: current}
 }
 
+/*TODO func checkFileType(file) int*/
+
 func (garden *Garden) PopulateGardenFromDir(source_dir string) {
+
 	// for each file in directory
-	// check filetype
+	directory, err := os.ReadDir(source_dir)
+	if err != nil {
+		panic(err)
+	}
+	// check filetype (i'll do this later once we have multiple filetypes)
 	// create nodes
+	for _, file := range directory {
+		fmt.Printf("Name:%s | Type: %s\n ", file.Name(), file.Type())
+	}
 
 }
