@@ -46,6 +46,10 @@ func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 		fmt.Printf("Node source already exists\n")
 		return garden.masterlist[source]
 	}
+	if garden.masterlist[source] != nil {
+		fmt.Printf("Node source already exists\n")
+		return garden.masterlist[source]
+	}
 	newNode := new(Node)
 
 	newNode.id = source
@@ -83,6 +87,7 @@ func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
 
 /*TODO func checkFileType(file) int*/
 
+// Populates garden with nodes generated from source_dir (note: nodes will remain islands until connected)
 // Populates garden with nodes generated from source_dir (note: nodes will remain islands until connected)
 func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 
