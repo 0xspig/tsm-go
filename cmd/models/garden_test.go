@@ -9,19 +9,17 @@ import (
 
 func TestMain(m *testing.M) {
 	g := CreateGarden()
-	g.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, "firstFile.md")
-	g.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, "secondFile.md")
 
-	g.ConnectNodes("firstFile.md", "secondFile.md")
-	// lets do it again and see if it dupes
-	g.ConnectNodes("firstFile.md", "secondFile.md")
 	home, err := os.UserHomeDir()
 	if err != nil {
 		panic(err)
 	}
 	home = filepath.Join(home, "prg/tsm/")
 	os.Chdir(home)
+	// TODO make content dir in config or something to search files in
+	// for now Im just going to hack in static
 	g.PopulateGardenFromDir("ui/vite/content")
+	g.ParseAllConnections()
 
 	fmt.Printf("peepee\n")
 }
