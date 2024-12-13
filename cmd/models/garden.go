@@ -26,12 +26,13 @@ const (
 
 // Essential node element
 type Node struct {
-	id            string
-	incomingNodes NodeList
-	outgoingNodes NodeList
-
-	data_type   int
-	data_source string
+	id                  string
+	data_source         string
+	data_type           int
+	numberIncomingNodes int
+	numberOutgoingNodes int
+	incomingNodes       NodeList
+	outgoingNodes       NodeList
 }
 
 func CreateGarden() *Garden {
@@ -55,6 +56,8 @@ func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 	newNode.id = source
 	newNode.data_source = source
 	newNode.data_type = datatype
+	newNode.numberIncomingNodes = 0
+	newNode.numberOutgoingNodes = 0
 
 	garden.masterlist[newNode.id] = newNode
 	garden.size += 1
@@ -107,8 +110,25 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 
 // Connect two nodes so that mainID node directs to outgoingID node.
 func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
-	garden.masterlist[mainID].outgoingNodes.AddNodeToList(garden.masterlist[outgoingID])
-	garden.masterlist[outgoingID].incomingNodes.AddNodeToList(garden.masterlist[mainID])
+	master := garden.masterlist[mainID]
+	outgoing := garden.masterlist[outgoingID]
+	//verify that both IDs exist
+	err := 0
+	if master == nil {
+		fmt.Printf("Error: nil node ID - %s: %p\n", mainID, master)
+		err = 1
+	}
+	if outgoing == nil {
+		fmt.Printf("Error: nil node ID - %s: %p\n", outgoingID, outgoing)
+		err = 1
+	}
+	if err == 1 {
+		return
+	}
+	master.outgoingNodes.AddNodeToList(outgoing)
+	master.numberOutgoingNodes += 1
+	outgoing.incomingNodes.AddNodeToList(master)
+	outgoing.numberIncomingNodes += 1
 }
 
 // Parses all node sources and populates outgoing and respective incoming connections

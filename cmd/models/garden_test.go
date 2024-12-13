@@ -20,6 +20,7 @@ func TestMain(m *testing.M) {
 	// for now Im just going to hack in static
 	g.PopulateGardenFromDir("ui/vite/content")
 	g.ParseAllConnections()
+	g.ConnectNodes("peepee.md", "firstFile.md")
 
 	fmt.Printf("peepee\n")
 }
