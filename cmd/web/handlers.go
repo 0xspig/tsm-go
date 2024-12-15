@@ -21,3 +21,9 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func (app *Application) getNode(w http.ResponseWriter, r *http.Request) {
+	app.logger.Debug("getNode Function Run")
+	w.Header().Add("Server", "McServer")
+
+}

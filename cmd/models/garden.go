@@ -133,7 +133,7 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 
 // Parses all node sources and populates outgoing and respective incoming connections
 func (garden *Garden) ParseAllConnections() {
-	os.Chdir("C:/Users/tmcke/prg/tsm/ui/vite/content")
+	os.Chdir("C:/Users/tmcke/prg/tsm/ui/content")
 	for _, node := range garden.masterlist {
 		data, err := os.ReadFile(node.data_source)
 		if err != nil {

@@ -18,7 +18,7 @@ func TestMain(m *testing.M) {
 	os.Chdir(home)
 	// TODO make content dir in config or something to search files in
 	// for now Im just going to hack in static
-	g.PopulateGardenFromDir("ui/vite/content")
+	g.PopulateGardenFromDir("ui/content")
 	g.ParseAllConnections()
 	g.ConnectNodes("peepee.md", "firstFile.md")
 

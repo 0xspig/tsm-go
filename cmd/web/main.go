@@ -5,10 +5,13 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	"go.tsmckee.com/cmd/models"
 )
 
 type Application struct {
 	logger *slog.Logger
+	garden *models.Garden
 }
 
 func main() {
