@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"regexp"
@@ -26,8 +27,9 @@ const (
 
 // Essential node element
 type Node struct {
-	id                  string
-	data_source         string
+	ID                  string `json:"id"`
+	Name                string `json:"name"`
+	Data_source         string `json:"source"`
 	data_type           int
 	numberIncomingNodes int
 	numberOutgoingNodes int
@@ -53,13 +55,13 @@ func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 	}
 	newNode := new(Node)
 
-	newNode.id = source
-	newNode.data_source = source
+	newNode.ID = source
+	newNode.Data_source = source
 	newNode.data_type = datatype
 	newNode.numberIncomingNodes = 0
 	newNode.numberOutgoingNodes = 0
 
-	garden.masterlist[newNode.id] = newNode
+	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
 
 	return newNode
@@ -73,12 +75,12 @@ func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
 	current := list
 	buffer := list.next
 
-	if current.node.id == nodeToAdd.id {
+	if current.node.ID == nodeToAdd.ID {
 		return
 	}
 
 	for buffer != nil {
-		if current.node.id == nodeToAdd.id {
+		if current.node.ID == nodeToAdd.ID {
 			return
 		}
 		current = current.next
@@ -135,7 +137,7 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 func (garden *Garden) ParseAllConnections() {
 	os.Chdir("C:/Users/tmcke/prg/tsm/ui/content")
 	for _, node := range garden.masterlist {
-		data, err := os.ReadFile(node.data_source)
+		data, err := os.ReadFile(node.Data_source)
 		if err != nil {
 			panic(err)
 		}
@@ -143,7 +145,7 @@ func (garden *Garden) ParseAllConnections() {
 
 		for _, link := range links {
 			// link[2] is should be the src in the regex function. if this breaks check the regex
-			garden.ConnectNodes(node.id, link[2])
+			garden.ConnectNodes(node.ID, link[2])
 		}
 	}
 
@@ -160,4 +162,31 @@ func findLinks(data []byte) [][]string {
 	// substring returns 3 strings for each match 0:full match 1:value 2:src
 	matches := regular_expression.FindAllStringSubmatch(string(data), -1)
 	return matches
+}
+
+type Link struct {
+	Source string `json:"source"`
+	Target string `json:"target"`
+}
+
+type GraphData struct {
+	Nodes []Node `json:"nodes"`
+	Links []Link `json:"links"`
+}
+
+func (garden *Garden) ExportJSONData() ([]byte, error) {
+	data := GraphData{}
+	for _, node := range garden.masterlist {
+		data.Nodes = append(data.Nodes, *node)
+		for link := node.incomingNodes; link.node != nil; {
+			newLink := Link{Source: node.ID, Target: link.node.ID}
+			data.Links = append(data.Links, newLink)
+			if link.next != nil {
+				link = *link.next
+			} else {
+				break
+			}
+		}
+	}
+	return json.Marshal(data)
 }
