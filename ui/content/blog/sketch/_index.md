@@ -1,0 +1,4 @@
+---
+layout: sketch
+title: Art
+---
