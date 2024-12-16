@@ -1,6 +1,0 @@
----
-layout: sketch
-title: Woodworking
----
-
-

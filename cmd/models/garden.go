@@ -45,6 +45,7 @@ func CreateGarden() *Garden {
 	}
 }
 
+// adds node to garden. Source should be filepath relative to root.
 func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 	if garden.masterlist[source] != nil {
 		fmt.Printf("Node source already exists\n")
@@ -56,7 +57,7 @@ func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
 	}
 	newNode := new(Node)
 
-	newNode.ID = source
+	newNode.ID = filepath.Base(source)
 	newNode.Data_source = source
 	newNode.data_type = datatype
 	newNode.numberIncomingNodes = 0
@@ -94,9 +95,7 @@ func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
 /*TODO func checkFileType(file) int*/
 
 // Populates garden with nodes generated from source_dir (note: nodes will remain islands until connected)
-// Populates garden with nodes generated from source_dir (note: nodes will remain islands until connected)
 func (garden *Garden) PopulateGardenFromDir(source_dir string) {
-
 	// for each file in directory
 	directory, err := os.ReadDir(source_dir)
 	if err != nil {
@@ -109,8 +108,13 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 		// check filetype (i'll do this later once we have multiple filetypes) asuming md for now
 		if file.IsDir() {
 			garden.PopulateGardenFromDir(filepath.Join(source_dir, file.Name()))
+		} else {
+			relLink := filepath.Clean(filepath.Join(source_dir, file.Name()))
+			if err != nil {
+				panic(err)
+			}
+			garden.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, relLink)
 		}
-		garden.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, file.Name())
 	}
 }
 
@@ -139,7 +143,6 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 
 // Parses all node sources and populates outgoing and respective incoming connections
 func (garden *Garden) ParseAllConnections() {
-	os.Chdir("C:/Users/tmcke/prg/tsm/ui/content")
 	for _, node := range garden.masterlist {
 		data, err := os.ReadFile(node.Data_source)
 		if err != nil {
@@ -149,7 +152,7 @@ func (garden *Garden) ParseAllConnections() {
 
 		for _, link := range links {
 			// link[2] is should be the src in the regex function. if this breaks check the regex
-			garden.ConnectNodes(node.ID, link[2])
+			garden.ConnectNodes(node.ID, filepath.Base(link[2])+".md")
 		}
 	}
 
