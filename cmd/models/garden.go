@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 )
 
@@ -106,6 +107,9 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 		fmt.Printf("Name:%s | Type: %s\n ", file.Name(), file.Type())
 
 		// check filetype (i'll do this later once we have multiple filetypes) asuming md for now
+		if file.IsDir() {
+			garden.PopulateGardenFromDir(filepath.Join(source_dir, file.Name()))
+		}
 		garden.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, file.Name())
 	}
 }
@@ -139,7 +143,7 @@ func (garden *Garden) ParseAllConnections() {
 	for _, node := range garden.masterlist {
 		data, err := os.ReadFile(node.Data_source)
 		if err != nil {
-			panic(err)
+
 		}
 		links := findLinks(data)
 
