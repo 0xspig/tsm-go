@@ -15,6 +15,7 @@ func (app *Application) routes() *http.ServeMux {
 	mux.Handle("GET /static/", http.StripPrefix("/static", fs))
 
 	mux.HandleFunc("GET /{$}", app.home)
+	mux.HandleFunc("GET /graph-json", app.getJSON)
 
 	return mux
 }
