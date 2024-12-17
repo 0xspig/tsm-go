@@ -51,7 +51,7 @@ func CreateGarden() *Garden {
 }
 
 // adds node to garden
-func (garden *Garden) addNodeToGarden(datatype int, source string, id string) *Node {
+func (garden *Garden) addNodeToGarden(datatype int, source string, id string, name string) *Node {
 	if garden.masterlist[source] != nil {
 		fmt.Printf("Node source already exists\n")
 		return garden.masterlist[source]
@@ -61,6 +61,7 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string) *N
 	newNode.ID = id
 	newNode.Data_source = source
 	newNode.Data_type = datatype
+	newNode.Name = name
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
 
@@ -82,6 +83,13 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	newNode.ID = filepath.Base(source)
 	newNode.Data_source = source
 	newNode.Data_type = datatype
+	if datatype == CONTENT_TYPE_MARKDOWN {
+		data, err := os.ReadFile(source)
+		if err != nil {
+			panic(err)
+		}
+		newNode.Name = scanYAMLFrontMatter(data).Title
+	}
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
 
@@ -191,9 +199,8 @@ type YAMLData struct {
 	Tags     []string
 }
 
-// parse markdown files for links
-func (garden *Garden) findLinks(data []byte) ([]string, []string) {
-
+// scans file for yaml frontmatter between '---' separators
+func scanYAMLFrontMatter(data []byte) *YAMLData {
 	var frontMatter YAMLData
 	var YAMLBytes []byte
 
@@ -209,17 +216,23 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 			breakCount++
 		}
 	}
-
 	err := yaml.Unmarshal(YAMLBytes, &frontMatter)
 	if err != nil {
 		panic(err)
 	}
+	return &frontMatter
+}
+
+// parse markdown files for links
+func (garden *Garden) findLinks(data []byte) ([]string, []string) {
+
+	frontMatter := scanYAMLFrontMatter(data)
 
 	tagMatches := make([]string, 0)
 
 	for _, tag := range frontMatter.Tags {
 		if garden.masterlist[tag] == nil {
-			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag)
+			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag, "tag:"+tag)
 		}
 		tagMatches = append(tagMatches, tag)
 	}
