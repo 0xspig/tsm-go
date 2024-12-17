@@ -31,14 +31,14 @@ const (
 	CONTENT_TYPE_TAG      = 2
 )
 
-// Essential node element
+// Essential node element/
 type Node struct {
 	ID                  string `json:"id"`
 	Name                string `json:"name"`
 	Data_source         string `json:"source"`
-	data_type           int
-	numberIncomingNodes int
-	numberOutgoingNodes int
+	Data_type           int    `json:"data_type"`
+	NumberIncomingNodes int    `json:"numIncoming"`
+	NumberOutgoingNodes int    `json:"numOutgoing"`
 	incomingNodes       NodeList
 	outgoingNodes       NodeList
 }
@@ -60,9 +60,9 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string) *N
 
 	newNode.ID = id
 	newNode.Data_source = source
-	newNode.data_type = datatype
-	newNode.numberIncomingNodes = 0
-	newNode.numberOutgoingNodes = 0
+	newNode.Data_type = datatype
+	newNode.NumberIncomingNodes = 0
+	newNode.NumberOutgoingNodes = 0
 
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
@@ -81,9 +81,9 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 
 	newNode.ID = filepath.Base(source)
 	newNode.Data_source = source
-	newNode.data_type = datatype
-	newNode.numberIncomingNodes = 0
-	newNode.numberOutgoingNodes = 0
+	newNode.Data_type = datatype
+	newNode.NumberIncomingNodes = 0
+	newNode.NumberOutgoingNodes = 0
 
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
@@ -158,9 +158,9 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 		return
 	}
 	master.outgoingNodes.AddNodeToList(outgoing)
-	master.numberOutgoingNodes += 1
+	master.NumberOutgoingNodes += 1
 	outgoing.incomingNodes.AddNodeToList(master)
-	outgoing.numberIncomingNodes += 1
+	outgoing.NumberIncomingNodes += 1
 }
 
 // Parses all node sources and populates outgoing and respective incoming connections
