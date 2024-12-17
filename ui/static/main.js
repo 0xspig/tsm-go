@@ -12,5 +12,3 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
-
-
