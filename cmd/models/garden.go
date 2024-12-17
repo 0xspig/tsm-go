@@ -1,11 +1,15 @@
 package models
 
 import (
+	"bufio"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
+
+	"gopkg.in/yaml.v3"
 )
 
 // Struct containing a hash table of all nodes in graph
@@ -24,6 +28,7 @@ type NodeList struct {
 const (
 	CONTENT_TYPE_HTML     = 0
 	CONTENT_TYPE_MARKDOWN = 1
+	CONTENT_TYPE_TAG      = 2
 )
 
 // Essential node element
@@ -45,12 +50,29 @@ func CreateGarden() *Garden {
 	}
 }
 
-// adds node to garden. Source should be filepath relative to root.
-func (garden *Garden) AddNodeToGarden(datatype int, source string) *Node {
+// adds node to garden
+func (garden *Garden) addNodeToGarden(datatype int, source string, id string) *Node {
 	if garden.masterlist[source] != nil {
 		fmt.Printf("Node source already exists\n")
 		return garden.masterlist[source]
 	}
+	newNode := new(Node)
+
+	newNode.ID = id
+	newNode.Data_source = source
+	newNode.data_type = datatype
+	newNode.numberIncomingNodes = 0
+	newNode.numberOutgoingNodes = 0
+
+	garden.masterlist[newNode.ID] = newNode
+	garden.size += 1
+
+	return newNode
+
+}
+
+// adds node to garden. Source should be filepath relative to root.
+func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	if garden.masterlist[source] != nil {
 		fmt.Printf("Node source already exists\n")
 		return garden.masterlist[source]
@@ -113,7 +135,7 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 			if err != nil {
 				panic(err)
 			}
-			garden.AddNodeToGarden(CONTENT_TYPE_MARKDOWN, relLink)
+			garden.AddSourceToGarden(CONTENT_TYPE_MARKDOWN, relLink)
 		}
 	}
 }
@@ -148,18 +170,60 @@ func (garden *Garden) ParseAllConnections() {
 		if err != nil {
 
 		}
-		links := findLinks(data)
+		fileLinks, tagLinks := garden.findLinks(data)
 
-		for _, link := range links {
+		for _, link := range fileLinks {
 			// link[2] is should be the src in the regex function. if this breaks check the regex
-			garden.ConnectNodes(node.ID, filepath.Base(link[2])+".md")
+			garden.ConnectNodes(node.ID, filepath.Base(link)+".md")
+		}
+		for _, link := range tagLinks {
+			// link[2] is should be the src in the regex function. if this breaks check the regex
+			garden.ConnectNodes(node.ID, link)
 		}
 	}
 
 }
 
+type YAMLData struct {
+	Title    string
+	Date     string
+	Category string
+	Tags     []string
+}
+
 // parse markdown files for links
-func findLinks(data []byte) [][]string {
+func (garden *Garden) findLinks(data []byte) ([]string, []string) {
+
+	var frontMatter YAMLData
+	var YAMLBytes []byte
+
+	scanner := bufio.NewScanner(bytes.NewReader(data))
+	breakCount := 0
+	for breakCount < 2 {
+		if !scanner.Scan() {
+			break
+		}
+		YAMLBytes = append(YAMLBytes, scanner.Bytes()...)
+		YAMLBytes = append(YAMLBytes, "\n"...)
+		if scanner.Text() == "---" {
+			breakCount++
+		}
+	}
+
+	err := yaml.Unmarshal(YAMLBytes, &frontMatter)
+	if err != nil {
+		panic(err)
+	}
+
+	tagMatches := make([]string, 0)
+
+	for _, tag := range frontMatter.Tags {
+		if garden.masterlist[tag] == nil {
+			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag)
+		}
+		tagMatches = append(tagMatches, tag)
+	}
+
 	// this gets the link value and source '[<value>](<src>)'
 	regular_expression, err := regexp.Compile(`\[([^\]]*)\]\(([^\)]*)\)`)
 
@@ -168,7 +232,12 @@ func findLinks(data []byte) [][]string {
 	}
 	// substring returns 3 strings for each match 0:full match 1:value 2:src
 	matches := regular_expression.FindAllStringSubmatch(string(data), -1)
-	return matches
+	matchValues := make([]string, 0)
+	for _, match := range matches {
+		matchValues = append(matchValues, match[2])
+	}
+
+	return matchValues, tagMatches
 }
 
 type Link struct {
