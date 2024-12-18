@@ -89597,8 +89597,8 @@ function getGraphObj(object) {
 }
 
 const Graph = new _3dForceGraph(document.getElementById('view'))
-  .width(document.getElementById("view").getBoundingClientRect().width - 10)
-  .height(document.getElementById("view").getBoundingClientRect().height - 10);
+  .width(document.getElementById("view").getBoundingClientRect().width - 1)
+  .height(document.getElementById("view").getBoundingClientRect().height);
 var xmlhttp = new XMLHttpRequest;
 
 Graph.backgroundColor("#0d1e1f");
@@ -89623,6 +89623,8 @@ Graph.onNodeClick(node => {
 var canvas = Graph.renderer().domElement;
 canvas.id = "scene";
 function resizeWindow(){
+  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
+  Graph.height(document.getElementById("view").getBoundingClientRect().height);
   Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
   Graph.camera().updateProjectionMatrix();
 }
@@ -89657,3 +89659,21 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
+
+
+Graph.onNodeClick(node => {
+  document.getElementById("data-content").innerHTML ='<h1>Node id: '+node.id+'</h1>';
+});
+
+document.getElementById("data-tab").addEventListener("click", dataToggle);
+var dataViewing = true;
+function dataToggle(){
+  if (dataViewing){
+    document.getElementById("data-content").style.flexBasis="0%";
+    dataViewing=false;
+  }else {
+    document.getElementById("data-content").style.flexBasis="45%";
+    dataViewing=true;
+  }
+    resizeWindow();
+}
