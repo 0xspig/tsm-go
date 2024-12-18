@@ -1,6 +1,6 @@
 import ForceGraph3D from "3d-force-graph";
 
-const Graph = new ForceGraph3D(document.getElementById('3d-graph'));
+const Graph = new ForceGraph3D(document.getElementById('view'));
 var xmlhttp = new XMLHttpRequest;
 var parsedJson;
 
@@ -22,9 +22,18 @@ Graph.onNodeClick(node => {
   );
 });
 
+
+var canvas = Graph.renderer().domElement
+canvas.id = "scene"
+function resizeWindow(){
+  Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
+  Graph.camera().updateProjectionMatrix()
+}
+
+addEventListener("resize", resizeWindow)
+
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-		console.log(this.responseText);
 		Graph.graphData(JSON.parse(this.responseText));
     Graph.nodeColor(node => {
       console.log(node);
