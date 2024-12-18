@@ -89617,6 +89617,9 @@ Graph.onNodeClick(node => {
     node, // lookAt ({ x, y, z })
     1800  // ms transition duration
   );
+
+  // ui stuff
+  document.getElementById("data-content").innerHTML ='<h1 class="nodeTitle">Node id: '+node.name+'</h1><br>';
 });
 
 
@@ -89661,18 +89664,22 @@ xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
 
 
-Graph.onNodeClick(node => {
-  document.getElementById("data-content").innerHTML ='<h1>Node id: '+node.id+'</h1>';
-});
-
 document.getElementById("data-tab").addEventListener("click", dataToggle);
 var dataViewing = true;
 function dataToggle(){
   if (dataViewing){
     document.getElementById("data-content").style.flexBasis="0%";
+    var elemChildren = document.getElementById("data-content").children;
+    for (var i = 0; i < elemChildren.length; i++){
+      elemChildren[i].style.display = "none";
+    }
     dataViewing=false;
   }else {
     document.getElementById("data-content").style.flexBasis="45%";
+    var elemChildren = document.getElementById("data-content").children;
+    for (var i = 0; i < elemChildren.length; i++){
+      elemChildren[i].style.display = "inline";
+    }
     dataViewing=true;
   }
     resizeWindow();
