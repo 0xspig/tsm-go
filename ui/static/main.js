@@ -89648,6 +89648,7 @@ xmlhttp.onreadystatechange = function() {
         return "#6b93c6";
       }
     });
+
     Graph.nodeVal(node => {
       //md files
       if (node.data_type == 1){
