@@ -89596,7 +89596,7 @@ function getGraphObj(object) {
   return obj;
 }
 
-const Graph = new _3dForceGraph(document.getElementById('3d-graph'));
+const Graph = new _3dForceGraph(document.getElementById('view'));
 var xmlhttp = new XMLHttpRequest;
 
 Graph.backgroundColor("#0d1e1f");
@@ -89617,9 +89617,18 @@ Graph.onNodeClick(node => {
   );
 });
 
+
+var canvas = Graph.renderer().domElement;
+canvas.id = "scene";
+function resizeWindow(){
+  Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
+  Graph.camera().updateProjectionMatrix();
+}
+
+addEventListener("resize", resizeWindow);
+
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-		console.log(this.responseText);
 		Graph.graphData(JSON.parse(this.responseText));
     Graph.nodeColor(node => {
       console.log(node);
