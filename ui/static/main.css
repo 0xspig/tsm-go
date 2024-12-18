@@ -54,3 +54,7 @@ html, body {
 canvas {
     width: 100% !important;
 }
+
+.nodeTitle{
+color:aquamarine;
+}
