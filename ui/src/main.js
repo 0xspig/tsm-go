@@ -1,6 +1,8 @@
 import ForceGraph3D from "3d-force-graph";
 
-const Graph = new ForceGraph3D(document.getElementById('view'));
+const Graph = new ForceGraph3D(document.getElementById('view'))
+  .width(document.getElementById("view").getBoundingClientRect().width)
+  .height(document.getElementById("view").getBoundingClientRect().height);
 var xmlhttp = new XMLHttpRequest;
 var parsedJson;
 

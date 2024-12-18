@@ -89596,7 +89596,9 @@ function getGraphObj(object) {
   return obj;
 }
 
-const Graph = new _3dForceGraph(document.getElementById('view'));
+const Graph = new _3dForceGraph(document.getElementById('view'))
+  .width(document.getElementById("view").getBoundingClientRect().width - 10)
+  .height(document.getElementById("view").getBoundingClientRect().height - 10);
 var xmlhttp = new XMLHttpRequest;
 
 Graph.backgroundColor("#0d1e1f");

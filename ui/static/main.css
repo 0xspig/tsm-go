@@ -16,20 +16,29 @@ html, body {
     width: 40%;
 }
 #view{
+    flex-basis: 40%;
     flex-grow: 1;
+    flex-shrink: 1;
     padding: 0px;
     margin: 0px;
 }
 .scene-container{
-
-    width: auto !important;
-    height: 100% !important;
-}
-#view > div, #view > div > div{
-    width: auto !important;
-    height: 100% !important;
-}
-canvas {
+    margin: 0px;
+    padding: 0px;
     width: 100% !important;
     height: 100% !important;
+}
+#view > div {
+    margin: 0px;
+    padding: 0px;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#view > div > div{
+    width: 100% !important;
+}
+
+canvas {
+    width: 100% !important;
 }
