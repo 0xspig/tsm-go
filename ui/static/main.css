@@ -1,0 +1,60 @@
+html, body {
+   margin: 0;
+   height: 100%;
+    background-color: #0d1e1f;
+}
+#main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#attrib{
+    border: double 4px white;
+    height: 100%;
+    width:12em;
+}
+#data-content{
+    height: 100%;
+    border: solid 2px green;
+    flex-basis: 45%;
+}
+#data-tab{
+    height: 100%;
+    background-color: #f3f3f2;
+    border: double 4px black;
+    width: 1em;
+}
+#view{
+    flex-grow: 1;
+    padding: 0px;
+    margin: 0px;
+    flex-basis:30%;
+}
+.scene-container{
+    margin: 0px;
+    padding: 0px;
+    width: 100% !important;
+    height: 100% !important;
+}
+#view > div {
+    margin: 0px;
+    padding: 0px;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#view > div > div{
+    width: 100% !important;
+}
+
+canvas {
+    width: 100% !important;
+}
+
+.nodeTitle{
+color:aquamarine;
+}

@@ -3,6 +3,7 @@
     "@rollup/plugin-commonjs": "^28.0.2"
   },
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^16.0.0"
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2"
   }
 }
