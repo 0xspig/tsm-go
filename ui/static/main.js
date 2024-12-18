@@ -89625,6 +89625,10 @@ Graph.onNodeClick(node => {
 
 var canvas = Graph.renderer().domElement;
 canvas.id = "scene";
+  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
+  Graph.height(document.getElementById("view").getBoundingClientRect().height);
+  Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
+  Graph.camera().updateProjectionMatrix();
 function resizeWindow(){
   Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
   Graph.height(document.getElementById("view").getBoundingClientRect().height);
