@@ -6,21 +6,33 @@ html, body {
 #main {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     height: 100%;
     width: 100%;
     margin: 0px;
     padding: 0px;
 }
-#controls {
-    flex-basis: 30%;
-    width: 40%;
+#attrib{
+    border: double 4px white;
+    height: 100%;
+    width:12em;
+}
+#data-content{
+    height: 100%;
+    border: solid 2px green;
+    flex-basis: 45%;
+}
+#data-tab{
+    height: 100%;
+    background-color: #f3f3f2;
+    border: double 4px black;
+    width: 1em;
 }
 #view{
-    flex-basis: 40%;
     flex-grow: 1;
-    flex-shrink: 1;
     padding: 0px;
     margin: 0px;
+    flex-basis:30%;
 }
 .scene-container{
     margin: 0px;
