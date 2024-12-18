@@ -89598,7 +89598,7 @@ function getGraphObj(object) {
 
 const Graph = new _3dForceGraph(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width - 1)
-  .height(document.getElementById("view").getBoundingClientRect().height);
+  .height(document.getElementById("view").getBoundingClientRect().height-100);
 var xmlhttp = new XMLHttpRequest;
 
 Graph.backgroundColor("#0d1e1f");
@@ -89670,6 +89670,7 @@ var dataViewing = true;
 function dataToggle(){
   if (dataViewing){
     document.getElementById("data-content").style.flexBasis="0%";
+    document.getElementById("data-content").style.display ="none";
     var elemChildren = document.getElementById("data-content").children;
     for (var i = 0; i < elemChildren.length; i++){
       elemChildren[i].style.display = "none";
@@ -89677,6 +89678,7 @@ function dataToggle(){
     dataViewing=false;
   }else {
     document.getElementById("data-content").style.flexBasis="45%";
+    document.getElementById("data-content").style.display ="inline";
     var elemChildren = document.getElementById("data-content").children;
     for (var i = 0; i < elemChildren.length; i++){
       elemChildren[i].style.display = "inline";
