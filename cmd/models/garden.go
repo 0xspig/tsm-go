@@ -10,6 +10,8 @@ import (
 	"regexp"
 
 	"gopkg.in/yaml.v3"
+
+	"github.com/yuin/goldmark"
 )
 
 // Struct containing a hash table of all nodes in graph
@@ -278,4 +280,21 @@ func (garden *Garden) ExportJSONData() ([]byte, error) {
 		}
 	}
 	return json.Marshal(data)
+}
+
+func (garden *Garden) NodeMdToHTML(nodeID string) []byte {
+	if (garden.masterlist[nodeID]) == nil {
+		return []byte("<h1>File Not Found</h1>")
+	}
+
+	source, err := os.ReadFile(garden.masterlist[nodeID].Data_source)
+	if err != nil {
+		panic(err)
+	}
+
+	var buf bytes.Buffer
+	if err := goldmark.Convert(source, &buf); err != nil {
+		panic(err)
+	}
+	return buf.Bytes()
 }
