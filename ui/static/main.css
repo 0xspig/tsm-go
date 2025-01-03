@@ -24,6 +24,7 @@ html, body {
     flex-basis: 45%;
     margin: 0px;
     background-color: #11392e;
+    overflow-y: auto;
 }
 #data-tab{
     height: 100%;
