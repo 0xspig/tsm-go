@@ -89599,7 +89599,6 @@ function getGraphObj(object) {
 const Graph = new _3dForceGraph(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width - 1)
   .height(document.getElementById("view").getBoundingClientRect().height-100);
-var xmlhttp = new XMLHttpRequest;
 
 Graph.backgroundColor("#0d1e1f");
 
@@ -89619,7 +89618,7 @@ Graph.onNodeClick(node => {
   );
 
   // ui stuff
-  document.getElementById("data-content").innerHTML ='<h1 class="nodeTitle">Node id: '+node.name+'</h1><br>';
+  getNodeData(node);
 });
 
 
@@ -89638,6 +89637,7 @@ function resizeWindow(){
 
 addEventListener("resize", resizeWindow);
 
+var xmlhttp = new XMLHttpRequest;
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 		Graph.graphData(JSON.parse(this.responseText));
@@ -89690,4 +89690,15 @@ function dataToggle(){
     dataViewing=true;
   }
     resizeWindow();
+}
+
+
+function getNodeData(node){
+  var node_data_request = new XMLHttpRequest;
+  node_data_request.onreadystatechange = function() {
+    console.log("peepee");
+    document.getElementById("data-content").innerHTML = node_data_request.responseText;
+  };
+  node_data_request.open("GET", "/node-data/"+node.id, true);
+  node_data_request.send();
 }
