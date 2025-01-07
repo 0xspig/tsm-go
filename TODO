@@ -1,6 +1,8 @@
 
 Todo:
   ☐ Add Post-processing
+    ☐ fog
+    ☐ bloom
   ✔ Indicate targeted node @started(25-01-07 12:09) @done(25-01-07 12:19) @lasted(10m20s)
   ☐ Fix Goldmark Rendering
   ☐ Render category nodes
