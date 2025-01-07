@@ -89603,22 +89603,7 @@ const Graph = new _3dForceGraph(document.getElementById('view'))
 Graph.backgroundColor("#0d1e1f");
 
 Graph.onNodeClick(node => {
-  // Aim at node from outside it
-  const distance = 600;
-  const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-
-  const newPos = node.x || node.y || node.z
-    ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
-    : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
-
-  Graph.cameraPosition(
-    newPos, // new position
-    node, // lookAt ({ x, y, z })
-    1800  // ms transition duration
-  );
-
-  // ui stuff
-  getNodeData(node);
+  targetNode(node.id);
 });
 
 
@@ -89641,8 +89626,8 @@ var xmlhttp = new XMLHttpRequest;
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 		Graph.graphData(JSON.parse(this.responseText));
+    console.log("graph data updated");
     Graph.nodeColor(node => {
-      console.log(node);
       //md files
       if (node.data_type == 1){
         return "#fff380";
@@ -89651,20 +89636,60 @@ xmlhttp.onreadystatechange = function() {
       if (node.data_type == 2){
         return "#6b93c6";
       }
+      // categories
+      if (node.data_type == 3){
+        return "#63335c";
+      }
     });
 
     Graph.nodeVal(node => {
       //md files
       if (node.data_type == 1){
-        return 1;
+        return 2;
       }
       // tags
       if (node.data_type == 2){
-        return 3;
+        return 1;
+      }
+      // categories
+      if (node.data_type == 3){
+        return 4;
       }
     });
     }
+    // target home node
+    targetNode("home.md");
 };
+
+function targetNode(nodeID){
+
+    var targetNode;
+    console.log("targeting Node: "+nodeID);
+    Graph.graphData().nodes.forEach(node => {
+      if (node.id == nodeID){
+        targetNode = node;
+        return;
+      }
+    });
+    console.log(targetNode);
+    // Aim at targetNode from outside it
+    const distance = 600;
+    const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
+
+    const newPos = targetNode.x || targetNode.y || targetNode.z
+      ? { x: targetNode.x * distRatio, y: targetNode.y * distRatio, z: targetNode.z * distRatio }
+      : { x: 0, y: 0, z: distance }; // special case if targetNode is in (0,0,0)
+
+    Graph.cameraPosition(
+      newPos, // new position
+      targetNode, // lookAt ({ x, y, z })
+      1800  // ms transition duration
+    );
+
+    // ui stuff
+    getNodeData(targetNode);
+}
+
 xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
 
