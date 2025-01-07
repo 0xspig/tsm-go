@@ -295,12 +295,26 @@ func (garden *Garden) ExportJSONData() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-func (garden *Garden) NodeMdToHTML(nodeID string) []byte {
-	if (garden.masterlist[nodeID]) == nil {
+func (garden *Garden) NodeToHTML(nodeID string) []byte {
+	node := garden.masterlist[nodeID]
+	if node == nil {
 		return []byte("<h1>File Not Found</h1>")
 	}
-
-	source, err := os.ReadFile(garden.masterlist[nodeID].Data_source)
+	switch node.Data_type {
+	case CONTENT_TYPE_MARKDOWN:
+		return garden.mdToHTML(node)
+	case CONTENT_TYPE_HTML:
+		return []byte("<h1>HTML unsupported</h1>")
+	case CONTENT_TYPE_TAG:
+		return []byte("<h1>Tags currently unsupported</h1>")
+	case CONTENT_TYPE_CATEGORY:
+		return []byte("<h1>Categories currently unsupported</h1>")
+	default:
+		return []byte("<h1>File Not Found</h1>")
+	}
+}
+func (garden *Garden) mdToHTML(node *Node) []byte {
+	source, err := os.ReadFile(node.Data_source)
 	if err != nil {
 		panic(err)
 	}
