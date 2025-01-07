@@ -13,7 +13,7 @@ imgalt:
 I've added a new section to the site!
 
 A bunch of text links is pretty boring for a blog about painting.
-Now there's a separate section called [Sketchbook](/blog/sketch) for image posts.
+Now there's a separate section called [Sketchbook](/blog/sketch.md) for image posts.
 They're still part of the regular blog, but now they're over there too.
 I'll probably add something similar to the gallery when I get the time to finish up the articles.
 

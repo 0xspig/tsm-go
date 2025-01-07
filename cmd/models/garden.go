@@ -181,7 +181,6 @@ func (garden *Garden) ParseAllConnections() {
 
 		// if datatype is md or html link to parent category
 		if node.Data_type < CONTENT_TYPE_TAG {
-
 			data, err := os.ReadFile(node.Data_source)
 			if err != nil {
 
@@ -190,7 +189,7 @@ func (garden *Garden) ParseAllConnections() {
 
 			for _, link := range fileLinks {
 				// link[2] is should be the src in the regex function. if this breaks check the regex
-				garden.ConnectNodes(node.ID, filepath.Base(link)+".md")
+				garden.ConnectNodes(node.ID, filepath.Base(link))
 			}
 			for _, link := range tagLinks {
 				// link[2] is should be the src in the regex function. if this breaks check the regex
