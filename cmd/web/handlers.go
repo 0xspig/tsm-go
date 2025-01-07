@@ -36,6 +36,6 @@ func (app *Application) getJSON(w http.ResponseWriter, r *http.Request) {
 func (app *Application) getPostHTML(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("getPostHTML function run")
 	w.Header().Add("Server", "McServer")
-	html := app.garden.NodeMdToHTML(r.PathValue("id"))
+	html := app.garden.NodeToHTML(r.PathValue("id"))
 	w.Write(html)
 }
