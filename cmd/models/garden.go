@@ -12,6 +12,9 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/yuin/goldmark"
+	meta "github.com/yuin/goldmark-meta"
+	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 // Struct containing a hash table of all nodes in graph
@@ -319,8 +322,18 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 		panic(err)
 	}
 
+	markdown := goldmark.New(
+		goldmark.WithExtensions(
+			meta.Meta,
+		),
+		goldmark.WithRendererOptions(
+			html.WithUnsafe(),
+		),
+	)
+
 	var buf bytes.Buffer
-	if err := goldmark.Convert(source, &buf); err != nil {
+	context := parser.NewContext()
+	if err := markdown.Convert(source, &buf, parser.WithContext(context)); err != nil {
 		panic(err)
 	}
 	return buf.Bytes()
