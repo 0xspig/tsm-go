@@ -89627,7 +89627,18 @@ xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 		Graph.graphData(JSON.parse(this.responseText));
     console.log("graph data updated");
+    pushGraphParams();
+    }
+    // target home node
+    targetNode("home.md");
+};
+
+function pushGraphParams(){
+
     Graph.nodeColor(node => {
+      if (node.targeted == true){
+        return "#ff33ff";
+      }
       //md files
       if (node.data_type == 1){
         return "#fff380";
@@ -89643,6 +89654,9 @@ xmlhttp.onreadystatechange = function() {
     });
 
     Graph.nodeVal(node => {
+      if (node.targeted == true){
+        return 8;
+      }
       //md files
       if (node.data_type == 1){
         return 2;
@@ -89656,10 +89670,7 @@ xmlhttp.onreadystatechange = function() {
         return 4;
       }
     });
-    }
-    // target home node
-    targetNode("home.md");
-};
+}
 
 function targetNode(nodeID){
 
@@ -89668,7 +89679,9 @@ function targetNode(nodeID){
     Graph.graphData().nodes.forEach(node => {
       if (node.id == nodeID){
         targetNode = node;
-        return;
+        targetNode.targeted = true;
+      }else {
+        node.targeted = false;
       }
     });
     console.log(targetNode);
@@ -89688,6 +89701,7 @@ function targetNode(nodeID){
 
     // ui stuff
     getNodeData(targetNode);
+    pushGraphParams();
 }
 
 xmlhttp.open("GET", "/graph-json", true);
@@ -89721,7 +89735,6 @@ function dataToggle(){
 function getNodeData(node){
   var node_data_request = new XMLHttpRequest;
   node_data_request.onreadystatechange = function() {
-    console.log("peepee");
     document.getElementById("data-content").innerHTML = node_data_request.responseText;
   };
   node_data_request.open("GET", "/node-data/"+node.id, true);
