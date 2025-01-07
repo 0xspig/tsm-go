@@ -1,10 +1,12 @@
 
 Todo:
   ☐ Add Post-processing
+  ✔ Indicate targeted node @started(25-01-07 12:09) @done(25-01-07 12:19) @lasted(10m20s)
   ☐ Fix Goldmark Rendering
   ☐ Render category nodes
   ☐ render tag nodes
   ☐ remove data tab
   ☐ update homepage
   ☐ add external link nodes
+  ☐ selectable internal links from ui
 
