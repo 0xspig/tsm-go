@@ -31,6 +31,7 @@ const (
 	CONTENT_TYPE_HTML     = 0
 	CONTENT_TYPE_MARKDOWN = 1
 	CONTENT_TYPE_TAG      = 2
+	CONTENT_TYPE_CATEGORY = 3
 )
 
 // Essential node element/
@@ -54,9 +55,9 @@ func CreateGarden() *Garden {
 
 // adds node to garden
 func (garden *Garden) addNodeToGarden(datatype int, source string, id string, name string) *Node {
-	if garden.masterlist[source] != nil {
+	if garden.masterlist[id] != nil {
 		fmt.Printf("Node source already exists\n")
-		return garden.masterlist[source]
+		return garden.masterlist[id]
 	}
 	newNode := new(Node)
 
@@ -139,6 +140,7 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 
 		// check filetype (i'll do this later once we have multiple filetypes) asuming md for now
 		if file.IsDir() {
+			garden.addNodeToGarden(CONTENT_TYPE_CATEGORY, filepath.Clean(file.Name()), file.Name(), file.Name())
 			garden.PopulateGardenFromDir(filepath.Join(source_dir, file.Name()))
 		} else {
 			relLink := filepath.Clean(filepath.Join(source_dir, file.Name()))
@@ -176,19 +178,31 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 // Parses all node sources and populates outgoing and respective incoming connections
 func (garden *Garden) ParseAllConnections() {
 	for _, node := range garden.masterlist {
-		data, err := os.ReadFile(node.Data_source)
-		if err != nil {
 
-		}
-		fileLinks, tagLinks := garden.findLinks(data)
+		// if datatype is md or html link to parent category
+		if node.Data_type < CONTENT_TYPE_TAG {
 
-		for _, link := range fileLinks {
-			// link[2] is should be the src in the regex function. if this breaks check the regex
-			garden.ConnectNodes(node.ID, filepath.Base(link)+".md")
-		}
-		for _, link := range tagLinks {
-			// link[2] is should be the src in the regex function. if this breaks check the regex
-			garden.ConnectNodes(node.ID, link)
+			data, err := os.ReadFile(node.Data_source)
+			if err != nil {
+
+			}
+			fileLinks, tagLinks := garden.findLinks(data)
+
+			for _, link := range fileLinks {
+				// link[2] is should be the src in the regex function. if this breaks check the regex
+				garden.ConnectNodes(node.ID, filepath.Base(link)+".md")
+			}
+			for _, link := range tagLinks {
+				// link[2] is should be the src in the regex function. if this breaks check the regex
+				garden.ConnectNodes(node.ID, link)
+			}
+
+			// parent node (category) directs to child (post)
+			category_id, err := filepath.Rel("ui/content", filepath.Dir(node.Data_source))
+			if err != nil {
+				panic(err)
+			}
+			garden.ConnectNodes(category_id, node.ID)
 		}
 	}
 
