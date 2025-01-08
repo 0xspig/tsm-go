@@ -12,7 +12,7 @@ tags:
 ---
 
 <div style="width:100%; text-align:center">
-<img src="/images/blog/fallen-tree/fallen-tree.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/fallen-tree/fallen-tree.jpg" width="60%" style="display:inline-block;">
 </div>
 
 Fallen tree on a path behind my house.

@@ -19,11 +19,11 @@ I plan to make a more in-depth article covering the basics (and maybe some youtu
 
 ## First attempt
 <div>
-<img src="/images/blog/hips/stray-top.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/hips/stray-side.jpg" width="55%" "padding-inline:1.5em;">
+<img src="/static/images/blog/hips/stray-top.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/stray-side.jpg" width="55%" "padding-inline:1.5em;">
 </div>
 <div style="width:100%; text-align:center">
-<img src="/images/blog/hips/stray-drawing.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/hips/stray-drawing.jpg" width="60%" style="display:inline-block;">
 </div>
 
 This first one I doofed pretty bad. 
@@ -46,12 +46,12 @@ https://www.youtube.com/watch?v=2-q5_VHeX1E
 ## Rotating is cool
 
 <div>
-<img src="/images/blog/hips/devers-top.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/hips/devers-drawing.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-top.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-drawing.jpg" width="45%" "padding-inline:1.5em;">
 </div>
 <div>
-<img src="/images/blog/hips/devers-foot.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/hips/devers-side.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-foot.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-side.jpg" width="45%" "padding-inline:1.5em;">
 </div>
 
 The second hip model shows the same principles but with a slightly different approach (and square walls this time).
