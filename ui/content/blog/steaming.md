@@ -28,8 +28,8 @@ While not *completely* useless, the effect is minor in comparison to the dutch o
 The majority of the steam escapes out of the oven's venting and the (very annoying) process of dumping water into hot oven drops the temperature a significant amount. 
 
 <div>
-<img src="/images/blog/steaming/bread1-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/steaming/bread1-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread1-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread1-crumb.jpg" width="45%" "padding-inline:1.5em;">
 </div>
 (First Bread)
 
@@ -39,8 +39,8 @@ I don't think I folded the dough enough and I know I shaped the loaf poorly.
 It had a pretty mild flavor but, as all homemade loaves, was miles better than any store-bought loaf.
  
 <div>
-<img src="/images/blog/steaming/bread2-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/steaming/bread2-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread2-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread2-crumb.jpg" width="45%" "padding-inline:1.5em;">
 </div>
 (Second Bread)
 
@@ -59,8 +59,8 @@ This was definitely the best loaf I've ever baked.
 I shared it with some friends and it was gone in one day.
 
 <div>
-<img src="/images/blog/steaming/bread3-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/images/blog/steaming/bread3-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread3-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread3-crumb.jpg" width="45%" "padding-inline:1.5em;">
 </div>
 (Third Bread)
 
@@ -84,5 +84,5 @@ Both are cast iron, but there is a noticeable difference in the amount of heat t
 These loaves are from one batch of dough. 
 They were put into and taken out of the oven about 15 seconds apart.
 <div>
-<img src="/images/blog/steaming/bread-oven-compare.jpg" width="95%" style="padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread-oven-compare.jpg" width="95%" style="padding-inline:1.5em;">
 </div>

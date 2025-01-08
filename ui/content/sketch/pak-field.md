@@ -11,6 +11,6 @@ image: /images/blog/pak-field/pak-field.jpg
 imgalt: Lone house in the distance behind a field
 ---
 <div style="width:100%; text-align:center">
-<img src="/images/blog/pak-field/pak-field.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/pak-field/pak-field.jpg" width="60%" style="display:inline-block;">
 </div>
 Another painting from the studio. I sat on this one for a long time not knowing how to finish it.

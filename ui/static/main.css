@@ -19,12 +19,14 @@ html, body {
     background-color: #11392e;
 }
 #data-content{
-    box-shadow: inset;
+    box-shadow: inset 5px black;
     height: 100%;
     flex-basis: 45%;
     margin: 0px;
     background-color: #11392e;
     overflow-y: auto;
+    padding-inline: 2em;
+    background-color: blanchedalmond;
 }
 #data-tab{
     height: 100%;
