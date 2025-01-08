@@ -11,4 +11,6 @@ Todo:
   ☐ update homepage
   ☐ add external link nodes
   ☐ selectable internal links from ui
+  ☐ unify image rendering process
+  ☐ pass through go templates
 
