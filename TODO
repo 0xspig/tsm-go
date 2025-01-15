@@ -7,10 +7,16 @@ Todo:
   ☐ Fix Goldmark Rendering
   ☐ Render category nodes @started(25-01-07 13:06)
   ☐ render tag nodes @started(25-01-07 13:06)
-  ☐ remove data tab
+  ✔ remove data tab @started(25-01-15 07:44) @done(25-01-15 07:50) @lasted(6m8s)
   ☐ update homepage
   ☐ add external link nodes
   ☐ selectable internal links from ui
   ☐ unify image rendering process
   ☐ pass through go templates
+  ☐ css scrollbar
+  Rework Links
+    ☐ change internal link format
+    ☐ render internal links properly
+    ☐ create node for external domains
+
 
