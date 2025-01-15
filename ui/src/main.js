@@ -112,6 +112,8 @@ function targetNode(nodeID){
 xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
 
+/* !!!!! TAB FUNCTION !!!
+  I'm removing this for the time being since its ugly and doesn't add anything to the UX
 
 document.getElementById("data-tab").addEventListener("click", dataToggle)
 var dataViewing = true;
@@ -136,11 +138,12 @@ function dataToggle(){
     resizeWindow()
 }
 
+*/
 
 function getNodeData(node){
   var node_data_request = new XMLHttpRequest;
   node_data_request.onreadystatechange = function() {
-    document.getElementById("data-content").innerHTML = node_data_request.responseText;
+    document.getElementById("data").innerHTML = node_data_request.responseText;
   }
   node_data_request.open("GET", "/node-data/"+node.id, true);
   node_data_request.send();
