@@ -5,7 +5,7 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 export default {
 	input: 'ui/src/main.js',
 	output: {
-		file: 'ui/static/main.js',
+		file: 'ui/static/gen/main.js',
 		format: 'cjs'
 	},
 	plugins:[
