@@ -31,7 +31,7 @@ I found the true lengths and angles for the compound angle joinery using {stereo
 {{< figure src="/images/gallery/chair/front-high-render.jpg" width="46%"  class="image-float-left" >}}
 {{< figure src="/images/gallery/chair/straight-render.jpg" width="46%"  class="image-float-right">}}
 
-Certainly not as cool as my {chest of drawers animation}(/gallery/chest.md) but I'm happy with how close it was to the final product. Just a couple slight proportional changes.
+Certainly not as cool as my {chest of drawers animation}(chest.md) but I'm happy with how close it was to the final product. Just a couple slight proportional changes.
 
 ## A Modern Sheild Back Chair
 {{< figure src="/images/gallery/chair/front-high.jpg" width="46%"  class="image-float-left" >}}

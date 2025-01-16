@@ -25,4 +25,4 @@ I haven't found much information online about people using naphtha which leads m
 But I haven't found anything about it being bad either so I'll just have to learn the hard way if it sucks.
 Anyways, so far so good. If anyone knows anything about naphtha vs turp as a painting solvent let me know!
 
-{Update on my thoughts on solvents}(/blog/solvents.md)
+{Update on my thoughts on solvents}(solvents.md)
