@@ -39,7 +39,7 @@ Every step of the way was littered with problems (of the most obnoxious temperam
 {{< figure src="/images/gallery/cabinet/front.jpg" width="46%"  class="image-float-left" >}}
 {{< figure src="/images/gallery/cabinet/side.jpg" width="46%"  class="image-float-right">}}
 
-For round two I went back to [pen and paper](/gallery/chair.md).
+For round two I went back to {pen and paper}(/gallery/chair.md).
 The design I came up with is quite plain.
 It's just a rectangle with a drawer.
 What it has that the original design lacks is proprotion and unity.
@@ -47,7 +47,7 @@ Only in simplicity of form can details shine.
 The pulls as well as the door stop are hand carved from walnut.
 It has one drawer with single-entry houndstooth dovetails.
 The case is finished with danish oil and the interior with shellac.
-(My shellac finish was admittedly not great which I resolved to make up for in my [next project](/gallery/chest.md))
+(My shellac finish was admittedly not great which I resolved to make up for in my {next project}(/gallery/chest.md))
 
 {{< figure src="/images/gallery/cabinet/door-pull.jpg" width="30%"  class="image-float-left" >}}
 {{< figure src="/images/gallery/cabinet/dovetails.jpg" width="30%"  class="image-float-left" >}}

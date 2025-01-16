@@ -15,8 +15,8 @@ tags:
 <img src="/static/images/blog/watershed/watershed.jpg" width="60%" style="display:inline-block;">
 </div>
 
-This is a painting I did before I took [Mark Boedges' workshop](/blog/mark-boedges-workshop.md).
-I was really struggling with my [solvents](/blog/solvents.md) at that point.
+This is a painting I did before I took {Mark Boedges' workshop}(/blog/mark-boedges-workshop.md).
+I was really struggling with my {solvents}(/blog/solvents.md) at that point.
 I don't like the way the surface turned out and it's a little dull on account of using too much OMS.
 The drawing was spot on though.
 Despite floundering with the medium I felt like I was in the Schmid-Zone the whole time.
