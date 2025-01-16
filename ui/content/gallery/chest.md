@@ -39,7 +39,7 @@ It features five walnut drawers with single entry dovetails, satinwood applied d
 The drawer interiors are lined with red velvet.
 The biggest point of interest in this piece is the tambour door on the right side.
 It is also made from satinwood with a matching walnut pull.
-As I mentioned in my [cabinet post](/gallery/cabinet.md), I wanted to redeem my previous mediocre shellac finish.
+As I mentioned in my {cabinet post}(/gallery/cabinet.md), I wanted to redeem my previous mediocre shellac finish.
 Fittingly, the entire chest including the tambour (wow, was that finicky) is french polished.
 
 This was probably my favorite project at the school.

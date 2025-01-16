@@ -56,6 +56,10 @@ function pushGraphParams(){
       if (node.data_type == 3){
         return "#63335c";
       }
+      // external
+      if (node.data_type == 4){
+        return "#68d588";
+      }
     });
 
     Graph.nodeVal(node => {
@@ -74,22 +78,35 @@ function pushGraphParams(){
       if (node.data_type == 3){
         return 4;
       }
+      // external
+      if (node.data_type == 4){
+        return 1;
+      }
     })
 }
 
 function targetNode(nodeID){
 
     var targetNode;
+
     console.log("targeting Node: "+nodeID);
     Graph.graphData().nodes.forEach(node => {
       if (node.id == nodeID){
         targetNode = node;
+        // if external
+        if (targetNode.data_type == 4) {
+          window.open(node.source, '_blank').focus();
+          return;
+        }
         targetNode.targeted = true;
       }else{
         node.targeted = false;
       }
     });
     console.log(targetNode);
+    if (targetNode.data_type == 4){
+      return;
+    } 
     // Aim at targetNode from outside it
     const distance = 600;
     const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
