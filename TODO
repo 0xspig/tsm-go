@@ -13,8 +13,9 @@ Todo:
   ☐ pass through go templates
   ✔ css scrollbar @done(25-01-15 08:31)
   Rework Links
-    ☐ add external link nodes
-    ☐ change internal link format
+    ✔ add external link nodes @started(25-01-16 07:22) @done(25-01-16 08:53) @lasted(1h31m40s)
+    ☐ find index.xml bug @started(25-01-16 08:54)
+    ✔ change internal link format @done(25-01-16 07:20)
     ☐ render internal links properly
 
 
