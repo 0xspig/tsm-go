@@ -17,5 +17,5 @@ Todo:
     ☐ find index.xml bug @started(25-01-16 08:54)
     ✔ change internal link format @done(25-01-16 07:20)
     ☐ render internal links properly
-
+  ☐ statically generate md files
 
