@@ -14,8 +14,20 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(err)
 	}
-	home = filepath.Join(home, "prg/tsm/")
+	home = filepath.Join(home, "prg/tsm-go/")
 	os.Chdir(home)
+	wd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(wd)
+	entries, err := os.ReadDir(wd)
+	if err != nil {
+		panic(err)
+	}
+	for _, e := range entries {
+		fmt.Println(e)
+	}
 	// TODO make content dir in config or something to search files in
 	// for now Im just going to hack in static
 	g.PopulateGardenFromDir("ui/content")
