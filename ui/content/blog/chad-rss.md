@@ -51,14 +51,14 @@ In order to read RSS feeds you need a feed reader. Here's some options.
 Adding feeds is pretty simple.
 If you see a little rss icon, just copy the link and put it into your feed reader.
 If you don't see a link, their platform (blogspot for example) may still automatically generate one that you can find by trying something like 'example.biz/rss'. Other common names are "feed", "rss.xml" or "index.xml".
-If you use twitter, you can follow twitter feeds with [Nitter](nitter.net) (this may be broken).
+If you use twitter, you can follow twitter feeds with [Nitter](https://nitter.net/) (this may be broken).
 No account needed and more importantly, none of the distractions of twitter.
 
 Once again, you can follow my {RSS}(/index.xml) if you haven't already.
 
 And here's some blogs that I follow and you should too:
 
-- [James Gurney](gurneyjourney.blogspot.com) | [RSS](https://feeds.feedburner.com/blogspot/NVaYV)
+- [James Gurney](https://gurneyjourney.blogspot.com) | [RSS](https://feeds.feedburner.com/blogspot/NVaYV)
 - [Art Contrarian](https://artcontrarian.blogspot.com/) | [RSS](https://artcontrarian.blogspot.com/feeds/posts/default)
 - [Pete the Street](https://www.peterbrownneac.com/blog/) | [RSS](https://www.peterbrownneac.com/blog/feed/)
 - [Tad Retz](https://www.tadretz.com) | [RSS](https://nitter.net/tadretz/rss)
