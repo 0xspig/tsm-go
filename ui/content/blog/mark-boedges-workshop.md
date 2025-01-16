@@ -37,7 +37,7 @@ In regular painting **I can tell a huge difference between turp and OMS.**
 I tried out naphtha today but I didn't notice much of a difference between turp.
 I plan to do some experiments with all three solvents to see just how much they differ. 
 
-{Updates on my solvent exploration}(/blog/solvents.md)
+{Updates on my solvent exploration}(solvents.md)
 
 ## 4 - BRUSHES MATTER
 **Seriously go buy Rosemary Co. Master's Series right now they're barely even more than Michaels garbage synthetics.**
