@@ -189,13 +189,13 @@ func (garden *Garden) ParseAllConnections() {
 			if err != nil {
 
 			}
-			fileLinks, tagLinks := garden.findLinks(data)
+			baseLinks, fullLinks := garden.findLinks(data)
 
-			for _, link := range fileLinks {
+			for _, link := range baseLinks {
 				// link[2] is should be the src in the regex function. if this breaks check the regex
 				garden.ConnectNodes(node.ID, filepath.Base(link))
 			}
-			for _, link := range tagLinks {
+			for _, link := range fullLinks {
 				// link[2] is should be the src in the regex function. if this breaks check the regex
 				garden.ConnectNodes(node.ID, link)
 			}
@@ -294,8 +294,9 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	}
 	for _, match := range matches {
 		uri := uri_regex.FindStringSubmatch(match[2])
-		garden.addNodeToGarden(CONTENT_TYPE_EXTERNAL, uri[1]+uri[3], uri[4], uri[4])
-		matchValues = append(matchValues, uri[4])
+		garden.addNodeToGarden(CONTENT_TYPE_EXTERNAL, uri[0], uri[0], match[1])
+		// matches are added to tag matches because the internal file matches get truncated later
+		tagMatches = append(tagMatches, uri[0])
 	}
 
 	return matchValues, tagMatches
