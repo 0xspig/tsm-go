@@ -35,6 +35,7 @@ const (
 	CONTENT_TYPE_MARKDOWN = 1
 	CONTENT_TYPE_TAG      = 2
 	CONTENT_TYPE_CATEGORY = 3
+	CONTENT_TYPE_EXTERNAL = 4
 )
 
 // Essential node element/
@@ -257,16 +258,44 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	}
 
 	// this gets the link value and source '{<value>](<src>)'
-	regular_expression, err := regexp.Compile(`\{([^\}]*)\}\(([^\)]*)\)`)
+	internal_regex, err := regexp.Compile(`\{([^\}]*)\}\(([^\)]*)\)`)
 
 	if err != nil {
 		panic(err)
 	}
 	// substring returns 3 strings for each match 0:full match 1:value 2:src
-	matches := regular_expression.FindAllStringSubmatch(string(data), -1)
+	matches := internal_regex.FindAllStringSubmatch(string(data), -1)
 	matchValues := make([]string, 0)
 	for _, match := range matches {
 		matchValues = append(matchValues, match[2])
+	}
+
+	//same as above for external links
+	external_regex, err := regexp.Compile(`\[([^\]]*)\]\(([^\)]*)\)`)
+	if err != nil {
+		panic(err)
+	}
+	matches = external_regex.FindAllStringSubmatch(string(data), -1)
+
+	// regex stolen from Berners-Lee
+	//$0 = http://www.ics.uci.edu/pub/ietf/uri/#Related
+	//$1 = http:
+	//$2 = http
+	//$3 = //www.ics.uci.edu
+	//$4 = www.ics.uci.edu
+	//$5 = /pub/ietf/uri/
+	//$6 = <undefined>
+	//$7 = <undefined>
+	//$8 = #Related
+	//$9 = Related
+	uri_regex, err := regexp.Compile(`^(([^:\/?#]+):)?(\/\/([^\/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?`)
+	if err != nil {
+		panic(err)
+	}
+	for _, match := range matches {
+		uri := uri_regex.FindStringSubmatch(match[2])
+		garden.addNodeToGarden(CONTENT_TYPE_EXTERNAL, uri[1]+uri[3], uri[4], uri[4])
+		matchValues = append(matchValues, uri[4])
 	}
 
 	return matchValues, tagMatches
