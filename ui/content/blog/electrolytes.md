@@ -15,7 +15,7 @@ Working up to my three day I had some issues with electrolytes.
 <!--more-->
 At first I wasn't getting enough (fatigue).
 Then I found out what happens when you get too much (bathroom emergency).
-But by the end of the season I'd figured out enough of a schedule to try a [5 day fast](/blog/dont-eat-challenge.md) over the summer.
+But by the end of the season I'd figured out enough of a schedule to try a {5 day fast}(/blog/dont-eat-challenge.md) over the summer.
 The 5 day was a success but I could tell my electrolytes were still not quite right.
 I was trying to cram all of my electrolytes into two bottles of water.
 While *technically* doable, the margin for error is very small.
@@ -24,7 +24,7 @@ A little too fast and you're evacuating 80% of the fluid you just drank.
 I was constantly going back and forth between not enough and too much.
 
 ## Round 2
-Now that I've stepped up my [baking](/blog/steaming.md) game with an [accurate scale](https://www.kingarthurbaking.com/blog/2022/02/18/digital-kitchen-scale) it's time to retire the teaspoon.
+Now that I've stepped up my {baking}(/blog/steaming.md) game with an [accurate scale](https://www.kingarthurbaking.com/blog/2022/02/18/digital-kitchen-scale) it's time to retire the teaspoon.
 Per day, the average person needs about 3-6g of sodium and 3-5g of potassium.
 There's about about 4g of sodium in 10g of salt and 5g of potassium in 10g on NoSalt.
 If you eat 9g of salt and 6g of NoSalt that gives you 3.6g of sodium and 3g of potassium - both safely within the daily range.
