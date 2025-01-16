@@ -107752,7 +107752,7 @@ function targetNode(nodeID){
         // if external
         if (targetNode.data_type == 4) {
           window.open(node.source, '_blank').focus();
-          return
+          return;
         }
         targetNode.targeted = true;
       }else {
@@ -107760,6 +107760,9 @@ function targetNode(nodeID){
       }
     });
     console.log(targetNode);
+    if (targetNode.data_type == 4){
+      return;
+    } 
     // Aim at targetNode from outside it
     const distance = 600;
     const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
