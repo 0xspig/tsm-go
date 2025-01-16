@@ -54,7 +54,7 @@ If you don't see a link, their platform (blogspot for example) may still automat
 If you use twitter, you can follow twitter feeds with [Nitter](nitter.net) (this may be broken).
 No account needed and more importantly, none of the distractions of twitter.
 
-Once again, you can follow my [RSS](/index.xml) if you haven't already.
+Once again, you can follow my {RSS}(/index.xml) if you haven't already.
 
 And here's some blogs that I follow and you should too:
 
