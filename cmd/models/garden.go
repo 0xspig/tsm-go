@@ -250,13 +250,14 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 
 	for _, tag := range frontMatter.Tags {
 		if garden.masterlist[tag] == nil {
+			// TODO fix source - currently just placeholder index.md
 			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag, "tag:"+tag)
 		}
 		tagMatches = append(tagMatches, tag)
 	}
 
-	// this gets the link value and source '[<value>](<src>)'
-	regular_expression, err := regexp.Compile(`\[([^\]]*)\]\(([^\)]*)\)`)
+	// this gets the link value and source '{<value>](<src>)'
+	regular_expression, err := regexp.Compile(`\{([^\}]*)\}\(([^\)]*)\)`)
 
 	if err != nil {
 		panic(err)
