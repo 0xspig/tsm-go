@@ -367,5 +367,13 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 	if err := markdown.Convert(source, &buf, parser.WithContext(context)); err != nil {
 		panic(err)
 	}
-	return buf.Bytes()
+
+	internal_regex, err := regexp.Compile(`\{([^\}]*)\}\(([^\)]*)\)`)
+	if err != nil {
+		panic(err)
+	}
+
+	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<div class="internal-link" onClick="targetNode('$2')">$1</div>`))
+
+	return data
 }

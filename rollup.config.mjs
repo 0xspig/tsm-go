@@ -6,7 +6,7 @@ export default {
 	input: 'ui/src/main.js',
 	output: {
 		file: 'ui/static/gen/main.js',
-		format: 'cjs'
+		format: 'es'
 	},
 	plugins:[
 		commonjs(),

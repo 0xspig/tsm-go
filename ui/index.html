@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <head>
 	<title>TSM GO</title>
-	<link rel="stylesheet" href="static/main.css">
-
-
+	<link rel="stylesheet" href="/static/main.css">
 </head>
 
 <body>
 	<script type="module" src="/static/gen/main.js"></script>
+	<script type="module">
+		import {targetNode} from "/static/gen/main.js";
+		window.targetNode = targetNode;
+	</script>
 	<div id="main">
 		<div id="data-container">
 			<div id="data"></div>
