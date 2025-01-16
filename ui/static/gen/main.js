@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @license
  * Copyright 2010-2024 Three.js Authors
@@ -107821,3 +107819,5 @@ function getNodeData(node){
   node_data_request.open("GET", "/node-data/"+node.id, true);
   node_data_request.send();
 }
+
+export { targetNode };

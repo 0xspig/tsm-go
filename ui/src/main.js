@@ -85,7 +85,7 @@ function pushGraphParams(){
     })
 }
 
-function targetNode(nodeID){
+export function targetNode(nodeID){
 
     var targetNode;
 
