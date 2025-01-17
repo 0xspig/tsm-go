@@ -24,7 +24,6 @@ type Garden struct {
 	size       int
 }
 
-// Double linked list of nodes
 const (
 	CONTENT_TYPE_HTML     = 0
 	CONTENT_TYPE_MARKDOWN = 1
@@ -35,14 +34,15 @@ const (
 
 // Essential node element/
 type Node struct {
-	ID                  string  `json:"id"`
-	Name                string  `json:"name"`
-	Data_source         string  `json:"source"`
-	Data_type           int     `json:"data_type"`
-	NumberIncomingNodes int     `json:"numIncoming"`
-	NumberOutgoingNodes int     `json:"numOutgoing"`
-	IncomingNodes       []*Node `json:"-"`
-	OutgoingNodes       []*Node `json:"-"`
+	ID                  string   `json:"id"`
+	Name                string   `json:"name"`
+	Data_source         string   `json:"source"`
+	Data_type           int      `json:"data_type"`
+	NumberIncomingNodes int      `json:"numIncoming"`
+	NumberOutgoingNodes int      `json:"numOutgoing"`
+	IncomingNodes       []*Node  `json:"-"`
+	OutgoingNodes       []*Node  `json:"-"`
+	Metadata            YAMLData `json:"-"`
 }
 
 type NodeList []Node
@@ -71,7 +71,14 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 	newNode.Name = name
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
-
+	if newNode.Data_type == CONTENT_TYPE_MARKDOWN {
+		data, err := os.ReadFile(source)
+		if err != nil {
+			panic(err)
+		}
+		yaml := scanYAMLFrontMatter(data)
+		newNode.Metadata = *yaml
+	}
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
 
@@ -95,7 +102,9 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 		if err != nil {
 			panic(err)
 		}
-		newNode.Name = scanYAMLFrontMatter(data).Title
+		yaml := scanYAMLFrontMatter(data)
+		newNode.Name = yaml.Title
+		newNode.Metadata = *yaml
 	}
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
@@ -348,7 +357,21 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 
 	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<div class="internal-link" onClick="targetNode('$2')">$1</div>`))
 
-	return data
+	data = append([]byte(`{{define "content"}}`), data...)
+	data = append(data, []byte(`{{end}}`)...)
+
+	ts, err := template.ParseFiles("ui/templates/post.template.html")
+	if err != nil {
+		panic(err)
+	}
+	ts, err = ts.Parse(string(data))
+	if err != nil {
+		panic(err)
+	}
+	var template_buf bytes.Buffer
+	ts.Execute(&template_buf, node)
+
+	return template_buf.Bytes()
 }
 func (garden *Garden) tagToHtml(node *Node) []byte {
 	ts, err := template.ParseFiles("ui/templates/tag.template.html")
