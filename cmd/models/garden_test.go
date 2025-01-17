@@ -34,12 +34,7 @@ func TestMain(m *testing.M) {
 	g.ParseAllConnections()
 	g.ConnectNodes("peepee.md", "firstFile.md")
 
-	data, err := g.ExportJSONData()
-	if err != nil {
-		fmt.Printf("json export error :(")
-	}
-
-	fmt.Printf("JSON: %s\n", string(data))
+	g.GenAssets()
 
 	fmt.Printf("peepee\n")
 }

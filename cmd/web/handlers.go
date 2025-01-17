@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"os"
 )
 
 func (app *Application) home(w http.ResponseWriter, r *http.Request) {
@@ -25,11 +26,12 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 func (app *Application) getJSON(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("getJSON Function Run")
 	w.Header().Add("Server", "McServer")
-	json, err := app.garden.ExportJSONData()
+	json, err := os.ReadFile("ui/static/gen/graph-data.json")
 	if err != nil {
-		app.logger.Error("json export error", err)
+		app.logger.Error("Error loading json", err)
 		return
 	}
+
 	w.Write(json)
 }
 
