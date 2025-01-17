@@ -14,8 +14,7 @@ func (app *Application) routes() *http.ServeMux {
 
 	mux.Handle("GET /static/", http.StripPrefix("/static", fs))
 
-	mux.HandleFunc("GET /{$}", app.home)
-	mux.HandleFunc("GET /", app.resolveID)
+	mux.HandleFunc("GET /", app.home)
 	mux.HandleFunc("GET /graph-json", app.getJSON)
 	mux.HandleFunc("GET /node-data/{id}", app.getPostHTML)
 
