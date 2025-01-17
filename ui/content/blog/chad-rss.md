@@ -10,7 +10,7 @@ tags:
 
 ---
 
-{{< figure src="/rss.png" width="5%" link="/index.xml">}}
+< figure src="/rss.png" width="5%" link="/index.xml">
 
 ## Social Media Sucks
 
