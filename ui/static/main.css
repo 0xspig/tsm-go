@@ -61,3 +61,18 @@ canvas {
 .nodeTitle{
 color:aquamarine;
 }
+
+.internal-link{
+    color:#1a8789;
+    text-decoration: underline;
+    transition: color .4s;
+    display:inline;
+}
+.internal-link:visited{
+    color: #6e8282;
+}
+.internal-link:hover{
+    cursor: pointer;
+    color: #28aea7;;
+    transition: color .2s;
+}
