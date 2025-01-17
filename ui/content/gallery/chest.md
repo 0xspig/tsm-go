@@ -8,8 +8,8 @@ tags:
 image: "/images/gallery/chest/front-home_cropped.jpg"
 imgalt: "Small Chest of Drawers with a bottle of pen ink"
 ---
-{{< figure src="/images/gallery/chest/front-home_cropped.jpg" width="46%"  class="image-float-left" >}}
-{{< figure src="/images/gallery/chest/drawer-sides_cropped.jpg" width="46%"  class="image-float-right">}}
+< figure src="/images/gallery/chest/front-home_cropped.jpg" width="46%"  class="image-float-left" >
+< figure src="/images/gallery/chest/drawer-sides_cropped.jpg" width="46%"  class="image-float-right">
 
 The third semester project at the [Vermont Woodworking School](https://www.vermontwoodworkingschool.com/) is a chest of drawers.
 There are two main goals in this semester; learn web frame construction and get used to doing a lot of work.
@@ -26,9 +26,9 @@ This is my magnum opus of rendering (though I wish it were a bit brighter).
 I'm happy to say the final product turned out almost exactly as I had designed it - due in part to my better Blender skills - but also to having a complete and cohesive design from the beginning.
 
 ## The real thing
-{{< figure src="/images/gallery/chest/dovetails_resized_cropped.jpg" width="45%" class="image-center">}}
-{{< figure src="/images/gallery/chest/drawer-top_cropped.jpg" width="46%"  class="image-float-left" >}}
-{{< figure src="/images/gallery/chest/3-4-closed_cropped_1.jpg" width="46%" class="image-float-right">}}
+< figure src="/images/gallery/chest/dovetails_resized_cropped.jpg" width="45%" class="image-center">
+< figure src="/images/gallery/chest/drawer-top_cropped.jpg" width="46%"  class="image-float-left" >
+< figure src="/images/gallery/chest/3-4-closed_cropped_1.jpg" width="46%" class="image-float-right">
 
 <div style="display:inline-block; width:100%">
 </div>
