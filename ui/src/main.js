@@ -33,9 +33,11 @@ xmlhttp.onreadystatechange = function() {
 		Graph.graphData(JSON.parse(this.responseText));
     console.log("graph data updated");
     pushGraphParams();
+    // target uri node (defaults to home if not found)
+    var path = window.location.pathname.split('/');
+    var id = path[path.length - 1];
+    targetNode(id);
     }
-    // target home node
-    targetNode("home.md");
 };
 
 function pushGraphParams(){
@@ -87,42 +89,46 @@ function pushGraphParams(){
 
 export function targetNode(nodeID){
 
-    var targetNode;
+    var target_node;
 
     console.log("targeting Node: "+nodeID);
     Graph.graphData().nodes.forEach(node => {
       if (node.id == nodeID){
-        targetNode = node;
+        target_node = node;
         // if external
-        if (targetNode.data_type == 4) {
+        if (target_node.data_type == 4) {
           window.open(node.source, '_blank').focus();
           return;
         }
-        targetNode.targeted = true;
+        target_node.targeted = true;
       }else{
         node.targeted = false;
       }
     });
-    console.log(targetNode);
-    if (targetNode.data_type == 4){
+    if (target_node == null){
+      targetNode("home.md");
+      return;
+    }
+    console.log(target_node);
+    if (target_node.data_type == 4){
       return;
     } 
-    // Aim at targetNode from outside it
+    // Aim at target_node from outside it
     const distance = 600;
-    const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
+    const distRatio = 1 + distance/Math.hypot(target_node.x, target_node.y, target_node.z);
 
-    const newPos = targetNode.x || targetNode.y || targetNode.z
-      ? { x: targetNode.x * distRatio, y: targetNode.y * distRatio, z: targetNode.z * distRatio }
-      : { x: 0, y: 0, z: distance }; // special case if targetNode is in (0,0,0)
+    const newPos = target_node.x || target_node.y || target_node.z
+      ? { x: target_node.x * distRatio, y: target_node.y * distRatio, z: target_node.z * distRatio }
+      : { x: 0, y: 0, z: distance }; // special case if target_node is in (0,0,0)
 
     Graph.cameraPosition(
       newPos, // new position
-      targetNode, // lookAt ({ x, y, z })
+      target_node, // lookAt ({ x, y, z })
       1800  // ms transition duration
     );
 
     // ui stuff
-    getNodeData(targetNode);
+    getNodeData(target_node);
     pushGraphParams();
 }
 
