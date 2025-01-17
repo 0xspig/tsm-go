@@ -130,7 +130,15 @@ export function targetNode(nodeID){
     // ui stuff
     getNodeData(target_node);
     pushGraphParams();
+    window.history.pushState(null, target_node.name, target_node.id);
 }
+
+addEventListener("popstate", (event) => {
+    // target uri node (defaults to home if not found)
+    var path = window.location.pathname.split('/');
+    var id = path[path.length - 1];
+    targetNode(id);
+});
 
 xmlhttp.open("GET", "/graph-json", true);
 xmlhttp.send();
