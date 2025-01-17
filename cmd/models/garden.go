@@ -106,8 +106,8 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	return newNode
 }
 
-func (list NodeList) AddNodeToList(nodeToAdd *Node) {
-	list = append(list, *nodeToAdd)
+func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
+	*list = append(*list, *nodeToAdd)
 }
 
 /*TODO func checkFileType(file) int*/
@@ -294,11 +294,12 @@ type GraphData struct {
 }
 
 func (garden *Garden) ExportJSONData() ([]byte, error) {
-	data := GraphData{}
+	var data GraphData
 	for _, node := range garden.masterlist {
 		data.Nodes = append(data.Nodes, *node)
 		for _, link := range node.incomingNodes {
-			data.Links = append(data.Links, Link{Source: node.ID, Target: link.ID})
+			newLink := Link{Source: node.ID, Target: link.ID}
+			data.Links = append(data.Links, newLink)
 		}
 		//for link := node.incomingNodes; link.node != nil; {
 		//	newLink := Link{Source: node.ID, Target: link.node.ID}
