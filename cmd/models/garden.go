@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -255,7 +256,7 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	for _, tag := range frontMatter.Tags {
 		if garden.masterlist[tag] == nil {
 			// TODO fix source - currently just placeholder index.md
-			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag, "tag:"+tag)
+			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag, "Tag: "+tag)
 		}
 		tagMatches = append(tagMatches, tag)
 	}
@@ -343,13 +344,14 @@ func (garden *Garden) NodeToHTML(nodeID string) []byte {
 	case CONTENT_TYPE_HTML:
 		return []byte("<h1>HTML unsupported</h1>")
 	case CONTENT_TYPE_TAG:
-		return []byte("<h1>Tags currently unsupported</h1>")
+		return garden.tagToHtml(node)
 	case CONTENT_TYPE_CATEGORY:
 		return []byte("<h1>Categories currently unsupported</h1>")
 	default:
 		return []byte("<h1>File Not Found</h1>")
 	}
 }
+
 func (garden *Garden) mdToHTML(node *Node) []byte {
 	source, err := os.ReadFile(node.Data_source)
 	if err != nil {
@@ -380,7 +382,14 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 
 	return data
 }
-
 func (garden *Garden) tagToHtml(node *Node) []byte {
-	return nil
+	ts, err := template.ParseFiles("ui/templates/tag.template.html")
+	if err != nil {
+		return []byte("<h1>Template rendering error</h1>")
+	}
+
+	var buf bytes.Buffer
+	ts.Execute(&buf, node)
+
+	return buf.Bytes()
 }

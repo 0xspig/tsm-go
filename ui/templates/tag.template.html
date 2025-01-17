@@ -1,4 +1,10 @@
 <div>
-    <h1>Tag: {{.Title}}</h1>
-    {{.}}
+    <h1>{{.Name}}</h1>
+
+    <h2>Posts:</h2>
+    <ul>
+    {{range .incomingNodes}}
+        <li class="internal_link" onclick="targetNode({{.ID}})">{{.Name}}</li>
+    {{ end }}
+    </ul>
 </div>
