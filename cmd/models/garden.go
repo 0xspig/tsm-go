@@ -41,8 +41,8 @@ type Node struct {
 	Data_type           int    `json:"data_type"`
 	NumberIncomingNodes int    `json:"numIncoming"`
 	NumberOutgoingNodes int    `json:"numOutgoing"`
-	incomingNodes       NodeList
-	outgoingNodes       NodeList
+	IncomingNodes       []Node
+	OutgoingNodes       []Node
 }
 
 type NodeList []Node
@@ -106,10 +106,6 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	return newNode
 }
 
-func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
-	*list = append(*list, *nodeToAdd)
-}
-
 /*TODO func checkFileType(file) int*/
 
 // Populates garden with nodes generated from source_dir (note: nodes will remain islands until connected)
@@ -154,9 +150,9 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 	if err == 1 {
 		return
 	}
-	master.outgoingNodes.AddNodeToList(outgoing)
+	master.OutgoingNodes = append(master.OutgoingNodes, *outgoing)
 	master.NumberOutgoingNodes += 1
-	outgoing.incomingNodes.AddNodeToList(master)
+	outgoing.IncomingNodes = append(outgoing.IncomingNodes, *master)
 	outgoing.NumberIncomingNodes += 1
 }
 
@@ -297,19 +293,10 @@ func (garden *Garden) ExportJSONData() ([]byte, error) {
 	var data GraphData
 	for _, node := range garden.masterlist {
 		data.Nodes = append(data.Nodes, *node)
-		for _, link := range node.incomingNodes {
+		for _, link := range node.IncomingNodes {
 			newLink := Link{Source: node.ID, Target: link.ID}
 			data.Links = append(data.Links, newLink)
 		}
-		//for link := node.incomingNodes; link.node != nil; {
-		//	newLink := Link{Source: node.ID, Target: link.node.ID}
-		//	data.Links = append(data.Links, newLink)
-		//	if link.next != nil {
-		//		link = *link.next
-		//	} else {
-		//		break
-		//	}
-		//}
 	}
 	return json.Marshal(data)
 }
