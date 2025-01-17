@@ -56,6 +56,9 @@ func CreateGarden() *Garden {
 		size:       0,
 	}
 }
+func (garden *Garden) ContainsID(id string) bool {
+	return garden.masterlist[id] != nil
+}
 
 // adds node to garden
 func (garden *Garden) addNodeToGarden(datatype int, source string, id string, name string) *Node {
@@ -376,4 +379,8 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<div class="internal-link" onClick="targetNode('$2')">$1</div>`))
 
 	return data
+}
+
+func (garden *Garden) tagToHtml(node *Node) []byte {
+	return nil
 }
