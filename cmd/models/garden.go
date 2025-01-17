@@ -25,12 +25,6 @@ type Garden struct {
 }
 
 // Double linked list of nodes
-type NodeList struct {
-	node *Node
-	next *NodeList
-	prev *NodeList
-}
-
 const (
 	CONTENT_TYPE_HTML     = 0
 	CONTENT_TYPE_MARKDOWN = 1
@@ -50,6 +44,8 @@ type Node struct {
 	incomingNodes       NodeList
 	outgoingNodes       NodeList
 }
+
+type NodeList []Node
 
 func CreateGarden() *Garden {
 	return &Garden{
@@ -110,27 +106,8 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	return newNode
 }
 
-func (list *NodeList) AddNodeToList(nodeToAdd *Node) {
-	if list.node == nil {
-		*list = NodeList{node: nodeToAdd, next: nil, prev: nil}
-		return
-	}
-	current := list
-	buffer := list.next
-
-	if current.node.ID == nodeToAdd.ID {
-		return
-	}
-
-	for buffer != nil {
-		if current.node.ID == nodeToAdd.ID {
-			return
-		}
-		current = current.next
-		buffer = current.next
-	}
-
-	current.next = &NodeList{node: nodeToAdd, next: nil, prev: current}
+func (list NodeList) AddNodeToList(nodeToAdd *Node) {
+	list = append(list, *nodeToAdd)
 }
 
 /*TODO func checkFileType(file) int*/
@@ -320,15 +297,18 @@ func (garden *Garden) ExportJSONData() ([]byte, error) {
 	data := GraphData{}
 	for _, node := range garden.masterlist {
 		data.Nodes = append(data.Nodes, *node)
-		for link := node.incomingNodes; link.node != nil; {
-			newLink := Link{Source: node.ID, Target: link.node.ID}
-			data.Links = append(data.Links, newLink)
-			if link.next != nil {
-				link = *link.next
-			} else {
-				break
-			}
+		for _, link := range node.incomingNodes {
+			data.Links = append(data.Links, Link{Source: node.ID, Target: link.ID})
 		}
+		//for link := node.incomingNodes; link.node != nil; {
+		//	newLink := Link{Source: node.ID, Target: link.node.ID}
+		//	data.Links = append(data.Links, newLink)
+		//	if link.next != nil {
+		//		link = *link.next
+		//	} else {
+		//		break
+		//	}
+		//}
 	}
 	return json.Marshal(data)
 }
