@@ -40,6 +40,9 @@ xmlhttp.onreadystatechange = function() {
     }
 };
 
+xmlhttp.open("GET", "/graph-json", true);
+xmlhttp.send();
+
 function pushGraphParams(){
 
     Graph.nodeColor(node => {
@@ -140,8 +143,6 @@ addEventListener("popstate", (event) => {
     targetNode(id);
 });
 
-xmlhttp.open("GET", "/graph-json", true);
-xmlhttp.send();
 
 /* !!!!! TAB FUNCTION !!!
   I'm removing this for the time being since its ugly and doesn't add anything to the UX

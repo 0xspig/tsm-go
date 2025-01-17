@@ -21,6 +21,7 @@ func main() {
 	// for now Im just going to hack in static
 	g.PopulateGardenFromDir("ui/content")
 	g.ParseAllConnections()
+	g.GenAssets()
 
 	addr := flag.String("addr", "localhost:3000", "HTTP Network Address")
 	flag.Parse()

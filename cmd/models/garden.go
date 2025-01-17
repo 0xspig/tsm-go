@@ -35,14 +35,14 @@ const (
 
 // Essential node element/
 type Node struct {
-	ID                  string `json:"id"`
-	Name                string `json:"name"`
-	Data_source         string `json:"source"`
-	Data_type           int    `json:"data_type"`
-	NumberIncomingNodes int    `json:"numIncoming"`
-	NumberOutgoingNodes int    `json:"numOutgoing"`
-	IncomingNodes       []Node
-	OutgoingNodes       []Node
+	ID                  string  `json:"id"`
+	Name                string  `json:"name"`
+	Data_source         string  `json:"source"`
+	Data_type           int     `json:"data_type"`
+	NumberIncomingNodes int     `json:"numIncoming"`
+	NumberOutgoingNodes int     `json:"numOutgoing"`
+	IncomingNodes       []*Node `json:"-"`
+	OutgoingNodes       []*Node `json:"-"`
 }
 
 type NodeList []Node
@@ -150,9 +150,9 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 	if err == 1 {
 		return
 	}
-	master.OutgoingNodes = append(master.OutgoingNodes, *outgoing)
+	master.OutgoingNodes = append(master.OutgoingNodes, outgoing)
 	master.NumberOutgoingNodes += 1
-	outgoing.IncomingNodes = append(outgoing.IncomingNodes, *master)
+	outgoing.IncomingNodes = append(outgoing.IncomingNodes, master)
 	outgoing.NumberIncomingNodes += 1
 }
 
@@ -289,7 +289,7 @@ type GraphData struct {
 	Links []Link `json:"links"`
 }
 
-func (garden *Garden) ExportJSONData() ([]byte, error) {
+func (garden *Garden) genJSONData() ([]byte, error) {
 	var data GraphData
 	for _, node := range garden.masterlist {
 		data.Nodes = append(data.Nodes, *node)
@@ -360,4 +360,13 @@ func (garden *Garden) tagToHtml(node *Node) []byte {
 	ts.Execute(&buf, node)
 
 	return buf.Bytes()
+}
+
+func (garden *Garden) GenAssets() {
+	// cache node data
+	json_data, err := garden.genJSONData()
+	if err != nil {
+		panic(err)
+	}
+	os.WriteFile("ui/static/gen/graph-data.json", json_data, 0644)
 }
