@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"path/filepath"
 )
 
 func (app *Application) home(w http.ResponseWriter, r *http.Request) {
@@ -38,4 +39,28 @@ func (app *Application) getPostHTML(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", "McServer")
 	html := app.garden.NodeToHTML(r.PathValue("id"))
 	w.Write(html)
+}
+
+func (app *Application) resolveID(w http.ResponseWriter, r *http.Request) {
+	app.logger.Debug("resolving ID")
+	w.Header().Add("Server", "McServer")
+	request_ID := filepath.Base(r.RequestURI)
+	if app.garden.ContainsID(request_ID) {
+
+		ts, err := template.ParseFiles("./ui/index.html")
+		if err != nil {
+			app.serverError(w, r, err)
+			return
+		}
+
+		//onload_string := "onload=\"targetNode('" + request_ID + "\"')"
+		err = ts.Execute(w, map[string]string{"OnLoad": request_ID})
+		if err != nil {
+			app.serverError(w, r, err)
+			return
+		}
+	} else {
+		app.home(w, r)
+		return
+	}
 }
