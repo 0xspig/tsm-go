@@ -49,6 +49,9 @@ function pushGraphParams(){
       if (node.targeted == true){
         return "#ff33ff";
       }
+      if (node.highlighted == true){
+        return "#eeeeff"
+      }
       //md files
       if (node.data_type == 1){
         return "#fff380";
@@ -71,6 +74,9 @@ function pushGraphParams(){
       if (node.targeted == true){
         return 8;
       }
+      if (node.highlighted == true){
+        return 8;
+      }
       //md files
       if (node.data_type == 1){
         return 2;
@@ -88,6 +94,21 @@ function pushGraphParams(){
         return 1;
       }
     })
+}
+
+export function highlightNode(nodeID){
+    var target_node;
+
+    console.log("targeting Node: "+nodeID);
+    Graph.graphData().nodes.forEach(node => {
+      if (node.id == nodeID){
+        target_node = node;
+        target_node.highlighted = true;
+      }else{
+        node.highlighted = false;
+      }
+    });
+    pushGraphParams();
 }
 
 export function targetNode(nodeID){
