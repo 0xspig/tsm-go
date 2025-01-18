@@ -370,7 +370,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 		template_file = "ui/templates/home.template.html"
 	}
 
-	ts, err := template.ParseFiles(template_file)
+	ts, err := template.ParseFiles(template_file, "ui/templates/footer.template.html")
 	if err != nil {
 		panic(err)
 	}
@@ -384,7 +384,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 	return template_buf.Bytes()
 }
 func (garden *Garden) tagToHtml(node *Node) []byte {
-	ts, err := template.ParseFiles("ui/templates/tag.template.html")
+	ts, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
 	if err != nil {
 		return []byte("<h1>Template rendering error</h1>")
 	}
@@ -396,7 +396,7 @@ func (garden *Garden) tagToHtml(node *Node) []byte {
 }
 
 func (garden *Garden) catToHtml(node *Node) []byte {
-	ts, err := template.ParseFiles("ui/templates/cat.template.html")
+	ts, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
 	if err != nil {
 		return []byte("<h1>Template rendering error</h1>")
 	}

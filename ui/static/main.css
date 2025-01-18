@@ -61,8 +61,11 @@ canvas {
 .nodeTitle{
 color:aquamarine;
 }
-
+a{
+    color:brown;
+}
 .internal-link{
+    margin:auto;
     color:#1a8789;
     text-decoration: underline;
     transition: color .4s;
