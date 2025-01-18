@@ -1,0 +1,17 @@
+<h1>Category: {{.Name}}</h1>
+{{with .IncomingNodes}}
+<h2>Incoming Nodes: </h2>
+<ul>
+{{range .}}
+    <li><a class="internal-link" onclick="targetNode('{{.ID}}')">{{.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
+{{with .OutgoingNodes}}
+<h2>Outgoing Nodes: </h2>
+<ul>
+{{range .}}
+    <li><a class="internal-link"onclick="targetNode('{{.ID}}')">{{.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
