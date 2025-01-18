@@ -1,9 +1,2 @@
-<div>
     <h1>{{.Name}}</h1>
-    <h2>Posts:</h2>
-    <ul>
-    {{range .IncomingNodes}}
-        <li><p class="internal-link" onclick="targetNode('{{.ID}}')">{{.Name}}</p></li>
-    {{ end }}
-    </ul>
-</div>
+    {{template "footer" .}}

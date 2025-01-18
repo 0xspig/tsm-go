@@ -1,0 +1,26 @@
+{{define "footer"}}
+{{with .OutgoingNodes}}
+<h2>Outgoing Nodes: </h2>
+<ul>
+{{range .}}
+    <li
+    {{ if eq .Data_type 4}}
+    style="list-style-type: square; color:brown;"
+    {{end}}
+    ><a class="internal-link"
+    {{ if eq .Data_type 4}}
+    style="color:brown;"
+    {{end}}
+     onclick="targetNode('{{.ID}}')">{{.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
+{{with .IncomingNodes}}
+<h2>Incoming Nodes: </h2>
+<ul>
+{{range .}}
+    <li><a class="internal-link" onclick="targetNode('{{.ID}}')">{{.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
+{{end}}
