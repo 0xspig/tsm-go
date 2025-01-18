@@ -40,7 +40,7 @@ Now, in my drawing I made a mistake very early on that shrunk my walls to be abo
 The angle cut into the top of the hip rafter is in plane with the line of the walls.
 
 This video is how I figured out the technique:
-[Four hits of the square](https://www.youtube.com/watch?v=2-q5_VHeX1E)
+[TFG Live with Patrick Moore](https://www.youtube.com/watch?v=2-q5_VHeX1E)
 
 ## Rotating is cool
 
