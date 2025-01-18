@@ -202,6 +202,7 @@ type YAMLData struct {
 	Date     string
 	Category string
 	Tags     []string
+	Class    string
 }
 
 // scans file for yaml frontmatter between '---' separators
@@ -323,7 +324,7 @@ func (garden *Garden) NodeToHTML(nodeID string) []byte {
 	case CONTENT_TYPE_TAG:
 		return garden.tagToHtml(node)
 	case CONTENT_TYPE_CATEGORY:
-		return []byte("<h1>Categories currently unsupported</h1>")
+		return garden.catToHtml(node)
 	default:
 		return []byte("<h1>File Not Found</h1>")
 	}
@@ -360,7 +361,16 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 	data = append([]byte(`{{define "content"}}`), data...)
 	data = append(data, []byte(`{{end}}`)...)
 
-	ts, err := template.ParseFiles("ui/templates/post.template.html")
+	var template_file string
+
+	switch node.Metadata.Class {
+	default:
+		template_file = "ui/templates/post.template.html"
+	case "home":
+		template_file = "ui/templates/home.template.html"
+	}
+
+	ts, err := template.ParseFiles(template_file)
 	if err != nil {
 		panic(err)
 	}
@@ -383,6 +393,19 @@ func (garden *Garden) tagToHtml(node *Node) []byte {
 	ts.Execute(&buf, node)
 
 	return buf.Bytes()
+}
+
+func (garden *Garden) catToHtml(node *Node) []byte {
+	ts, err := template.ParseFiles("ui/templates/cat.template.html")
+	if err != nil {
+		return []byte("<h1>Template rendering error</h1>")
+	}
+
+	var buf bytes.Buffer
+	ts.Execute(&buf, node)
+
+	return buf.Bytes()
+
 }
 
 func (garden *Garden) GenAssets() {
