@@ -1,13 +1,27 @@
 <div style="text-align: center;width:100%">
 <h1 style="font-family: serif;">TS McKee</h1>
 
-<div style="display: inline-block; width: fit-content;">
-<div class="home-cat-button" onclick="targetNode('blog')">Blog</div>
-<br>
-<div class="home-cat-button" onclick="targetNode('sketch')">Sketches</div>
-<br>
-<div class="home-cat-button" onclick="targetNode('gallery')">Wood</div>
-<br>
 </div>
+<div style="display: flex;align-items:baseline; text-align: center;">
+    <div style="flex-grow: 1;">
+    <h2 class="home-header">Tags:</h2>
+    <div style="display: inline-block;width: min-content;">
+    {{with .ParentGarden.Tags}}
+    {{range .}}
+        <div class="home-cat-button" style="display:inline-block" onclick="targetNode({{.}})" onmouseover="highlightNode({{.}})" onmouseout="highlightNode('')">{{.}}</div>
+    {{end}}
+    {{end}}
+    </div>
+    </div>
 
+    <div style="flex-grow: 1;">
+    <h2 class="home-header">Categories:</h2>
+    <div style="display:inline-block; width:min-content;">
+    {{with .ParentGarden.Categories}}
+    {{range .}}
+        <div class="home-cat-button" onclick="targetNode({{.}})" onmouseover="highlightNode({{.}})" onmouseout="highlightNode('')">{{.}}</div>
+    {{end}}
+    {{end}}
+    </div>
+    </div>
 </div>

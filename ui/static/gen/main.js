@@ -107694,11 +107694,17 @@ xmlhttp.onreadystatechange = function() {
     }
 };
 
+xmlhttp.open("GET", "/graph-json", true);
+xmlhttp.send();
+
 function pushGraphParams(){
 
     Graph.nodeColor(node => {
       if (node.targeted == true){
         return "#ff33ff";
+      }
+      if (node.highlighted == true){
+        return "#eeeeff"
       }
       //md files
       if (node.data_type == 1){
@@ -107722,6 +107728,9 @@ function pushGraphParams(){
       if (node.targeted == true){
         return 8;
       }
+      if (node.highlighted == true){
+        return 8;
+      }
       //md files
       if (node.data_type == 1){
         return 2;
@@ -107739,6 +107748,21 @@ function pushGraphParams(){
         return 1;
       }
     });
+}
+
+function highlightNode(nodeID){
+    var target_node;
+
+    console.log("targeting Node: "+nodeID);
+    Graph.graphData().nodes.forEach(node => {
+      if (node.id == nodeID){
+        target_node = node;
+        target_node.highlighted = true;
+      }else {
+        node.highlighted = false;
+      }
+    });
+    pushGraphParams();
 }
 
 function targetNode(nodeID){
@@ -107794,8 +107818,6 @@ addEventListener("popstate", (event) => {
     targetNode(id);
 });
 
-xmlhttp.open("GET", "/graph-json", true);
-xmlhttp.send();
 
 /* !!!!! TAB FUNCTION !!!
   I'm removing this for the time being since its ugly and doesn't add anything to the UX
@@ -107834,4 +107856,4 @@ function getNodeData(node){
   node_data_request.send();
 }
 
-export { targetNode };
+export { highlightNode, targetNode };

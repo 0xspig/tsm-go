@@ -22,6 +22,8 @@ import (
 type Garden struct {
 	masterlist map[string]*Node
 	size       int
+	Tags       map[string]string
+	Categories map[string]string
 }
 
 const (
@@ -43,6 +45,7 @@ type Node struct {
 	IncomingNodes       []*Node  `json:"-"`
 	OutgoingNodes       []*Node  `json:"-"`
 	Metadata            YAMLData `json:"-"`
+	ParentGarden        *Garden  `json:"-"`
 }
 
 type NodeList []Node
@@ -51,6 +54,8 @@ func CreateGarden() *Garden {
 	return &Garden{
 		masterlist: make(map[string]*Node),
 		size:       0,
+		Tags:       make(map[string]string),
+		Categories: make(map[string]string),
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {
@@ -71,13 +76,29 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 	newNode.Name = name
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
-	if newNode.Data_type == CONTENT_TYPE_MARKDOWN {
+	newNode.ParentGarden = garden
+	switch newNode.Data_type {
+	default:
+		break
+	case CONTENT_TYPE_MARKDOWN:
 		data, err := os.ReadFile(source)
 		if err != nil {
 			panic(err)
 		}
 		yaml := scanYAMLFrontMatter(data)
 		newNode.Metadata = *yaml
+	case CONTENT_TYPE_TAG:
+		if garden.Tags[id] == id {
+			break
+		} else {
+			garden.Tags[id] = id
+		}
+	case CONTENT_TYPE_CATEGORY:
+		if garden.Categories[id] == id {
+			break
+		} else {
+			garden.Categories[id] = id
+		}
 	}
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
@@ -108,6 +129,7 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	}
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
+	newNode.ParentGarden = garden
 
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
