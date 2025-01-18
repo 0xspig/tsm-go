@@ -29,7 +29,7 @@ The majority of the steam escapes out of the oven's venting and the (very annoyi
 
 <div>
 <img src="/static/images/blog/steaming/bread1-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/steaming/bread1-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread1-crumb.jpg" width="45%" style="padding-inline:1.5em;">
 </div>
 (First Bread)
 
@@ -40,7 +40,7 @@ It had a pretty mild flavor but, as all homemade loaves, was miles better than a
  
 <div>
 <img src="/static/images/blog/steaming/bread2-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/steaming/bread2-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread2-crumb.jpg" width="45%" style="padding-inline:1.5em;">
 </div>
 (Second Bread)
 
@@ -60,7 +60,7 @@ I shared it with some friends and it was gone in one day.
 
 <div>
 <img src="/static/images/blog/steaming/bread3-loaf.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/steaming/bread3-crumb.jpg" width="45%" "padding-inline:1.5em;">
+<img src="/static/images/blog/steaming/bread3-crumb.jpg" width="45%" style="padding-inline:1.5em;">
 </div>
 (Third Bread)
 
