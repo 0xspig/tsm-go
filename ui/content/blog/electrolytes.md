@@ -24,7 +24,7 @@ A little too fast and you're evacuating 80% of the fluid you just drank.
 I was constantly going back and forth between not enough and too much.
 
 ## Round 2
-Now that I've stepped up my {baking}(/blog/steaming.md) game with an [accurate scale](https://www.kingarthurbaking.com/blog/2022/02/18/digital-kitchen-scale) it's time to retire the teaspoon.
+Now that I've stepped up my {baking}(steaming.md) game with an [accurate scale](https://www.kingarthurbaking.com/blog/2022/02/18/digital-kitchen-scale) it's time to retire the teaspoon.
 Per day, the average person needs about 3-6g of sodium and 3-5g of potassium.
 There's about about 4g of sodium in 10g of salt and 5g of potassium in 10g on NoSalt.
 If you eat 9g of salt and 6g of NoSalt that gives you 3.6g of sodium and 3g of potassium - both safely within the daily range.
