@@ -5,10 +5,9 @@ draft: false
 image: 
 imgalt: 
 tags: 
+class: home
 ---
-This is my homepage. Maybe categories should be a thing now? 
-Yeah. Categories will be folders. 
-That will effectively limit posts to one category and also remove the need for a category param in the header.
-{Blog}(blog)
-{Sketch}(sketch)
-{Gallery}(gallery)
+
+{blog}(blog)
+{sketch}(sketch)
+{gallery}(gallery)

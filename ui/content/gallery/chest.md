@@ -5,11 +5,11 @@ category: gallery
 draft: false
 tags: 
 - wood
-image: "/images/gallery/chest/front-home_cropped.jpg"
+image: "static/images/gallery/chest/front-home_cropped.jpg"
 imgalt: "Small Chest of Drawers with a bottle of pen ink"
 ---
-<img src="/images/gallery/chest/front-home_cropped.jpg" width="46%"  class="image-float-left" >
-<img src="/images/gallery/chest/drawer-sides_cropped.jpg" width="46%"  class="image-float-right">
+<img src="static/images/gallery/chest/front-home_cropped.jpg" width="46%"  class="image-float-left" >
+<img src="static/images/gallery/chest/drawer-sides_cropped.jpg" width="46%"  class="image-float-right">
 
 The third semester project at the [Vermont Woodworking School](https://www.vermontwoodworkingschool.com/) is a chest of drawers.
 There are two main goals in this semester; learn web frame construction and get used to doing a lot of work.
@@ -19,16 +19,16 @@ The web frames are only 3/8" thick!
 
 ## The renders
 <video width="100%" autoplay loop muted>
-<source src="/images/gallery/chest/render.webm" type="video/webm">
+<source src="static/images/gallery/chest/render.webm" type="video/webm">
 </video>
 
 This is my magnum opus of rendering (though I wish it were a bit brighter).
 I'm happy to say the final product turned out almost exactly as I had designed it - due in part to my better Blender skills - but also to having a complete and cohesive design from the beginning.
 
 ## The real thing
-<img src="/images/gallery/chest/dovetails_resized_cropped.jpg" width="45%" class="image-center">
-<img src="/images/gallery/chest/drawer-top_cropped.jpg" width="46%"  class="image-float-left" >
-<img src="/images/gallery/chest/3-4-closed_cropped_1.jpg" width="46%" class="image-float-right">
+<img src="static/images/gallery/chest/dovetails_resized_cropped.jpg" width="45%" class="image-center">
+<img src="static/images/gallery/chest/drawer-top_cropped.jpg" width="46%"  class="image-float-left" >
+<img src="static/images/gallery/chest/3-4-closed_cropped_1.jpg" width="46%" class="image-float-right">
 
 <div style="display:inline-block; width:100%">
 </div>

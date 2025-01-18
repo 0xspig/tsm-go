@@ -356,7 +356,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 		panic(err)
 	}
 
-	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<div class="internal-link" onClick="targetNode('$2')">$1</div>`))
+	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<a class="internal-link" onClick="targetNode('$2')">$1</a>`))
 
 	data = append([]byte(`{{define "content"}}`), data...)
 	data = append(data, []byte(`{{end}}`)...)
