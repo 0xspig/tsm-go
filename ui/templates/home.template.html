@@ -7,8 +7,8 @@
     <h2 class="home-header">Tags:</h2>
     <div style="display: inline-block;width: min-content;">
     {{with .ParentGarden.Tags}}
-    {{range .}}
-        <div class="home-cat-button" style="display:inline-block" onclick="targetNode({{.}})" onmouseover="highlightNode({{.}})" onmouseout="highlightNode('')">{{.}}</div>
+    {{range $key, $value := .}}
+        <div class="home-cat-button" style="display:inline-block" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</div>
     {{end}}
     {{end}}
     </div>
@@ -18,8 +18,8 @@
     <h2 class="home-header">Categories:</h2>
     <div style="display:inline-block; width:min-content;">
     {{with .ParentGarden.Categories}}
-    {{range .}}
-        <div class="home-cat-button" onclick="targetNode({{.}})" onmouseover="highlightNode({{.}})" onmouseout="highlightNode('')">{{.}}</div>
+    {{range $key, $value := .}}
+        <div class="home-cat-button" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</div>
     {{end}}
     {{end}}
     </div>
