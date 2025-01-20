@@ -234,7 +234,7 @@ func (garden *Garden) ParseAllConnections() {
 			garden.ConnectNodes(category_id, node.ID)
 		}
 	}
-
+	garden.Center = garden.findCenter()[0]
 }
 
 type YAMLData struct {
