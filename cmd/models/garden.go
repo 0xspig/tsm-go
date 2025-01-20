@@ -7,9 +7,11 @@ import (
 	"fmt"
 	"html/template"
 	"maps"
+	"math"
 	"os"
 	"path/filepath"
 	"regexp"
+	"slices"
 
 	"gopkg.in/yaml.v3"
 
@@ -24,6 +26,7 @@ type StringSet map[string]bool
 // Struct containing a hash table of all nodes in graph
 type Garden struct {
 	masterlist map[string]*Node
+	idList     []string
 	size       int
 	Tags       StringSet
 	Categories StringSet
@@ -109,6 +112,7 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 		}
 	}
 	garden.masterlist[newNode.ID] = newNode
+	garden.idList = append(garden.idList, id)
 	garden.size += 1
 
 	return newNode
@@ -143,6 +147,7 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	newNode.IncomingNodes = NodeSet{}
 
 	garden.masterlist[newNode.ID] = newNode
+	garden.idList = append(garden.idList, newNode.ID)
 	garden.size += 1
 
 	return newNode
@@ -324,15 +329,121 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	return matchValues, tagMatches
 }
 
-/*
-	func (garden *Garden) shortestPath(n1_ID string, n2_ID string, k int) {
-		all_connections := maps.Copy[*Node]()
+func (garden *Garden) shortestPath(origin string, dest string) int {
+	if _, exists := garden.masterlist[dest]; !exists {
+		fmt.Printf("Unable to find path of nonexistent node: %s\n", dest)
+		return -1
+	}
+	if _, exists := garden.masterlist[origin]; !exists {
+		fmt.Printf("Unable to find path of nonexistent node: %s\n", origin)
+		return -1
 	}
 
-func (garden *Garden) findCenter() {
+	origin_connections := maps.Clone(garden.masterlist[origin].IncomingNodes)
+	maps.Copy(origin_connections, garden.masterlist[origin].OutgoingNodes)
 
+	if _, exists := origin_connections[garden.masterlist[dest]]; exists {
+		return 1
+	}
+
+	stepsMap := map[string]int{origin: 0}
+	numSteps := 1
+
+	node_list := origin_connections
+	for len(stepsMap) < garden.size {
+		for node := range node_list {
+			if _, exists := stepsMap[node.ID]; !exists {
+				maps.Insert(stepsMap, maps.All(map[string]int{node.ID: numSteps}))
+			}
+		}
+
+		swap_list := maps.Clone(node_list)
+		clear(node_list)
+		for c := range swap_list {
+			maps.Copy(node_list, c.IncomingNodes)
+			maps.Copy(node_list, c.OutgoingNodes)
+		}
+		maps.DeleteFunc(node_list, func(key *Node, value bool) bool {
+			_, exists := stepsMap[key.ID]
+			return exists
+		})
+
+		numSteps++
+	}
+
+	return stepsMap[dest]
 }
-*/
+func (garden *Garden) findCenter() []string {
+	minDists := make([][]int, garden.size)
+	for i := range garden.idList {
+		minDists[i] = make([]int, garden.size)
+	}
+	for i := range garden.idList {
+		for j := range garden.idList {
+			if i == j {
+				minDists[i][j] = 0
+				continue
+			}
+			_, itoj := garden.masterlist[garden.idList[i]].IncomingNodes[garden.masterlist[garden.idList[j]]]
+			_, jtoi := garden.masterlist[garden.idList[j]].IncomingNodes[garden.masterlist[garden.idList[i]]]
+			if itoj || jtoi {
+				minDists[i][j] = 1
+			} else {
+				minDists[i][j] = math.MaxInt
+			}
+			//minDists[i][j] = garden.shortestPath(garden.idList[i], garden.idList[j])
+		}
+	}
+
+	for k := range garden.idList {
+		for i := range garden.idList {
+			for j := range garden.idList {
+				if minDists[i][j] > minDists[i][k]+minDists[k][j] {
+					//stop integer overflowing
+					if minDists[i][k] == math.MaxInt || minDists[k][j] == math.MaxInt {
+						continue
+					}
+					minDists[i][j] = minDists[i][k] + minDists[k][j]
+				}
+			}
+		}
+
+	}
+
+	indexofhip := slices.Index(garden.idList, "hips.md")
+	indexofhoney := slices.Index(garden.idList, "honey-hollow.md")
+
+	hiptohoney := minDists[indexofhip][indexofhoney]
+	fmt.Printf("distance between hips(%d) and honey(%d) 2: %d\n", indexofhip, indexofhoney, hiptohoney)
+
+	e := slices.Repeat([]int{0}, garden.size)
+	for i := range garden.idList {
+		for j := range garden.idList {
+			if minDists[i][j] > e[i] {
+				e[i] = minDists[i][j]
+			}
+		}
+	}
+	rad := math.MaxInt
+	diam := 0
+	for i := range garden.idList {
+		if rad > e[i] {
+			rad = e[i]
+		}
+		if diam < e[i] {
+			diam = e[i]
+		}
+	}
+
+	var center []string
+	for i := range garden.idList {
+		if e[i] == rad {
+			center = append(center, garden.idList[i])
+		}
+	}
+	return center
+}
+
 type Link struct {
 	Source string `json:"source"`
 	Target string `json:"target"`
