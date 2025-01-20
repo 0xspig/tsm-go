@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"maps"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -37,6 +38,8 @@ const (
 	CONTENT_TYPE_EXTERNAL = 4
 )
 
+type NodeSet map[*Node]bool
+
 // Essential node element/
 type Node struct {
 	ID                  string   `json:"id"`
@@ -45,8 +48,8 @@ type Node struct {
 	Data_type           int      `json:"data_type"`
 	NumberIncomingNodes int      `json:"numIncoming"`
 	NumberOutgoingNodes int      `json:"numOutgoing"`
-	IncomingNodes       []*Node  `json:"-"`
-	OutgoingNodes       []*Node  `json:"-"`
+	IncomingNodes       NodeSet  `json:"-"`
+	OutgoingNodes       NodeSet  `json:"-"`
 	Metadata            YAMLData `json:"-"`
 	ParentGarden        *Garden  `json:"-"`
 }
@@ -77,6 +80,8 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 	newNode.Data_source = source
 	newNode.Data_type = datatype
 	newNode.Name = name
+	newNode.OutgoingNodes = NodeSet{}
+	newNode.IncomingNodes = NodeSet{}
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
 	newNode.ParentGarden = garden
@@ -134,6 +139,9 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	newNode.NumberOutgoingNodes = 0
 	newNode.ParentGarden = garden
 
+	newNode.OutgoingNodes = NodeSet{}
+	newNode.IncomingNodes = NodeSet{}
+
 	garden.masterlist[newNode.ID] = newNode
 	garden.size += 1
 
@@ -184,9 +192,11 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 	if err == 1 {
 		return
 	}
-	master.OutgoingNodes = append(master.OutgoingNodes, outgoing)
+
+	maps.Insert(master.OutgoingNodes, maps.All(NodeSet{outgoing: true}))
 	master.NumberOutgoingNodes += 1
-	outgoing.IncomingNodes = append(outgoing.IncomingNodes, master)
+
+	maps.Insert(outgoing.IncomingNodes, maps.All(NodeSet{master: true}))
 	outgoing.NumberIncomingNodes += 1
 }
 
@@ -337,8 +347,8 @@ func (garden *Garden) genJSONData() ([]byte, error) {
 	var data GraphData
 	for _, node := range garden.masterlist {
 		data.Nodes = append(data.Nodes, *node)
-		for _, link := range node.IncomingNodes {
-			newLink := Link{Source: node.ID, Target: link.ID}
+		for addr, _ := range node.IncomingNodes {
+			newLink := Link{Source: node.ID, Target: addr.ID}
 			data.Links = append(data.Links, newLink)
 		}
 	}
