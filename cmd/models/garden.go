@@ -18,12 +18,15 @@ import (
 	"github.com/yuin/goldmark/renderer/html"
 )
 
+type StringSet map[string]bool
+
 // Struct containing a hash table of all nodes in graph
 type Garden struct {
 	masterlist map[string]*Node
 	size       int
-	Tags       map[string]string
-	Categories map[string]string
+	Tags       StringSet
+	Categories StringSet
+	Center     string
 }
 
 const (
@@ -54,8 +57,8 @@ func CreateGarden() *Garden {
 	return &Garden{
 		masterlist: make(map[string]*Node),
 		size:       0,
-		Tags:       make(map[string]string),
-		Categories: make(map[string]string),
+		Tags:       make(StringSet),
+		Categories: make(StringSet),
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {
@@ -88,16 +91,16 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 		yaml := scanYAMLFrontMatter(data)
 		newNode.Metadata = *yaml
 	case CONTENT_TYPE_TAG:
-		if garden.Tags[id] == id {
+		if garden.Tags[id] {
 			break
 		} else {
-			garden.Tags[id] = id
+			garden.Tags[id] = true
 		}
 	case CONTENT_TYPE_CATEGORY:
-		if garden.Categories[id] == id {
+		if garden.Categories[id] {
 			break
 		} else {
-			garden.Categories[id] = id
+			garden.Categories[id] = true
 		}
 	}
 	garden.masterlist[newNode.ID] = newNode
@@ -311,6 +314,15 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	return matchValues, tagMatches
 }
 
+/*
+	func (garden *Garden) shortestPath(n1_ID string, n2_ID string, k int) {
+		all_connections := maps.Copy[*Node]()
+	}
+
+func (garden *Garden) findCenter() {
+
+}
+*/
 type Link struct {
 	Source string `json:"source"`
 	Target string `json:"target"`
