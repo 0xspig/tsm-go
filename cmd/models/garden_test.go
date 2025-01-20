@@ -36,5 +36,10 @@ func TestMain(m *testing.M) {
 
 	g.GenAssets()
 
+	fmt.Printf("distance between home and blog: %d\n", g.shortestPath("home.md", "blog"))
+	fmt.Printf("distance between hips and honey: %d\n", g.shortestPath("hips.md", "honey-hollow.md"))
+	center := g.findCenter()
+	fmt.Printf("Center of graph: %s\n %d", center, len(center))
+
 	fmt.Printf("peepee\n")
 }
