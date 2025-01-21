@@ -1,7 +1,6 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 	"os"
 )
@@ -10,12 +9,9 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("home Function run")
 	w.Header().Add("Server", "McServer")
 
-	ts, err := template.ParseFiles("./ui/index.html", "./ui/templates/nav.template.html")
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
-	err = ts.ExecuteTemplate(w, "base", app.Garden)
+	ts := app.Garden.Templates["base_template"]
+
+	err := ts.ExecuteTemplate(w, "base", app.Garden)
 	if err != nil {
 		app.serverError(w, r, err)
 		return

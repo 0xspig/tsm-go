@@ -612,4 +612,10 @@ func (garden *Garden) GenAssets() {
 		panic(err)
 	}
 	garden.Templates["home_template"] = home_template
+
+	base_template, err := template.ParseFiles("./ui/index.html", "./ui/templates/nav.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.Templates["base_template"] = base_template
 }
