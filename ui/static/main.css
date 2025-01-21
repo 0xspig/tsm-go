@@ -13,6 +13,7 @@ html, body {
 }
 #nav-container{
     flex-basis: 20%;
+    background-color: antiquewhite;
 }
 #data-container{
     flex-grow: 1;
@@ -45,6 +46,10 @@ html, body {
     max-height: 40%;
     width:100%;
     margin: 0px;
+}
+#link-data{
+    flex-grow: 1;
+    background-color: antiquewhite;
 }
 .scene-container{
     margin: 0px;

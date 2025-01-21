@@ -15,8 +15,7 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 		return
 	}
-
-	err = ts.Execute(w, app.garden)
+	err = ts.ExecuteTemplate(w, "base", app.Garden)
 	if err != nil {
 		app.serverError(w, r, err)
 		return
@@ -38,6 +37,13 @@ func (app *Application) getJSON(w http.ResponseWriter, r *http.Request) {
 func (app *Application) getPostHTML(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("getPostHTML function run")
 	w.Header().Add("Server", "McServer")
-	html := app.garden.NodeToHTML(r.PathValue("id"))
+	html := app.Garden.NodeToHTML(r.PathValue("id"))
+	w.Write(html)
+}
+
+func (app *Application) getLinksHTML(w http.ResponseWriter, r *http.Request) {
+	app.logger.Debug("getPostHTML function run")
+	w.Header().Add("Server", "McServer")
+	html := app.Garden.NodeLinksToHTML(r.PathValue("id"))
 	w.Write(html)
 }
