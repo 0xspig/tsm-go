@@ -5,11 +5,12 @@ const Graph = new ForceGraph3D(document.getElementById('view'))
   .height(document.getElementById("view").getBoundingClientRect().height-100);
 var parsedJson;
 
-Graph.backgroundColor("#0d1e1f");
+Graph.backgroundColor("#2d3e3f");
 
 Graph.onNodeClick(node => {
   targetNode(node.id);
 });
+
 
 
 var canvas = Graph.renderer().domElement

@@ -10,23 +10,39 @@ html, body {
     height: 100%;
     width: 100%;
     margin:0px;
+    background-color:#2d3e3f;
 }
 #nav-container{
     flex-basis: 20%;
     background-color: antiquewhite;
+    overflow-y: scroll;
+    scrollbar-color: #587f8c #3d4e5f;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+    margin:.75em;
+    margin-right: 0em;
+    padding-inline: 1em;
 }
 #data-container{
     flex-grow: 1;
     box-sizing: border-box;
     height: 100%;
     flex-basis: 55%;
+    overflow-y:hidden;
     margin: 0px;
-    overflow-y: auto;
-    padding-inline: .75em;
+    padding-left: 0em;
     padding-block: .75em;
     background-color: #2d3e3f;
-    scrollbar-color: #587f8c #3d4e5f;
 }
+#data-padding{
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100%;
+    scrollbar-color: #587f8c #3d4e5f;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+}
+
 #data {
     box-sizing: border-box;
     width: 100%;
@@ -36,6 +52,7 @@ html, body {
     padding-block: .5em;
 }
 #view-container{
+    background-color: #2d3e3f;
     display: flex;
     flex-direction: column;
     flex-grow: 2;
@@ -47,16 +64,64 @@ html, body {
     width:100%;
     margin: 0px;
 }
+
+#view-bottom{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: .75em;
+    margin-inline: 0px;
+    overflow-y: scroll;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+    scrollbar-color: #587f8c #3d4e5f;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+}
+
 #link-data{
+    padding-inline: 1em;
     flex-grow: 1;
     background-color: antiquewhite;
 }
+
+#button-container {
+    padding-top: 1em;
+    padding-bottom: 0px;
+    background-color: antiquewhite;
+}
+
+#donate-button{
+    display: block;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+    font-size: large;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    background-color: #4593ba;
+    padding-inline: 1em;
+    padding-block: .65em;
+    width:fit-content;
+    height: fit-content; 
+    border-radius: .5em;
+    margin-inline: auto;
+    margin-block: .4em;
+    transition: box-shadow .2s;
+}
+
+#donate-button:hover{
+    box-shadow: 0px 2px 4px 0px #675a3e;
+    transition: box-shadow .1s;
+}
+
 .scene-container{
     margin: 0px;
     padding: 0px;
     width: 100% !important;
     height: 100% !important;
 }
+
+
 #view > div {
     margin: 0px;
     padding: 0px;

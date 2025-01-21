@@ -4,19 +4,32 @@
 {{ $garden := . }}
 
 {{with index .Masterlist .Center}}
-    <div class="expandable">
+    <ul id="nav-tree">
         {{range $k, $v := $garden.Categories}}
-        <div class="expandable">
-            {{$k}}
-        </div>
+        {{with index $garden.Masterlist $k}}
+        <li class="expandable"><span onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">Category: {{.Name}} ({{.NumberOutgoingNodes}})</span> 
+            <ul>
+                {{range $k, $v := .OutgoingNodes}}
+                    <li><span class="internal-link" onclick="targetNode('{{$k.ID}}')" onmouseover="highlightNode({{$k.ID}})" onmouseout="highlightNode('')">{{$k.Name}}</span></li>
+                {{end}}
+            </ul>
+        </li>
         {{end}}
-        {{range $k, $v := $garden.Tags}}
-        <div class="expandable">
-            {{$k}}
-        </div>
-        {{end}}
+        {{end}} <!-- end of categories-->
 
-    </div>
+        {{range $k, $v := $garden.Tags}}
+        {{with index $garden.Masterlist $k}}
+        <li class="expandable"><span onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">{{.Name}} ({{.NumberIncomingNodes}})</span> 
+            <ul>
+                {{range $k, $v := .IncomingNodes}}
+                    <li><span class="internal-link" onclick="targetNode('{{$k.ID}}')" onmouseover="highlightNode({{$k.ID}})" onmouseout="highlightNode('')">{{$k.Name}}</span></li>
+                {{end}}
+            </ul>
+        </li>
+        {{end}}
+        {{end}} <!-- end of Tags-->
+
+    </ul>
 {{end}}
 
 {{end}}
