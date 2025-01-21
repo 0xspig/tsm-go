@@ -31,6 +31,7 @@ type Garden struct {
 	Tags       StringSet
 	Categories StringSet
 	Center     string
+	templates  map[string]*template.Template
 }
 
 const (
@@ -65,6 +66,7 @@ func CreateGarden() *Garden {
 		size:       0,
 		Tags:       make(StringSet),
 		Categories: make(StringSet),
+		templates:  make(map[string]*template.Template),
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {
@@ -486,12 +488,9 @@ func (garden *Garden) NodeToHTML(nodeID string) []byte {
 }
 
 func (garden *Garden) NodeLinksToHTML(nodeID string) []byte {
-	ts, err := template.ParseFiles("ui/templates/links.template.html")
-	if err != nil {
-		panic(err)
-	}
+	ts := garden.templates["links_template"]
 	var buf bytes.Buffer
-	err = ts.ExecuteTemplate(&buf, "links", garden.Masterlist[nodeID])
+	err := ts.ExecuteTemplate(&buf, "links", garden.Masterlist[nodeID])
 	if err != nil {
 		panic(err)
 	}
@@ -529,16 +528,22 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 	data = append([]byte(`{{define "content"}}`), data...)
 	data = append(data, []byte(`{{end}}`)...)
 
-	var template_file string
+	var ts *template.Template
 
 	switch node.Metadata.Class {
 	default:
-		template_file = "ui/templates/post.template.html"
+		ts, err = garden.templates["post_template"].Clone()
+		if err != nil {
+			panic(err)
+		}
 	case "home":
-		template_file = "ui/templates/home.template.html"
+		ts, err = garden.templates["home_template"].Clone()
+		if err != nil {
+			panic(err)
+		}
 	}
 
-	ts, err := template.ParseFiles(template_file, "ui/templates/footer.template.html")
+	ts, err = ts.ParseFiles("ui/templates/footer.template.html")
 	if err != nil {
 		panic(err)
 	}
@@ -553,11 +558,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 }
 
 func (garden *Garden) tagToHtml(node *Node) []byte {
-	ts, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
-	if err != nil {
-		return []byte("<h1>Template rendering error</h1>")
-	}
-
+	ts := garden.templates["tag_template"]
 	var buf bytes.Buffer
 	ts.Execute(&buf, node)
 
@@ -565,11 +566,7 @@ func (garden *Garden) tagToHtml(node *Node) []byte {
 }
 
 func (garden *Garden) catToHtml(node *Node) []byte {
-	ts, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
-	if err != nil {
-		return []byte("<h1>Template rendering error</h1>")
-	}
-
+	ts := garden.templates["category_template"]
 	var buf bytes.Buffer
 	ts.Execute(&buf, node)
 
@@ -584,4 +581,35 @@ func (garden *Garden) GenAssets() {
 		panic(err)
 	}
 	os.WriteFile("ui/static/gen/graph-data.json", json_data, 0644)
+
+	// parse templates
+	category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.templates["category_template"] = category_template
+
+	tag_template, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.templates["tag_template"] = tag_template
+
+	links_template, err := template.ParseFiles("ui/templates/links.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.templates["links_template"] = links_template
+
+	post_template, err := template.ParseFiles("ui/templates/post.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.templates["post_template"] = post_template
+
+	home_template, err := template.ParseFiles("ui/templates/home.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.templates["home_template"] = home_template
 }
