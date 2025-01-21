@@ -4,11 +4,21 @@
 {{ $garden := . }}
 
 {{with index .Masterlist .Center}}
+    <script>
+        function expand(id){
+            let nestedTarget = document.getElementById(id).querySelector('.nested');
+            if (nestedTarget.classList.contains('nested-show')){
+                nestedTarget.classList.remove('nested-show');
+            }else{
+                nestedTarget.classList.add('nested-show');
+            }
+        }
+    </script>
     <ul id="nav-tree">
         {{range $k, $v := $garden.Categories}}
         {{with index $garden.Masterlist $k}}
-        <li class="expandable"><span onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">Category: {{.Name}} ({{.NumberOutgoingNodes}})</span> 
-            <ul>
+        <li class="expandable" id="link-to-{{.ID}}"><span onclick="expand('link-to-{{.ID}}')" onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">Category: {{.Name}} ({{.NumberOutgoingNodes}})</span> 
+            <ul class="nested">
                 {{range $k, $v := .OutgoingNodes}}
                     <li><span class="internal-link" onclick="targetNode('{{$k.ID}}')" onmouseover="highlightNode({{$k.ID}})" onmouseout="highlightNode('')">{{$k.Name}}</span></li>
                 {{end}}
@@ -19,8 +29,8 @@
 
         {{range $k, $v := $garden.Tags}}
         {{with index $garden.Masterlist $k}}
-        <li class="expandable"><span onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">{{.Name}} ({{.NumberIncomingNodes}})</span> 
-            <ul>
+        <li class="expandable" id="link-to-{{.ID}}"><span onclick="expand('link-to-{{.ID}}')" onmouseover="highlightNode({{.ID}})" onmouseout="highlightNode('')">{{.Name}} ({{.NumberIncomingNodes}})</span> 
+            <ul class="nested">
                 {{range $k, $v := .IncomingNodes}}
                     <li><span class="internal-link" onclick="targetNode('{{$k.ID}}')" onmouseover="highlightNode({{$k.ID}})" onmouseout="highlightNode('')">{{$k.Name}}</span></li>
                 {{end}}

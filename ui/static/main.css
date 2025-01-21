@@ -23,6 +23,21 @@ html, body {
     margin-right: 0em;
     padding-inline: 1em;
 }
+
+.expandable{
+    cursor: pointer;
+}
+
+.nested{
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .1s;
+}
+.nested.nested-show{
+    max-height: 800px;
+    transition: max-height .8s;
+}
+
 #data-container{
     flex-grow: 1;
     box-sizing: border-box;
