@@ -107854,6 +107854,13 @@ function getNodeData(node){
   };
   node_data_request.open("GET", "/node-data/"+node.id, true);
   node_data_request.send();
+
+  var node_links_request = new XMLHttpRequest;
+  node_links_request.onreadystatechange = function() {
+    document.getElementById("link-data").innerHTML = node_links_request.responseText;
+  };
+  node_links_request.open("GET", "/node-links/"+node.id, true);
+  node_links_request.send();
 }
 
 export { highlightNode, targetNode };

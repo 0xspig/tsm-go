@@ -1,3 +1,22 @@
 {{define "nav"}}
-<p>This is the nav sidebar</p>
+<h1>Nav</h1>
+
+{{ $garden := . }}
+
+{{with index .Masterlist .Center}}
+    <div class="expandable">
+        {{range $k, $v := $garden.Categories}}
+        <div class="expandable">
+            {{$k}}
+        </div>
+        {{end}}
+        {{range $k, $v := $garden.Tags}}
+        <div class="expandable">
+            {{$k}}
+        </div>
+        {{end}}
+
+    </div>
+{{end}}
+
 {{end}}

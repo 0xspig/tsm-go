@@ -11,7 +11,7 @@ import (
 
 type Application struct {
 	logger *slog.Logger
-	garden *models.Garden
+	Garden *models.Garden
 }
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 
 	app := &Application{
 		logger: logger,
-		garden: g,
+		Garden: g,
 	}
 	logger.Info("Starting server on", "addr", *addr)
 	err := http.ListenAndServe(*addr, app.routes())

@@ -1,3 +1,4 @@
+{{define "base"}}
 <!DOCTYPE html>
 <head>
 	<title>TSM GO</title>
@@ -14,13 +15,15 @@
 	</script>
 	<div id="main">
 		<div id="nav-container">
-			{{template "nav"}}
+			{{template "nav" .}}
 		</div>
 		<div id="data-container">
 			<div id="data"></div>
 		</div>
 		<div id="view-container">
 			<div id="view"></div>
+			<div id="link-data"></div>
 		</div>
 	</div>
 </body>
+{{end}}

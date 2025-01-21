@@ -25,7 +25,7 @@ type StringSet map[string]bool
 
 // Struct containing a hash table of all nodes in graph
 type Garden struct {
-	masterlist map[string]*Node
+	Masterlist map[string]*Node
 	idList     []string
 	size       int
 	Tags       StringSet
@@ -61,21 +61,21 @@ type NodeList []Node
 
 func CreateGarden() *Garden {
 	return &Garden{
-		masterlist: make(map[string]*Node),
+		Masterlist: make(map[string]*Node),
 		size:       0,
 		Tags:       make(StringSet),
 		Categories: make(StringSet),
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {
-	return garden.masterlist[id] != nil
+	return garden.Masterlist[id] != nil
 }
 
 // adds node to garden
 func (garden *Garden) addNodeToGarden(datatype int, source string, id string, name string) *Node {
-	if garden.masterlist[id] != nil {
+	if garden.Masterlist[id] != nil {
 		fmt.Printf("Node source already exists\n")
-		return garden.masterlist[id]
+		return garden.Masterlist[id]
 	}
 	newNode := new(Node)
 
@@ -111,7 +111,7 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 			garden.Categories[id] = true
 		}
 	}
-	garden.masterlist[newNode.ID] = newNode
+	garden.Masterlist[newNode.ID] = newNode
 	garden.idList = append(garden.idList, id)
 	garden.size += 1
 
@@ -121,9 +121,9 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 
 // adds node to garden. Source should be filepath relative to root.
 func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
-	if garden.masterlist[source] != nil {
+	if garden.Masterlist[source] != nil {
 		fmt.Printf("Node source already exists\n")
-		return garden.masterlist[source]
+		return garden.Masterlist[source]
 	}
 	newNode := new(Node)
 
@@ -146,7 +146,7 @@ func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
 	newNode.OutgoingNodes = NodeSet{}
 	newNode.IncomingNodes = NodeSet{}
 
-	garden.masterlist[newNode.ID] = newNode
+	garden.Masterlist[newNode.ID] = newNode
 	garden.idList = append(garden.idList, newNode.ID)
 	garden.size += 1
 
@@ -182,8 +182,8 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 
 // Connect two nodes so that mainID node directs to outgoingID node.
 func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
-	master := garden.masterlist[mainID]
-	outgoing := garden.masterlist[outgoingID]
+	master := garden.Masterlist[mainID]
+	outgoing := garden.Masterlist[outgoingID]
 	//verify that both IDs exist
 	err := 0
 	if master == nil {
@@ -207,7 +207,7 @@ func (garden *Garden) ConnectNodes(mainID string, outgoingID string) {
 
 // Parses all node sources and populates outgoing and respective incoming connections
 func (garden *Garden) ParseAllConnections() {
-	for _, node := range garden.masterlist {
+	for _, node := range garden.Masterlist {
 
 		// if datatype is md or html link to parent category
 		if node.Data_type < CONTENT_TYPE_TAG {
@@ -277,7 +277,7 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 	tagMatches := make([]string, 0)
 
 	for _, tag := range frontMatter.Tags {
-		if garden.masterlist[tag] == nil {
+		if garden.Masterlist[tag] == nil {
 			// TODO fix source - currently just placeholder index.md
 			garden.addNodeToGarden(CONTENT_TYPE_TAG, "index.md", tag, "Tag: "+tag)
 		}
@@ -330,19 +330,19 @@ func (garden *Garden) findLinks(data []byte) ([]string, []string) {
 }
 
 func (garden *Garden) shortestPath(origin string, dest string) int {
-	if _, exists := garden.masterlist[dest]; !exists {
+	if _, exists := garden.Masterlist[dest]; !exists {
 		fmt.Printf("Unable to find path of nonexistent node: %s\n", dest)
 		return -1
 	}
-	if _, exists := garden.masterlist[origin]; !exists {
+	if _, exists := garden.Masterlist[origin]; !exists {
 		fmt.Printf("Unable to find path of nonexistent node: %s\n", origin)
 		return -1
 	}
 
-	origin_connections := maps.Clone(garden.masterlist[origin].IncomingNodes)
-	maps.Copy(origin_connections, garden.masterlist[origin].OutgoingNodes)
+	origin_connections := maps.Clone(garden.Masterlist[origin].IncomingNodes)
+	maps.Copy(origin_connections, garden.Masterlist[origin].OutgoingNodes)
 
-	if _, exists := origin_connections[garden.masterlist[dest]]; exists {
+	if _, exists := origin_connections[garden.Masterlist[dest]]; exists {
 		return 1
 	}
 
@@ -384,8 +384,8 @@ func (garden *Garden) findCenter() []string {
 				minDists[i][j] = 0
 				continue
 			}
-			_, itoj := garden.masterlist[garden.idList[i]].IncomingNodes[garden.masterlist[garden.idList[j]]]
-			_, jtoi := garden.masterlist[garden.idList[j]].IncomingNodes[garden.masterlist[garden.idList[i]]]
+			_, itoj := garden.Masterlist[garden.idList[i]].IncomingNodes[garden.Masterlist[garden.idList[j]]]
+			_, jtoi := garden.Masterlist[garden.idList[j]].IncomingNodes[garden.Masterlist[garden.idList[i]]]
 			if itoj || jtoi {
 				minDists[i][j] = 1
 			} else {
@@ -456,7 +456,7 @@ type GraphData struct {
 
 func (garden *Garden) genJSONData() ([]byte, error) {
 	var data GraphData
-	for _, node := range garden.masterlist {
+	for _, node := range garden.Masterlist {
 		data.Nodes = append(data.Nodes, *node)
 		for addr, _ := range node.IncomingNodes {
 			newLink := Link{Source: node.ID, Target: addr.ID}
@@ -467,7 +467,7 @@ func (garden *Garden) genJSONData() ([]byte, error) {
 }
 
 func (garden *Garden) NodeToHTML(nodeID string) []byte {
-	node := garden.masterlist[nodeID]
+	node := garden.Masterlist[nodeID]
 	if node == nil {
 		return []byte("<h1>File Not Found</h1>")
 	}
@@ -483,6 +483,19 @@ func (garden *Garden) NodeToHTML(nodeID string) []byte {
 	default:
 		return []byte("<h1>File Not Found</h1>")
 	}
+}
+
+func (garden *Garden) NodeLinksToHTML(nodeID string) []byte {
+	ts, err := template.ParseFiles("ui/templates/links.template.html")
+	if err != nil {
+		panic(err)
+	}
+	var buf bytes.Buffer
+	err = ts.ExecuteTemplate(&buf, "links", garden.Masterlist[nodeID])
+	if err != nil {
+		panic(err)
+	}
+	return buf.Bytes()
 }
 
 func (garden *Garden) mdToHTML(node *Node) []byte {
@@ -538,6 +551,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 
 	return template_buf.Bytes()
 }
+
 func (garden *Garden) tagToHtml(node *Node) []byte {
 	ts, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
 	if err != nil {
