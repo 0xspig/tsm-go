@@ -4,11 +4,11 @@ Todo:
     ☐ fog
     ☐ bloom
   ✔ Indicate targeted node @started(25-01-07 12:09) @done(25-01-07 12:19) @lasted(10m20s)
-  ☐ Fix Goldmark Rendering
+  ✔ Fix Goldmark Rendering @done(25-01-21 13:52)
   ✔ remove data tab @started(25-01-15 07:44) @done(25-01-15 07:50) @lasted(6m8s)
   ☐ update homepage
   ☐ unify image rendering process
-  ☐ pass through go templates
+  ✔ pass through go templates @done(25-01-21 13:52)
   ✔ css scrollbar @done(25-01-15 08:31)
   Rework Links
     ✔ add external link nodes @started(25-01-16 07:22) @done(25-01-16 08:53) @lasted(1h31m40s)
@@ -18,6 +18,6 @@ Todo:
   ☐ statically generate md files
   ✔ render categories @done(25-01-17 19:22)
   ✔ render tags @started(25-01-17 11:44) @done(25-01-17 15:36) @lasted(3h52m21s)
-  ☐ parse templates once and cache them
+  ✔ parse templates once and cache them @started(25-01-21 13:52) @done(25-01-21 14:18) @lasted(26m42s)
   ☐ create watcher
 
