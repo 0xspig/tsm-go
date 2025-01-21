@@ -412,12 +412,6 @@ func (garden *Garden) findCenter() []string {
 
 	}
 
-	indexofhip := slices.Index(garden.idList, "hips.md")
-	indexofhoney := slices.Index(garden.idList, "honey-hollow.md")
-
-	hiptohoney := minDists[indexofhip][indexofhoney]
-	fmt.Printf("distance between hips(%d) and honey(%d) 2: %d\n", indexofhip, indexofhoney, hiptohoney)
-
 	e := slices.Repeat([]int{0}, garden.size)
 	for i := range garden.idList {
 		for j := range garden.idList {
