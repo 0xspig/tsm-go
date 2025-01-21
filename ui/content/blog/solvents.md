@@ -9,7 +9,7 @@ tags:
 - art
 - oil
 ---
-In my post about {Mark Boedges workshop}(/blog/mark-boedges-workshop.md) I mentioned that Mark specifically uses *turpentine*
+In my post about {Mark Boedges workshop}(mark-boedges-workshop.md) I mentioned that Mark specifically uses *turpentine*
 instead of OMS for his first layer because of its drying time.
 Turpentine drys about 3 times faster than OMS.
 Another petroleum distillate, VM+P Naphtha actually dries faster than both.
