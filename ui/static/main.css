@@ -11,6 +11,9 @@ html, body {
     width: 100%;
     margin:0px;
 }
+#nav-container{
+    flex-basis: 20%;
+}
 #data-container{
     flex-grow: 1;
     box-sizing: border-box;
@@ -31,12 +34,17 @@ html, body {
     padding-inline:1em;
     padding-block: .5em;
 }
-
-#view{
+#view-container{
+    display: flex;
+    flex-direction: column;
     flex-grow: 2;
-    padding: 0px;
+    flex-basis:25%;
+}
+#view{
+    flex-basis: 35%;
+    max-height: 40%;
+    width:100%;
     margin: 0px;
-    flex-basis:30%;
 }
 .scene-container{
     margin: 0px;
