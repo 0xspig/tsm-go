@@ -20,4 +20,5 @@ Todo:
   ✔ render tags @started(25-01-17 11:44) @done(25-01-17 15:36) @lasted(3h52m21s)
   ✔ parse templates once and cache them @started(25-01-21 13:52) @done(25-01-21 14:18) @lasted(26m42s)
   ☐ create watcher
+  ☐ generate rss
 
