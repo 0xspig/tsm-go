@@ -25,7 +25,7 @@ Except... there is.
 
 Before sites like Reddit and Facebook came along and built their walled garden, there was a technology called RSS.
 RSS is *really simple*.
-My blog has an {RSS Feed}(/index.xml).
+My blog has an [RSS Feed](https://web.tsmckee.com/static/rss.xml).
 You can copy that link into your RSS reader (more about that below) and whenever I update my blog, it shows up in your feed.
 It's just like a Facebook or Instagram feed except:
 - No "friends". Outside of the garden, friends are real people that you interact with, NOT a number on a screen.
