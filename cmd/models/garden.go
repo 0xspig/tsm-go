@@ -174,9 +174,6 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 			garden.PopulateGardenFromDir(filepath.Join(source_dir, file.Name()))
 		} else {
 			relLink := filepath.Clean(filepath.Join(source_dir, file.Name()))
-			if err != nil {
-				panic(err)
-			}
 			garden.AddSourceToGarden(CONTENT_TYPE_MARKDOWN, relLink)
 		}
 	}
