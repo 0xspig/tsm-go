@@ -63,6 +63,17 @@ h1, h2, h3, h4 {
   transition: max-height 0.8s;
 }
 
+#home-link {
+  cursor: pointer;
+  font-family: Trirong, "Palatino", "Book Antiqua", Palatino, serif;
+  font-weight: normal;
+  font-size: 2.25em;
+  border-top: 2px solid #bf9b6e;
+  border-bottom: 2px solid #bf9b6e;
+  width: fit-content;
+  text-align: left;
+}
+
 #data-container {
   flex-grow: 1;
   box-sizing: border-box;

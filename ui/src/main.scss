@@ -78,6 +78,17 @@ h1, h2,h3,h4{
     transition: max-height .8s;
 }
 
+#home-link{
+    cursor: pointer;
+    font-family: Trirong, $serif-stack;
+    font-weight: normal;
+    font-size: 2.25em;
+	border-top: 2px solid $color-text-link;
+	border-bottom: 2px solid $color-text-link;
+    width: fit-content;
+    text-align: left;
+}
+
 #data-container{
     flex-grow: 1;
     box-sizing: border-box;
