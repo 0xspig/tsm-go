@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"slices"
+	"time"
 
 	"gopkg.in/yaml.v3"
 
@@ -56,6 +57,7 @@ type Node struct {
 	OutgoingNodes       NodeSet  `json:"-"`
 	Metadata            YAMLData `json:"-"`
 	ParentGarden        *Garden  `json:"-"`
+	Latest              *Node    `json:"-"`
 }
 
 type NodeList []Node
@@ -91,6 +93,7 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 	newNode.NumberIncomingNodes = 0
 	newNode.NumberOutgoingNodes = 0
 	newNode.ParentGarden = garden
+	newNode.Latest = nil
 	switch newNode.Data_type {
 	default:
 		break
@@ -203,6 +206,21 @@ func (garden *Garden) ParseAllConnections() {
 		}
 	}
 	garden.Center = garden.findCenter()[0]
+	for _, node := range garden.Masterlist {
+		latest_time := time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)
+		var latest_post *Node
+		for post := range node.OutgoingNodes {
+			this_time, err := time.Parse(time.RFC3339, post.Metadata.Date)
+			if err != nil {
+				continue
+			}
+			if this_time.Compare(latest_time) > 0 {
+				latest_time = this_time
+				latest_post = post
+			}
+		}
+		node.Latest = latest_post
+	}
 }
 
 type YAMLData struct {
@@ -211,6 +229,8 @@ type YAMLData struct {
 	Category string
 	Tags     []string
 	Class    string
+	Image    string
+	Imgalt   string
 }
 
 // scans file for yaml frontmatter between '---' separators
