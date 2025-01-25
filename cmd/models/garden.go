@@ -103,6 +103,9 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 			panic(err)
 		}
 		yaml := scanYAMLFrontMatter(data)
+		if yaml.Draft {
+			return nil
+		}
 		newNode.Metadata = *yaml
 		newNode.Name = yaml.Title
 		newNode.ID = filepath.Base(source)
@@ -229,6 +232,7 @@ type YAMLData struct {
 	Category string
 	Tags     []string
 	Class    string
+	Draft    bool
 	Image    string
 	Imgalt   string
 }
