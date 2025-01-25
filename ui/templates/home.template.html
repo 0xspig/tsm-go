@@ -1,12 +1,43 @@
 <div style="text-align: center;width:100%">
-<h1 style="font-family: serif;">TS McKee</h1>
+<h1 id="home-header">T S M</h1>
+</div>
+
+<div id="bio">
+    <img src="/static/images/me_irl.jpg" alt="Me and my violin" id="me_irl">
+		<h1>Hi.</h1>
+		<p>My name is Tyler McKee and this is my website.
+
+		<br>
+		<br>
+		I'm a carpenter by trade and I have too many hobbies to list.
+		<br>
+		The bulk of content here is painting but there's also some geometry, woodworking, baking... really anything that I think is fun enough to write about might end up here.
+		<br>
+		I try to keep the content useful - or at the very least interesting - so it tends to be sparse.
+		<br>
+		<br>
+		The best way to keep up is via <a class="internal-link" onmouseout="highlightNode('')" onmouseover="highlightNode('chad-rss.md')" onclick="targetNode('chad-rss.md')">RSS</a>.
+		<br>
+		<b>
+		<a href="/static/rss.xml">Blog RSS</a>
+		</b>
+		<br>
+		<br>
+		Feel free to drop me a line at: <span id="email" >tyler<span style="display: none;">BEGONE BOTS</span>@tsmckee.com </span>
+		</p>
+
+		<div style="clear:both"></div>
+</div>
+
+<div class="separator"></div>
+
 {{ $G := .ParentGarden}}
 </div>
 <div id="home-cats">
 {{with .ParentGarden.Categories}}
 {{range $key, $value := .}}
     <div class="home-cat">
-    <h3 class="home-cat-header" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</h3>
+    <h2 class="home-cat-header" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</h2>
     {{with index $G.Masterlist $key }} {{$node := .Latest}}{{with .Latest.Metadata}} 
     {{ $meta := .}}
     {{with .Image}}
