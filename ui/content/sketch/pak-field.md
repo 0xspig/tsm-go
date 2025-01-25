@@ -7,7 +7,7 @@ tags:
   - art
   - oil
   - studio
-image: /images/blog/pak-field/pak-field.jpg
+image: /static/images/blog/pak-field/pak-field.jpg
 imgalt: Lone house in the distance behind a field
 ---
 <div style="width:100%; text-align:center">
