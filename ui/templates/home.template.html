@@ -12,7 +12,7 @@
     {{with .Image}}
     <img src="{{.}}" alt="{{$meta.Imgalt}}" width="100%" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$node.ID}}')" onclick="targetNode('{{$node.ID}}')">
     {{else}} 
-        <div class="home-tag-button" onclick="targetNode({{$node.ID}})" onmouseover="highlightNode({{$node.ID}})" onmouseout="highlightNode('')">{{$node.Name}}</div>
+        <div class="home-cat-button" onclick="targetNode({{$node.ID}})" onmouseover="highlightNode({{$node.ID}})" onmouseout="highlightNode('')">{{$node.Name}}</div>
     {{end}}
     {{end}}{{end}}
     </div>
