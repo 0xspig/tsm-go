@@ -482,6 +482,37 @@ func (garden *Garden) NodeLinksToHTML(nodeID string) []byte {
 	return buf.Bytes()
 }
 
+func (garden *Garden) mdToRSS(node *Node) []byte {
+	source, err := os.ReadFile(node.Data_source)
+	if err != nil {
+		panic(err)
+	}
+
+	markdown := goldmark.New(
+		goldmark.WithExtensions(
+			meta.Meta,
+		),
+		goldmark.WithRendererOptions(
+			html.WithUnsafe(),
+		),
+	)
+
+	var buf bytes.Buffer
+	context := parser.NewContext()
+	if err := markdown.Convert(source, &buf, parser.WithContext(context)); err != nil {
+		panic(err)
+	}
+
+	internal_regex, err := regexp.Compile(`\{([^\}]*)\}\(([^\)]*)\)`)
+	if err != nil {
+		panic(err)
+	}
+
+	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<a class="internal-link" href="/$2">$1</a>`))
+
+	return data
+}
+
 func (garden *Garden) mdToHTML(node *Node) []byte {
 	source, err := os.ReadFile(node.Data_source)
 	if err != nil {
@@ -593,6 +624,7 @@ func (garden *Garden) GenAssets() {
 			Link:    &feeds.Link{Href: "https://web.tsmckee.com/" + post.ID},
 			Author:  me,
 			Updated: date,
+			Content: string(garden.mdToRSS(post)),
 		}
 		feed.Add(item)
 	}
