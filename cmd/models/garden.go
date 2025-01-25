@@ -16,6 +16,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
+	"github.com/gorilla/feeds"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/parser"
@@ -558,6 +559,7 @@ func (garden *Garden) catToHtml(node *Node) []byte {
 
 }
 
+// Generate staic assets
 func (garden *Garden) GenAssets() {
 	// cache node data
 	json_data, err := garden.genJSONData()
@@ -565,6 +567,41 @@ func (garden *Garden) GenAssets() {
 		panic(err)
 	}
 	os.WriteFile("ui/static/gen/graph-data.json", json_data, 0644)
+
+	me := &feeds.Author{Name: "Tyler McKee", Email: "tyler@tsmckee.com"}
+
+	// create Atom feed
+	feed := feeds.Feed{
+		Title:       "TS McKee",
+		Link:        &feeds.Link{Href: "https://web.tsmckee.com/"},
+		Description: "Tech, Painting, Woodworking",
+		Author:      me,
+		Created:     time.Now(),
+	}
+
+	for _, post := range garden.Masterlist {
+		if post.Data_type != CONTENT_TYPE_MARKDOWN {
+			continue
+		}
+		date, err := time.Parse(time.RFC3339, post.Metadata.Date)
+		if err != nil {
+			fmt.Println("error parsing date in post: " + post.ID)
+			date = time.Date(0, 0, 0, 0, 0, 0, 0, time.Local)
+		}
+		item := &feeds.Item{
+			Title:   post.Metadata.Title,
+			Link:    &feeds.Link{Href: "https://web.tsmckee.com/" + post.ID},
+			Author:  me,
+			Updated: date,
+		}
+		feed.Add(item)
+	}
+
+	xml, err := os.Create("ui/static/rss.xml")
+	if err != nil {
+		panic(err)
+	}
+	feed.WriteAtom(xml)
 
 	// parse templates
 	category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
