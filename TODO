@@ -21,6 +21,7 @@ Todo:
   ✔ parse templates once and cache them @started(25-01-21 13:52) @done(25-01-21 14:18) @lasted(26m42s)
   ☐ create watcher
   ☐ generate rss
-  ☐ implement drafts
+  ✔ dont render drafts @done(25-01-25 12:34)
+  ☐ implement flag to optionally render drafts
   ☐ implement latest @started(25-01-25 10:35)
 
