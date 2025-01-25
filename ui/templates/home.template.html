@@ -1,27 +1,30 @@
 <div style="text-align: center;width:100%">
 <h1 style="font-family: serif;">TS McKee</h1>
-
+{{ $G := .ParentGarden}}
 </div>
-<div style="display: flex;align-items:baseline; text-align: center;">
-    <div style="flex-grow: 1;">
-    <h2 class="home-header">Tags:</h2>
-    <div style="display: inline-block;width: min-content;">
+<div id="home-cats">
+{{with .ParentGarden.Categories}}
+{{range $key, $value := .}}
+    <div class="home-cat">
+    <h3 class="home-cat-header" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</h3>
+    {{with index $G.Masterlist $key }} {{$node := .Latest}}{{with .Latest.Metadata}} 
+    {{ $meta := .}}
+    {{with .Image}}
+    <img src="{{.}}" alt="{{$meta.Imgalt}}" width="100%" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$node.ID}}')" onclick="targetNode('{{$node.ID}}')">
+    {{else}} 
+        <div class="home-tag-button" onclick="targetNode({{$node.ID}})" onmouseover="highlightNode({{$node.ID}})" onmouseout="highlightNode('')">{{$node.Name}}</div>
+    {{end}}
+    {{end}}{{end}}
+    </div>
+{{end}}
+{{end}}
+</div>
+<div id="home-tags">
+    <h2 class="home-tag-header">Tags:</h2>
     {{with .ParentGarden.Tags}}
     {{range $key, $value := .}}
-        <div class="home-cat-button" style="display:inline-block" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</div>
+        <div class="home-tag-button" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</div>
     {{end}}
     {{end}}
-    </div>
-    </div>
 
-    <div style="flex-grow: 1;">
-    <h2 class="home-header">Categories:</h2>
-    <div style="display:inline-block; width:min-content;">
-    {{with .ParentGarden.Categories}}
-    {{range $key, $value := .}}
-        <div class="home-cat-button" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</div>
-    {{end}}
-    {{end}}
-    </div>
-    </div>
 </div>
