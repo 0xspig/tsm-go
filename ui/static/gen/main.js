@@ -107659,7 +107659,15 @@ const Graph = new _3dForceGraph(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width - 1)
   .height(document.getElementById("view").getBoundingClientRect().height-100);
 
-Graph.backgroundColor("#2d3e3f");
+//colors
+//$color-bg-mid: #626d64;
+//$color-bg-white: #fbf0e3;
+//$color-text: #323738;
+//$color-text-light: #f9f1e9;
+//$color-text-dark: #3e4642;
+//$color-text-link: #bf9b6e;
+//$color-text-highlight: #b9c3bb;
+Graph.backgroundColor("#626d64");
 
 Graph.onNodeClick(node => {
   targetNode(node.id);
