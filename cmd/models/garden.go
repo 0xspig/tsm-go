@@ -74,6 +74,7 @@ func (garden *Garden) ContainsID(id string) bool {
 }
 
 // adds node to garden
+// parameters will be auto filled from markdown metadata if passed empty strings
 func (garden *Garden) addNodeToGarden(datatype int, source string, id string, name string) *Node {
 	if garden.Masterlist[id] != nil {
 		fmt.Printf("Node source already exists\n")
@@ -100,6 +101,8 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 		}
 		yaml := scanYAMLFrontMatter(data)
 		newNode.Metadata = *yaml
+		newNode.Name = yaml.Title
+		newNode.ID = filepath.Base(source)
 	case CONTENT_TYPE_TAG:
 		if garden.Tags[id] {
 			break
@@ -114,45 +117,11 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 		}
 	}
 	garden.Masterlist[newNode.ID] = newNode
-	garden.idList = append(garden.idList, id)
-	garden.size += 1
-
-	return newNode
-
-}
-
-// adds node to garden. Source should be filepath relative to root.
-func (garden *Garden) AddSourceToGarden(datatype int, source string) *Node {
-	if garden.Masterlist[source] != nil {
-		fmt.Printf("Node source already exists\n")
-		return garden.Masterlist[source]
-	}
-	newNode := new(Node)
-
-	newNode.ID = filepath.Base(source)
-	newNode.Data_source = source
-	newNode.Data_type = datatype
-	if datatype == CONTENT_TYPE_MARKDOWN {
-		data, err := os.ReadFile(source)
-		if err != nil {
-			panic(err)
-		}
-		yaml := scanYAMLFrontMatter(data)
-		newNode.Name = yaml.Title
-		newNode.Metadata = *yaml
-	}
-	newNode.NumberIncomingNodes = 0
-	newNode.NumberOutgoingNodes = 0
-	newNode.ParentGarden = garden
-
-	newNode.OutgoingNodes = NodeSet{}
-	newNode.IncomingNodes = NodeSet{}
-
-	garden.Masterlist[newNode.ID] = newNode
 	garden.idList = append(garden.idList, newNode.ID)
 	garden.size += 1
 
 	return newNode
+
 }
 
 /*TODO func checkFileType(file) int*/
@@ -174,7 +143,7 @@ func (garden *Garden) PopulateGardenFromDir(source_dir string) {
 			garden.PopulateGardenFromDir(filepath.Join(source_dir, file.Name()))
 		} else {
 			relLink := filepath.Clean(filepath.Join(source_dir, file.Name()))
-			garden.AddSourceToGarden(CONTENT_TYPE_MARKDOWN, relLink)
+			garden.addNodeToGarden(CONTENT_TYPE_MARKDOWN, relLink, "", "")
 		}
 	}
 }
