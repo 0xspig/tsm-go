@@ -301,6 +301,12 @@ a{
 .home-cat-header{
    cursor: pointer; 
    aspect-ratio: auto;
+   color: $color-text-dark;
+   transition: color .4s;
+}
+.home-cat-header:hover{
+    color: $color-text-highlight;
+    transition: color .2s;
 }
 .home-cat img{
     width: 100%;
@@ -312,7 +318,7 @@ a{
     aspect-ratio: 1/1;
 }
 
-.home-cat *:hover{
+.home-cat img:hover, .home-cat-button:hover{
     opacity: .8;
     transition: opacity .2s;
 }

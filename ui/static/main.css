@@ -264,6 +264,13 @@ a {
 .home-cat-header {
   cursor: pointer;
   aspect-ratio: auto;
+  color: #3e4642;
+  transition: color 0.4s;
+}
+
+.home-cat-header:hover {
+  color: #b9c3bb;
+  transition: color 0.2s;
 }
 
 .home-cat img {
@@ -276,7 +283,7 @@ a {
   aspect-ratio: 1/1;
 }
 
-.home-cat *:hover {
+.home-cat img:hover, .home-cat-button:hover {
   opacity: 0.8;
   transition: opacity 0.2s;
 }
