@@ -5,7 +5,7 @@ category: gallery
 draft: false
 tags: 
 - wood
-image: "/images/gallery/chair/3-4-low.jpg"
+image: "/static/images/gallery/chair/3-4-low.jpg"
 imgalt: "3/4 view of a chair"
 ---
 
