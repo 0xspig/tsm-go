@@ -2,6 +2,8 @@
 <!DOCTYPE html>
  <html lang="en">
     {{- template "head.html" . -}}
+	{{- template "header.html" . -}}
+
 	<script type="module" src="/static/gen/main.js"></script>
 	<script type="module" >
 		import {targetNode} from "/static/gen/main.js";
@@ -9,12 +11,13 @@
 		window.targetNode = targetNode;
 		window.highlightNode = highlightNode;
 	</script>
-	{{- template "header.html" . -}}
 
 	<div class="content">
         {{- block "main" . }}{{- end }}
 
 	</div>
+	{{- template "web.html" -}}
+
         {{- template "footer.html" . -}}
 </html>
 {{end}}
