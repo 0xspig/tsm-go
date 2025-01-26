@@ -32,7 +32,7 @@
 
 	<div class="recent" id="gallery">
 	<h1>Gallery:</h1>
-	{{ with index .Masterlist "gallery"}}
+	{{ with index .Masterlist "sketch"}}
 	{{with .Latest.Metadata}}
 	<a >
 		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" >
