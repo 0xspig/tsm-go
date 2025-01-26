@@ -3,18 +3,18 @@
 // GLOBAL
 @font-face {
 	font-family: "Trirong";
-	src: 	url("/fonts/trirong/Trirong-Medium.ttf"),
-	url("/fonts/trirong/Trirong-Thin.ttf") format("truetype");
+	src: 	url("/static/fonts/trirong/Trirong-Medium.ttf"),
+	url("/static/fonts/trirong/Trirong-Thin.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "Montserrat";
-	src: url("/fonts/montserrat/static/Montserrat-Regular.ttf") format("truetype");
+	src: url("/static/fonts/montserrat/static/Montserrat-Regular.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "Amethysta";
-	src: url("/fonts/amethysta/Amethysta-Regular.ttf") format("truetype");
+	src: url("/static/fonts/amethysta/Amethysta-Regular.ttf") format("truetype");
 }
 
 $sans-stack: "Montserrat", "Arial", sans-serif;
