@@ -25,13 +25,31 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Trirong";
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: normal;
   color: #323738;
 }
 
 a {
   text-decoration: none;
   color: #bf9b6e;
+}
+
+.internal-link {
+  margin: auto;
+  color: #bf9b6e;
+  text-decoration: underline;
+  transition: color 0.4s;
+}
+
+.internal-link:visited {
+  color: #6e8282;
+}
+
+.internal-link:hover {
+  cursor: pointer;
+  color: #b9c3bb;
+  transition: color 0.2s;
 }
 
 #main-container {
