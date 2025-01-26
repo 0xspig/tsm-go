@@ -1,0 +1,100 @@
+{{ define "main" }}
+
+{{ $pageTitle := .Parent.Title }}
+
+<div class="content"> 
+
+<div class="article-container">
+	<h1>{{ .Title }}</h1>
+	<p>{{ .Date.Format "Monday January 2, 2006" }}</p>
+	<p>{{ .Content }}</p>
+	<br>
+	<p>	
+		Tags: 
+	{{ with .Params.tags }}
+		{{ $l := len . }}
+		{{ range $i, $e := . }}
+		{{ if $e }} 
+		<a href="/tags/{{ . }}" style="display:inline;">
+			{{ . }}
+		</a>
+		{{ end }}
+
+		{{ if lt $i (sub $l 1) }}	
+			{{ ", " }}
+		{{ end }}
+
+		{{ end }}
+	{{ end }}
+	</p>
+</div>
+
+<!-- Prev/Next -->
+ 
+<div class="article-footer">
+{{ with .Prev }}
+
+<a class="art-button" id="prev" href={{ .RelPermalink }}>← {{.Parent.Title}}: {{ .Title }}</a>
+
+{{end}}
+
+{{ with .Parent }}
+<a href="{{ .Permalink }}" id="back-btn"><< {{ .Title | title }}</a>
+{{ end }}
+
+{{ with .Next }}
+
+<a class="art-button" id="next" href={{ .RelPermalink }}>→{{.Parent.Title}}: {{ .Title }}</a>
+
+{{end}}
+
+</div>
+<!-- End Prev/Next -->
+
+{{/* this is a little weird - commenting it out to fix later 
+
+<!-- Sketch -->
+{{ if eq .Params.category "sketch" }}
+
+<div style="height:5em;width:100%;">
+{{ with .PrevInSection }}
+
+<a class="art-button" id="prev" href={{ .RelPermalink }}>← {{.Parent.Title}}: {{ .Title }}</a>
+
+{{end}}
+
+{{ with .NextInSection }}
+
+<a class="art-button" id="next" href={{ .RelPermalink }}>→{{.Parent.Title}}: {{ .Title }}</a>
+
+</div>
+{{ end }} 
+
+<div style="height:5em;width:100%;">
+{{ if not ( eq .Prev .PrevInSection ) }}
+{{ with .Prev }}
+
+<a class="art-button" id="prev" href={{ .RelPermalink }} >← {{.Parent.Title}}: {{ .Title }}</a>
+
+{{end}}
+{{end}}
+
+{{ if not ( eq .Next .NextInSection ) }}
+{{ with .Next }}
+
+<a class="art-button" id="next" href={{ .RelPermalink }} >→{{.Parent.Title}}: {{ .Title }}</a>
+
+{{end}}
+{{end}}
+
+{{ end }}
+</div>
+<!-- Sketch -->
+
+*/}}
+
+<div class="floatfix"></div>
+
+</div>
+{{ end }}
+

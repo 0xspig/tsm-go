@@ -636,29 +636,34 @@ func (garden *Garden) GenAssets() {
 	feed.WriteAtom(xml)
 
 	// parse templates
-	category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
+	partials, err := filepath.Glob("ui/templates/partials/*.html")
 	if err != nil {
 		panic(err)
 	}
-	garden.Templates["category_template"] = category_template
 
-	tag_template, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
-	if err != nil {
-		panic(err)
-	}
-	garden.Templates["tag_template"] = tag_template
+	//category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//garden.Templates["category_template"] = category_template
 
-	links_template, err := template.ParseFiles("ui/templates/links.template.html")
-	if err != nil {
-		panic(err)
-	}
-	garden.Templates["links_template"] = links_template
+	//tag_template, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//garden.Templates["tag_template"] = tag_template
 
-	post_template, err := template.ParseFiles("ui/templates/post.template.html")
-	if err != nil {
-		panic(err)
-	}
-	garden.Templates["post_template"] = post_template
+	//links_template, err := template.ParseFiles("ui/templates/links.template.html")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//garden.Templates["links_template"] = links_template
+
+	//post_template, err := template.ParseFiles("ui/templates/post.template.html")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//garden.Templates["post_template"] = post_template
 
 	home_template, err := template.ParseFiles("ui/templates/home.template.html")
 	if err != nil {
@@ -666,7 +671,12 @@ func (garden *Garden) GenAssets() {
 	}
 	garden.Templates["home_template"] = home_template
 
-	base_template, err := template.ParseFiles("./ui/templates/base.template.html", "./ui/templates/nav.template.html")
+	base_files := []string{
+		"./ui/templates/baseof.html",
+		"./ui/templates/index.html",
+	}
+	base_files = append(base_files, partials...)
+	base_template, err := template.ParseFiles(base_files...)
 	if err != nil {
 		panic(err)
 	}

@@ -1,0 +1,10 @@
+{{define "base"}}
+<!DOCTYPE html>
+ <html lang="en">
+    {{- template "head.html" . -}}
+	{{- template "header.html" . -}}
+        {{- block "main" . }}{{- end }}
+
+        {{- template "footer.html" . -}}
+</html>
+{{end}}

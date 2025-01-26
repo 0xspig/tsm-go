@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+<div class="content"> 
+
+<div class="article-container" style="padding-bottom: 1em;">
+	<h1>{{ .Title | title}}</h1>
+	{{ with .Content }}
+	<p>{{ . }}</p>
+	{{ end }}
+{{ range .RegularPagesRecursive }}
+
+	<li style="padding-block: .3em;
+		{{ if eq .Params.category "sketch" }} 
+		list-style-type: circle;
+		{{ else }} 
+		list-style-type: square;
+		{{ end }}
+		">
+	<a href={{ .Permalink }} class="blog-title" >
+		<b>{{ .Title }}</b>
+	</a>
+
+	{{ if not ( eq .Parent.Params.category "gallery" ) }}
+	 | Tags: 
+	{{ with .Params.tags }}
+		{{ $l := len . }}
+		{{ range $i, $e := . }}
+		{{ if $e }} 
+		<a href="/tags/{{ . }}" style="display:inline;">
+			{{ . }}
+		</a>
+		{{ end }}
+
+		{{ if lt $i (sub $l 1) }}	
+			{{ ", " }}
+		{{ end }}
+
+		{{ end }}
+	{{ end }}
+
+	{{ end }}
+	</li>
+{{ end }}
+
+
+</div>
+</div>
+{{ end }}
