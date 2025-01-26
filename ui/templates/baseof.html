@@ -10,8 +10,11 @@
 		window.highlightNode = highlightNode;
 	</script>
 	{{- template "header.html" . -}}
+
+	<div class="content">
         {{- block "main" . }}{{- end }}
 
+	</div>
         {{- template "footer.html" . -}}
 </html>
 {{end}}
