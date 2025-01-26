@@ -665,11 +665,11 @@ func (garden *Garden) GenAssets() {
 	//}
 	//garden.Templates["post_template"] = post_template
 
-	home_template, err := template.ParseFiles("ui/templates/home.template.html")
-	if err != nil {
-		panic(err)
-	}
-	garden.Templates["home_template"] = home_template
+	//home_template, err := template.ParseFiles("ui/templates/home.template.html")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//garden.Templates["home_template"] = home_template
 
 	base_files := []string{
 		"./ui/templates/baseof.html",
