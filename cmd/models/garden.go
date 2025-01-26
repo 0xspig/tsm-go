@@ -567,8 +567,9 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 			panic(err)
 		}
 		var template_buf bytes.Buffer
-		ts.Execute(&template_buf, node)
+		ts.Execute(&template_buf, node.ParentGarden)
 
+		fmt.Println(template_buf.String())
 		return template_buf.Bytes()
 	}
 
