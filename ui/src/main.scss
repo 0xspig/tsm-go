@@ -47,7 +47,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Trirong";
+    font-family: $sans-stack;
+    font-weight: normal;
 	color: $color-text;
 }
 
@@ -56,6 +57,20 @@ a {
 	color: $color-text-link;
 }
 
+.internal-link{
+    margin:auto;
+    color: $color-text-link;
+    text-decoration: underline;
+    transition: color .4s;
+}
+.internal-link:visited{
+    color: #6e8282;
+}
+.internal-link:hover{
+    cursor: pointer;
+    color: $color-text-highlight;
+    transition: color .2s;
+}
 // Main Container
 #main-container {
 	flex:1 1 $main-width;
@@ -143,7 +158,6 @@ a {
 
 
 }
-
 
 // Index
 #bio {
