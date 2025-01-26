@@ -41,6 +41,9 @@ body {
 	background-color: $color-bg-mid;
 	margin: 0px;
 	padding: 0px;
+	padding-inline: auto;
+	display:flex;
+	flex-direction: row;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -53,8 +56,18 @@ a {
 	color: $color-text-link;
 }
 
+// Main Container
+#main-container {
+	flex:1 1 $main-width;
+}
+#main-layout{
+	width:$main-width;
+	margin-right: 1em;
+	margin-left:auto;
+}
+
 // HEADER
-header {	
+#header {	
 	a {
 		color: inherit;
 		text-decoration: inherit;
@@ -63,7 +76,7 @@ header {
 
 	text-decoration: none;
 	color: $color-text;
-	width: $main-width;
+	width: 100%;
 	margin-inline:auto;
 	padding-top: 3.5em;
 	//border: 3px solid $color-bg-white;
@@ -193,7 +206,7 @@ header {
 // Content
 
 #content {
-	width: $main-width;
+	width: 100%;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:1em;
@@ -214,6 +227,92 @@ header {
 img {
 	border: 3px double $color-text-highlight;
 	//border-style: groove ridge ridge groove;
+}
+
+// Web
+
+#web-container{
+    background-color: $color-bg-mid;
+    flex-grow: 1;
+    flex-basis:25%;
+	max-width: 35%;
+	margin: auto;
+	margin-right: auto;
+	margin-left: .5em;
+	margin-top: 4em;
+}
+
+#web-layout{
+	width: 25em;
+
+}
+
+// Scene
+#view{
+	width: 25em;
+	height: 25em;
+	border: 5px double $color-text-highlight;
+	margin-top: 5em;
+	div{
+		div{
+			.scene-container{
+				#scene{
+					width:25em !important;
+					height: 25em	!important;
+				}
+			}
+		}
+	}
+}
+
+// links
+#view-bottom{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+	width: 100%;
+    margin: .75em;
+    margin-inline: 0px;
+	border: 5px double $color-text-highlight;
+}
+
+#link-data{
+    padding-inline: 1em;
+	padding-bottom:1em;
+    flex-grow: 1;
+    background-color: $color-bg-white;
+}
+
+#button-container {
+    padding-top: 1em;
+    padding-bottom: 0px;
+    background-color: $color-bg-white;
+}
+
+#donate-button {
+    cursor: pointer;
+    display:block;
+	padding-block: .75em;
+	padding-inline:.5em;
+    margin-inline: auto;
+    margin-block: .4em;
+    width:fit-content;
+    height: fit-content; 
+    font-size: large;
+    font-weight: 700;
+    text-decoration: none;
+	color: $color-text-light;
+	background-color: $color-bg-mid;
+	border: 1px solid $color-text-highlight;
+	transition: color .4s, background-color .4s, border-color .4s;
+
+}
+#donate-button:hover {
+	background: $color-bg-white;
+	border: 1px solid $color-text-highlight;
+	color: $color-text-dark;
+
+	transition: background .2s;
 }
 
 

@@ -28,7 +28,7 @@ canvas.id = "scene"
   Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
   Graph.camera().updateProjectionMatrix()
 function resizeWindow(){
-  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1)
+  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
   Graph.height(document.getElementById("view").getBoundingClientRect().height);
   Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
   Graph.camera().updateProjectionMatrix()
