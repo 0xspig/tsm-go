@@ -25,4 +25,6 @@ Todo:
   ☐ implement flag to optionally render drafts
   ✔ implement latest @started(25-01-25 10:35) @done(25-01-25 13:37) @lasted(3h2m34s)
   ☐ implement summary feature
+  ☐ add base meta tag that doesn't break dev env
+
 

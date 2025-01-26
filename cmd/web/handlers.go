@@ -9,7 +9,7 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("home Function run")
 	w.Header().Add("Server", "McServer")
 
-	ts := app.Garden.Templates["base_template"]
+	ts := app.Garden.Templates["home_template"]
 
 	err := ts.ExecuteTemplate(w, "base", app.Garden)
 	if err != nil {

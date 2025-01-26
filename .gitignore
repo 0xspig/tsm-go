@@ -2,3 +2,5 @@ launch.json
 node_modules
 ui/static/gen/graph-data.json
 ui/static/rss.xml
+web
+restart

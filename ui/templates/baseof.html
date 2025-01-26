@@ -11,13 +11,13 @@
 		window.targetNode = targetNode;
 		window.highlightNode = highlightNode;
 	</script>
-
+	<div id="main layout">	
 	<div class="content">
         {{- block "main" . }}{{- end }}
-
 	</div>
 	{{- template "web.html" -}}
 
+	</div>
         {{- template "footer.html" . -}}
 </html>
 {{end}}
