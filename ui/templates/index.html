@@ -2,7 +2,7 @@
 <div class="content">
 
 	<div id="bio">
-		<img src="/me_irl.jpg" alt="Me and my violin" id="me_irl" width="45%" height="auto">
+		<img src="/static/images/me_irl.jpg" alt="Me and my violin" id="me_irl" width="45%" height="auto">
 		<h1>Hi.</h1>
 		<p>My name is Tyler McKee and this is my website.
 
@@ -34,21 +34,24 @@
 
 	<div class="recent" id="gallery">
 	<h1>Gallery:</h1>
-	{{ with .Site.GetPage "/blog" }}
-	<a href="{{ .Permalink }}">
-		<img class="img" src={{ .Params.image }} alt={{ .Params.imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" >
+	{{ with index .Masterlist "gallery"}}
+	{{with .Latest.Metadata}}
+	<a >
+		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" >
 	</a>
-	{{ end }}
+	{{end}}
+	{{end}}
 	</div>
 
 	<div class="recent" id="blog">
 		<h1>Blog/Updates:</h1>
-		{{ with .Site.GetPage "/blog" }}
-		<a class="post" href="{{ .Permalink }}">
-		<h2>{{ .Title }}</h2>
-		{{ .Summary }}
+		{{ with index .Masterlist "blog" }}
+		{{with .Latest}}
+		<a class="post" href="/{{ .ID }}">
+		<h2>{{ .Name }}</h2>
 
 		</a>
+		{{end}}
 		{{end}}
 	</div>
 	<div class="floatfix"></div>
