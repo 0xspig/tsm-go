@@ -629,7 +629,7 @@ func (garden *Garden) GenAssets() {
 		feed.Add(item)
 	}
 
-	xml, err := os.Create("ui/static/rss.xml")
+	xml, err := os.Create("ui/static/index.xml")
 	if err != nil {
 		panic(err)
 	}
