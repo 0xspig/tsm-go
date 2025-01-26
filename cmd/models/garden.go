@@ -541,19 +541,28 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 
 	data := internal_regex.ReplaceAll(buf.Bytes(), []byte(`<a class="internal-link" onmouseover="highlightNode('$2')" onmouseout="highlightNode('')" onClick="targetNode('$2')">$1</a>`))
 
-	data = append([]byte(`{{define "main"}}`), data...)
+	data = append([]byte(`{{define "content"}}`), data...)
 	data = append(data, []byte(`{{end}}`)...)
-
-	var ts *template.Template
 
 	switch node.Metadata.Class {
 	default:
-		ts, err = garden.Templates["post_template"].Clone()
+		ts, err := template.ParseFiles("ui/templates/single.html")
 		if err != nil {
 			panic(err)
 		}
+		fmt.Println("post template")
+
+		ts, err = ts.Parse(string(data))
+		if err != nil {
+			panic(err)
+		}
+		var template_buf bytes.Buffer
+		ts.Execute(&template_buf, node)
+
+		return template_buf.Bytes()
 	case "home":
-		ts, err = ts.ParseFiles("ui/templates/index.html")
+		fmt.Println("home template")
+		ts, err := template.ParseFiles("ui/templates/index.html")
 		if err != nil {
 			panic(err)
 		}
@@ -563,18 +572,6 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 		return template_buf.Bytes()
 	}
 
-	ts, err = ts.ParseFiles("ui/templates/footer.template.html")
-	if err != nil {
-		panic(err)
-	}
-	ts, err = ts.Parse(string(data))
-	if err != nil {
-		panic(err)
-	}
-	var template_buf bytes.Buffer
-	ts.Execute(&template_buf, node)
-
-	return template_buf.Bytes()
 }
 
 func (garden *Garden) tagToHtml(node *Node) []byte {
@@ -648,6 +645,11 @@ func (garden *Garden) GenAssets() {
 		"./ui/templates/baseof.html",
 	}
 	base_files = append(base_files, partials...)
+	base_template, err := template.ParseFiles(base_files...)
+	if err != nil {
+		panic(err)
+	}
+	garden.Templates["base_template"] = base_template
 
 	//category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
 	//if err != nil {
@@ -661,14 +663,14 @@ func (garden *Garden) GenAssets() {
 	//}
 	//garden.Templates["tag_template"] = tag_template
 
-	//links_template, err := template.ParseFiles("ui/templates/links.template.html")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//garden.Templates["links_template"] = links_template
+	links_template, err := template.ParseFiles("ui/templates/old-templates/links.template.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.Templates["links_template"] = links_template
 
-	post_template, err := template.ParseFiles(base_files...)
-	post_template.Parse("./ui/templates/single.html")
+	post_template, err := template.ParseFiles(partials...)
+	post_template.ParseFiles("./ui/templates/single.html")
 	if err != nil {
 		panic(err)
 	}
@@ -684,9 +686,4 @@ func (garden *Garden) GenAssets() {
 	}
 	garden.Templates["home_template"] = home_template
 
-	base_template, err := template.ParseFiles(base_files...)
-	if err != nil {
-		panic(err)
-	}
-	garden.Templates["base_template"] = base_template
 }

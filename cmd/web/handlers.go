@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 )
@@ -34,6 +35,7 @@ func (app *Application) getPostHTML(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("getPostHTML function run")
 	w.Header().Add("Server", "McServer")
 	html := app.Garden.NodeToHTML(r.PathValue("id"))
+	fmt.Println(string(html))
 	w.Write(html)
 }
 

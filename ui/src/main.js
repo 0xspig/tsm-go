@@ -205,7 +205,7 @@ function dataToggle(){
 function getNodeData(node){
   var node_data_request = new XMLHttpRequest;
   node_data_request.onreadystatechange = function() {
-    document.getElementById("data").innerHTML = node_data_request.responseText;
+    document.getElementById("content").innerHTML = node_data_request.responseText;
   }
   node_data_request.open("GET", "/node-data/"+node.id, true);
   node_data_request.send();
