@@ -99,7 +99,7 @@ It's a lot to think about but when it goes right the results are worth it.
 
 ## My Paintings
 
-<img src="/static/images/blog/mark-boedges-workshop/my-paintings.jpg" width="100%" style="margin:auto">
+<img src="/static/images/blog/mark-boedges-workshop/my-paintings.jpg" width="100%" style="margin:auto; aspect-ratio:4/3;">
 You can (hopefully) see my progression in the paintings each day.
 The first day (top) I was still using OMS and having a really hard time controlling the paint.
 I started way too thick and didn't have room to layer.
