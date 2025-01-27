@@ -140,11 +140,11 @@ export function targetNode(nodeID){
     });
     if (target_node == null){
       targetNode("home.md");
-      return;
+      return false;
     }
     console.log(target_node);
     if (target_node.data_type == 4){
-      return;
+      return false;
     } 
     // Aim at target_node from outside it
     const distance = 600;
@@ -164,6 +164,7 @@ export function targetNode(nodeID){
     getNodeData(target_node);
     pushGraphParams();
     window.history.pushState(null, target_node.name, target_node.id);
+    return false;
 }
 
 addEventListener("popstate", (event) => {
