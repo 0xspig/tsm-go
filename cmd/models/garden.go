@@ -575,7 +575,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 }
 
 func (garden *Garden) tagToHtml(node *Node) []byte {
-	ts := garden.Templates["tag_template"]
+	ts := garden.Templates["list_template"]
 	var buf bytes.Buffer
 	ts.Execute(&buf, node)
 
@@ -583,7 +583,7 @@ func (garden *Garden) tagToHtml(node *Node) []byte {
 }
 
 func (garden *Garden) catToHtml(node *Node) []byte {
-	ts := garden.Templates["category_template"]
+	ts := garden.Templates["list_template"]
 	var buf bytes.Buffer
 	ts.Execute(&buf, node)
 
@@ -651,6 +651,11 @@ func (garden *Garden) GenAssets() {
 	}
 	garden.Templates["base_template"] = base_template
 
+	list_template, err := template.ParseFiles("ui/templates/list.html")
+	if err != nil {
+		panic(err)
+	}
+	garden.Templates["list_template"] = list_template
 	//category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
 	//if err != nil {
 	//	panic(err)
