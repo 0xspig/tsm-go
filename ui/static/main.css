@@ -14,6 +14,12 @@
   background-color: #b9c3bb;
 }
 
+html {
+  scrollbar-color: #b9c3bb #626d64;
+  scrollbar-width: 0.75em;
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Montserrat";
   background-color: #626d64;
@@ -267,6 +273,7 @@ a {
 #web-container {
   position: sticky;
   top: 1em;
+  bottom: 2em;
   background-color: #626d64;
   flex-grow: 1;
   flex-basis: 25%;
@@ -274,7 +281,7 @@ a {
   margin: auto;
   margin-right: auto;
   margin-left: 0.5em;
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 #web-layout {
@@ -295,7 +302,11 @@ a {
 #view-bottom {
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: 25em;
+  overflow-y: scroll;
+  scrollbar-color: #626d64 #f2eeea;
+  scrollbar-width: 0.75em;
+  scrollbar-gutter: stable;
   width: 100%;
   margin: 0.75em;
   margin-inline: 0px;
