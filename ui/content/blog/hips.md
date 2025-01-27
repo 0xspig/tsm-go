@@ -19,10 +19,10 @@ I plan to make a more in-depth article covering the basics (and maybe some youtu
 
 ## First attempt
 <div>
-<img src="/static/images/blog/hips/stray-top.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/hips/stray-side.jpg" width="55%" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/stray-top.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;aspect-ratio:1/1;">
+<img src="/static/images/blog/hips/stray-side.jpg" width="55%" style="padding-inline:1.5em;aspect-ratio:4/3;">
 <div style="width:100%; text-align:center">
-<img src="/static/images/blog/hips/stray-drawing.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/hips/stray-drawing.jpg" width="60%" style="display:inline-block;aspect-ratio:1/1;">
 </div>
 
 This first one I doofed pretty bad. 
@@ -45,12 +45,12 @@ This video is how I figured out the technique:
 ## Rotating is cool
 
 <div>
-<img src="/static/images/blog/hips/devers-top.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/hips/devers-drawing.jpg" width="45%" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-top.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;aspect-ratio:1/1;">
+<img src="/static/images/blog/hips/devers-drawing.jpg" width="45%" style="padding-inline:1.5em;aspect-ratio:1/1;">
 </div>
 <div>
-<img src="/static/images/blog/hips/devers-foot.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/hips/devers-side.jpg" width="45%" style="padding-inline:1.5em;">
+<img src="/static/images/blog/hips/devers-foot.jpg" width="45%" class="image-float-left" style="padding-inline:1.5em;aspect-ratio:1/1;">
+<img src="/static/images/blog/hips/devers-side.jpg" width="45%" style="padding-inline:1.5em;aspect-ratio:1/1;">
 </div>
 
 The second hip model shows the same principles but with a slightly different approach (and square walls this time).
