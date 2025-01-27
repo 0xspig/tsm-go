@@ -13,7 +13,7 @@ imgalt: "Painting of a stream"
 ---
 
 <div style="width:100%; text-align:center">
-<img src="/static/images/blog/honey-hollow/honey-hollow.jpg" alt="Painting of a stream" width="60%" style="display:inline-block; apect-ratio:455/604;">
+<img src="/static/images/blog/honey-hollow/honey-hollow.jpg" alt="Painting of a stream" width="60%" style="display:inline-block; aspect-ratio:455/604;">
 </div>
 
 I did a little plein air yesterday to try out using naphtha as a solvent in the under layer.
