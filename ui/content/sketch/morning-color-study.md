@@ -22,7 +22,8 @@ Palette:
 - A *very* small amount of Cad. Red to grey down trees in the front.
 
 <div width="100%" style="text-align:center">
-<img src="/static/images/blog/050923-morning-color-crop.jpg" width="60%" style="display:inline-block; margin:1em">
+<img src="/static/images/blog/050923-morning-color-crop.jpg" width="60%" style="display:inline-block; margin:1em;aspect-ratio:1/1">
+
 </div>
 
 I'm finding that the key to non-muddy colors is to actually use less color.

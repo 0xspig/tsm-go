@@ -11,7 +11,7 @@ tags:
 - studio
 ---
 <div style="width:100%; text-align:center">
-<img src="/static/images/blog/ridgeline/ridgeline-resize.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/ridgeline/ridgeline-resize.jpg" width="60%" style="display:inline-block;aspect-ratio:455/606;">
 </div>
 Finished up this ridgeline view from one of my favorite hiking areas.
 Haven't been able to paint outside in a while since it's dark after work now.

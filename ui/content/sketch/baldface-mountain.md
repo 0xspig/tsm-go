@@ -12,7 +12,7 @@ tags:
 ---
 
 <div style="width:100%; text-align:center">
-<img src="/static/images/blog/baldface-mountain/baldface-mountain.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/baldface-mountain/baldface-mountain.jpg" width="60%" style="display:inline-block; aspect-ratio:455/618;">
 </div>
 
 I thought this one sucked when I initially painted it.

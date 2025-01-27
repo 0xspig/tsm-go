@@ -12,7 +12,7 @@ tags:
 ---
 
 <div style="width:100%; text-align:center">
-<img src="/static/images/blog/watershed/watershed.jpg" width="60%" style="display:inline-block;">
+<img src="/static/images/blog/watershed/watershed.jpg" width="60%" style="display:inline-block;aspect-ratio:455/342;">
 </div>
 
 This is a painting I did before I took {Mark Boedges' workshop}(/blog/mark-boedges-workshop.md).

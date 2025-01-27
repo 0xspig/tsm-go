@@ -13,8 +13,8 @@ imgalt: "a marsh"
 It's officially spring in New England and that means green.
 I recently did two plein air paintings, both of which I think are some of my best plein airs so far.
 <div>
-<img src="/static/images/blog/no-green/woodland-clearing.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;">
-<img src="/static/images/blog/no-green/marsh.jpg" width="55%" style="padding-inline:1.5em;">
+<img src="/static/images/blog/no-green/woodland-clearing.jpg" width="35%" class="image-float-left" style="padding-inline:1.5em;aspect-ratio:53/71;">
+<img src="/static/images/blog/no-green/marsh.jpg" width="55%" style="padding-inline:1.5em;aspect-ratio:4/3;">
 </div>
 
 But when I look at them on the wall they just dont pop.

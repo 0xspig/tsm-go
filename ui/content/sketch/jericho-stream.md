@@ -11,7 +11,7 @@ image: "/images/blog/browns-river/browns-river.jpg"
 imgalt: "River"
 ---
 <div width="100%" style="text-align:center">
-<img src="/static/images/blog/browns-river/browns-river.jpg" width="60%" style="display:inline-block">
+<img src="/static/images/blog/browns-river/browns-river.jpg" width="60%" style="display:inline-block;aspect-ratio:455/599;">
 </div>
 
 Painted a little river in Jericho this afternoon.
