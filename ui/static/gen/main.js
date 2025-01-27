@@ -107657,7 +107657,8 @@ function getGraphObj(object) {
 
 const Graph = new _3dForceGraph(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width - 1)
-  .height(document.getElementById("view").getBoundingClientRect().height-100);
+  .height(document.getElementById("view").getBoundingClientRect().height-100)
+  .showNavInfo(false);
 
 //colors
 //$color-bg-mid: #626d64;

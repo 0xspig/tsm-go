@@ -2,7 +2,8 @@ import ForceGraph3D from "3d-force-graph";
 
 const Graph = new ForceGraph3D(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width - 1)
-  .height(document.getElementById("view").getBoundingClientRect().height-100);
+  .height(document.getElementById("view").getBoundingClientRect().height-100)
+  .showNavInfo(false);
 var parsedJson;
 
 //colors
