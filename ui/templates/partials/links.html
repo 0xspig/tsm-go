@@ -13,7 +13,7 @@
     style="color:brown;"
     {{end}}
     style="display:inline-block;width:100%"
-     onclick="targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
+     onclick="return targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
 {{end}}
 </ul>
 {{end}}
@@ -30,7 +30,7 @@
     style="color:brown;"
     {{end}}
     style="display:inline-block; width:100%"
-    onclick="targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
+    onclick="return targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
 {{end}}
 </ul>
 {{end}}
