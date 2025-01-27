@@ -10,7 +10,7 @@ tags:
 
 ---
 
-<img src="/rss.png" width="5%" link="/index.xml">
+<img src="/static/images/rss.png" width="5%" link="/index.xml">
 
 ## Social Media Sucks
 
