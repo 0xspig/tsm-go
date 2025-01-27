@@ -107861,7 +107861,27 @@ function dataToggle(){
 function getNodeData(node){
   var node_data_request = new XMLHttpRequest;
   node_data_request.onreadystatechange = function() {
-    document.getElementById("content").innerHTML = node_data_request.responseText;
+    switch (node_data_request.readyState){
+      default:
+        return;
+      case 3:
+        return;
+      case 4:
+        var content = document.getElementById("content");
+        content.innerHTML = node_data_request.responseText;
+        var resp = document.getElementById("response");
+        requestAnimationFrame(()=>{
+          var margin = parseFloat(getComputedStyle(content).paddingTop) 
+                        + parseFloat(getComputedStyle(content).paddingBottom)
+                        + parseFloat(getComputedStyle(resp).marginTop)
+                        + parseFloat(getComputedStyle(resp).marginBottom);
+
+          content.style = "height: " + (resp.scrollHeight + margin) + "px;";
+
+        });
+        return;
+
+    }
   };
   node_data_request.open("GET", "/node-data/"+node.id, true);
   node_data_request.send();

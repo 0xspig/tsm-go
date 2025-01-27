@@ -1,3 +1,4 @@
+<div id="response">
 	<div id="bio">
 		<img src="/static/images/me_irl.jpg" alt="Me and my violin" id="me_irl" width="45%" height="auto">
 		<h1>Hi.</h1>
@@ -33,7 +34,7 @@
 	{{$latest := .Latest}}
 	{{with .Latest.Metadata}}
 	<a href="/{{$latest.ID}}" >
-		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$latest.ID}}')" onclick="return targetNode('{{$latest.ID}}')">
+		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;height:auto" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$latest.ID}}')" onclick="return targetNode('{{$latest.ID}}')">
 	</a>
 	{{end}}
 	{{end}}
@@ -63,3 +64,5 @@
 	    {{end}}
 
 	</div>
+	<div class="floatfix"></div>
+</div>
