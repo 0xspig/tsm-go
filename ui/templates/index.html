@@ -28,21 +28,22 @@
 	<div class="separator" class="floatfix"></div>
 
 	<div class="recent" id="gallery">
-	<h1>Gallery:</h1>
+	<h1 class="header-link" onmouseout="highlightNode('')" onmouseover="highlightNode('gallery')" onclick="targetNode('gallery')">Gallery:</h1>
 	{{ with index .Masterlist "sketch"}}
+	{{$latest := .Latest}}
 	{{with .Latest.Metadata}}
-	<a >
-		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" >
+	<a href="/{{$latest.ID}}" >
+		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$latest.ID}}')" onclick="targetNode('{{$latest.ID}}')">
 	</a>
 	{{end}}
 	{{end}}
 	</div>
 
 	<div class="recent" id="blog">
-		<h1>Blog/Updates:</h1>
+		<h1 class="header-link" onmouseout="highlightNode('')" onmouseover="highlightNode('blog')" onclick="targetNode('blog')">Blog/Updates:</h1>
 		{{ with index .Masterlist "blog" }}
 		{{with .Latest}}
-		<a class="post" href="/{{ .ID }}">
+		<a class="post" href="/{{ .ID }}"  onmouseout="highlightNode('')" onmouseover="highlightNode('{{.ID}}')" onclick="targetNode('{{.ID}}')">
 		<h2>{{ .Name }}</h2>
 
 		</a>
@@ -50,3 +51,15 @@
 		{{end}}
 	</div>
 	<div class="floatfix"></div>
+	
+	<br>
+	<br>
+	<div id="home-tags">
+	    <h2 class="home-tag-header">Tags:</h2>
+	    {{with .Tags}}
+	    {{range $key, $value := .}}
+	        <a class="home-tag-button" onclick="targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</a>
+	    {{end}}
+	    {{end}}
+
+	</div>

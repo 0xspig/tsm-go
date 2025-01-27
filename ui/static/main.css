@@ -28,6 +28,61 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", "Arial", sans-serif;
   font-weight: normal;
   color: #323738;
+  transition: color 0.4s;
+}
+
+.header-link {
+  cursor: pointer;
+}
+
+.header-link:hover {
+  color: #bf9b6e;
+  transition: color 0.2s;
+}
+
+.recent img {
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.recent img:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.recent .post h2 {
+  color: #323738;
+  transition: color 0.4s;
+}
+.recent .post:hover h2 {
+  color: #bf9b6e;
+  transition: color 0.2s;
+}
+
+#home-tags {
+  display: block;
+  text-align: center;
+  width: 80%;
+  margin-inline: auto;
+  margin-bottom: 2em;
+}
+
+.home-tag-button {
+  margin-block: 0.25em;
+  cursor: pointer;
+  display: inline-block;
+  height: auto;
+  padding-block: 0.75em;
+  padding-inline: 0.5em;
+  background: #f2eeea;
+  border: 1px solid #b9c3bb;
+  color: #3e4642;
+  transition: color 0.4s, background-color 0.4s, border-color 0.4s;
+}
+
+.home-tag-button:hover {
+  color: #f9f1e9;
+  background-color: #626d64;
+  border-color: #b9c3bb;
+  transition: background 0.2s;
 }
 
 a {
@@ -135,6 +190,7 @@ a {
   margin-top: 4em;
   margin-inline: 1em;
   float: right;
+  border: 3px double #b9c3bb;
 }
 
 #email {
@@ -204,11 +260,13 @@ a {
   color: #626d64;
 }
 
-img {
+.img {
   border: 3px double #b9c3bb;
 }
 
 #web-container {
+  position: sticky;
+  top: 4em;
   background-color: #626d64;
   flex-grow: 1;
   flex-basis: 25%;
