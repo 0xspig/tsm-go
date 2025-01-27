@@ -107678,10 +107678,13 @@ Graph.onNodeClick(node => {
 
 var canvas = Graph.renderer().domElement;
 canvas.id = "scene";
-  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
-  Graph.height(document.getElementById("view").getBoundingClientRect().height);
-  Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
-  Graph.camera().updateProjectionMatrix();
+
+document.getElementById("view");
+Graph.width(canvas.getBoundingClientRect().width);
+Graph.height(canvas.getBoundingClientRect().height);
+Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
+Graph.camera().updateProjectionMatrix();
+
 function resizeWindow(){
   Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
   Graph.height(document.getElementById("view").getBoundingClientRect().height);
@@ -107763,7 +107766,7 @@ function pushGraphParams(){
 function highlightNode(nodeID){
     var target_node;
 
-    console.log("targeting Node: "+nodeID);
+    console.log("highlighting Node: "+nodeID);
     Graph.graphData().nodes.forEach(node => {
       if (node.id == nodeID){
         target_node = node;
@@ -107802,7 +107805,7 @@ function targetNode(nodeID){
       return false;
     } 
     // Aim at target_node from outside it
-    const distance = 600;
+    const distance = 225;
     const distRatio = 1 + distance/Math.hypot(target_node.x, target_node.y, target_node.z);
 
     const newPos = target_node.x || target_node.y || target_node.z
@@ -107870,15 +107873,13 @@ function getNodeData(node){
         var content = document.getElementById("content");
         content.innerHTML = node_data_request.responseText;
         var resp = document.getElementById("response");
-        requestAnimationFrame(()=>{
-          var margin = parseFloat(getComputedStyle(content).paddingTop) 
-                        + parseFloat(getComputedStyle(content).paddingBottom)
-                        + parseFloat(getComputedStyle(resp).marginTop)
-                        + parseFloat(getComputedStyle(resp).marginBottom);
 
-          content.style = "height: " + (resp.scrollHeight + margin) + "px;";
+        var margin = parseFloat(getComputedStyle(content).paddingTop) 
+                      + parseFloat(getComputedStyle(content).paddingBottom)
+                      + parseFloat(getComputedStyle(resp).marginTop)
+                      + parseFloat(getComputedStyle(resp).marginBottom);
+        content.style = "height: " + (resp.scrollHeight + margin) + "px;";
 
-        });
         return;
 
     }
