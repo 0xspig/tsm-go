@@ -663,7 +663,7 @@ func (garden *Garden) GenAssets() {
 	//}
 	//garden.Templates["tag_template"] = tag_template
 
-	links_template, err := template.ParseFiles("ui/templates/old-templates/links.template.html")
+	links_template, err := template.ParseFiles("ui/templates/partials/links.html")
 	if err != nil {
 		panic(err)
 	}
