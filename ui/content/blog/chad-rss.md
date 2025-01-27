@@ -10,7 +10,7 @@ tags:
 
 ---
 
-<img src="/static/images/rss.png" width="5%" link="/index.xml">
+<a href="/static/index.xml"><img src="/static/images/rss.png" width="5%" alt="rss logo" style="aspect-ratio:1/1"></a>
 
 ## Social Media Sucks
 
@@ -54,7 +54,7 @@ If you don't see a link, their platform (blogspot for example) may still automat
 If you use twitter, you can follow twitter feeds with [Nitter](https://nitter.net/) (this may be broken).
 No account needed and more importantly, none of the distractions of twitter.
 
-Once again, you can follow my {RSS}(/index.xml) if you haven't already.
+Once again, you can follow my [RSS](/static/index.xml) if you haven't already.
 
 And here's some blogs that I follow and you should too:
 
