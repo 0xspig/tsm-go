@@ -289,20 +289,16 @@ a {
 }
 
 #web-layout {
-  width: 25em;
+  width: 55%;
 }
 
 #view {
-  width: 25em;
-  height: 25em;
+  width: 100%;
+  max-height: fit-content;
+  aspect-ratio: 1/1;
   border: 5px double #b9c3bb;
   margin-top: 5em;
 }
-#view div div .scene-container #scene {
-  width: 25em !important;
-  height: 25em !important;
-}
-
 #view-bottom {
   display: flex;
   flex-direction: column;

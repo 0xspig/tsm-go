@@ -1,8 +1,8 @@
 import ForceGraph3D from "3d-force-graph";
 
 const Graph = new ForceGraph3D(document.getElementById('view'))
-  .width(document.getElementById("view").getBoundingClientRect().width - 1)
-  .height(document.getElementById("view").getBoundingClientRect().height-100)
+  .width(document.getElementById("view").getBoundingClientRect().width)
+  .height(document.getElementById("view").getBoundingClientRect().height)
   .showNavInfo(false);
 var parsedJson;
 
@@ -32,8 +32,14 @@ Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
 Graph.camera().updateProjectionMatrix()
 
 function resizeWindow(){
-  Graph.width(document.getElementById("view").getBoundingClientRect().width - 1);
-  Graph.height(document.getElementById("view").getBoundingClientRect().height);
+  console.log("resize");
+  var real_style = getComputedStyle(document.getElementById("view"));
+  document.getElementById("scene").style.width = real_style.width;
+  document.getElementById("scene").style.height = real_style.height;
+  Graph.width(document.getElementsByClassName("scene-container")[0].getBoundingClientRect().width);
+  Graph.height(document.getElementsByClassName("scene-container")[0].getBoundingClientRect().height);
+  Graph.width(document.getElementById("scene").getBoundingClientRect().width);
+  Graph.height(document.getElementById("scene").getBoundingClientRect().height);
   Graph.camera().aspect = canvas.clientWidth / canvas.clientHeight;
   Graph.camera().updateProjectionMatrix()
 }
@@ -51,6 +57,7 @@ xmlhttp.onreadystatechange = function() {
     var id = path[path.length - 1];
     targetNode(id);
     }
+    resizeWindow();
 };
 
 xmlhttp.open("GET", "/graph-json", true);

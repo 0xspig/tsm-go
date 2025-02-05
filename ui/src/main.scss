@@ -332,22 +332,21 @@ a {
 }
 
 #web-layout{
-	width: 25em;
+	width: 55%;
 
 }
 
 // Scene
 #view{
-	width: 25em;
-	height: 25em;
+	width: 100%;
+	max-height: fit-content;
+	aspect-ratio: 1/1;
 	border: 5px double $color-text-highlight;
 	margin-top: 5em;
 	div{
 		div{
 			.scene-container{
 				#scene{
-					width:25em !important;
-					height: 25em	!important;
 				}
 			}
 		}
