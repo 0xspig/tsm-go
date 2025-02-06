@@ -6,7 +6,7 @@ Todo:
   ✔ Indicate targeted node @started(25-01-07 12:09) @done(25-01-07 12:19) @lasted(10m20s)
   ✔ Fix Goldmark Rendering @done(25-01-21 13:52)
   ✔ remove data tab @started(25-01-15 07:44) @done(25-01-15 07:50) @lasted(6m8s)
-  ☐ update homepage
+  ✔ update homepage @done(25-02-05 18:45)
   ☐ unify image rendering process
   ✔ pass through go templates @done(25-01-21 13:52)
   ✔ css scrollbar @done(25-01-15 08:31)
@@ -26,6 +26,5 @@ Todo:
   ✔ implement latest @started(25-01-25 10:35) @done(25-01-25 13:37) @lasted(3h2m34s)
   ☐ implement summary feature
   ☐ add base meta tag that doesn't break dev env
-  ☐ resize content with JS like on mckeewood so it doesnt jitter while loading content
-
+  ✔ resize content with JS like on mckeewood so it doesnt jitter while loading content @done(25-02-05 18:44)
 
